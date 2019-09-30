@@ -3,7 +3,7 @@ from django.contrib import messages, auth
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .forms import UserLoginForm, UserRegistrationForm, MyDetailsForm, PersonalityForm
+from .forms import UserLoginForm, UserRegistrationForm
 from core import models
 
 
