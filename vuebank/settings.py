@@ -170,4 +170,4 @@ WEBPACK_LOADER = {
 }
 
 # Get User model
-AUTH_USER_MODEL = 'core.CustomUser'
+AUTH_USER_MODEL = 'core.User'
