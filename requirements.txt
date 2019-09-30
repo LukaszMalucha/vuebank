@@ -1,0 +1,12 @@
+defusedxml==0.6.0
+dj_database_url == 0.5.0
+Django==2.1.5
+django-allauth==0.40.0
+django-crispy-forms==1.7.2
+django-forms-bootstrap==3.1.0
+django-registration==3.0.1
+django-rest-auth==0.9.5
+django-webpack-loader==0.6.0
+DjangoRestFramework==3.9.1
+psycopg2==2.7.7
+python3-openid==3.1.0
