@@ -7,7 +7,6 @@ from .forms import UserLoginForm, UserRegistrationForm
 from core import models
 
 
-
 def login(request):
     """A view that manages the login form"""
     if request.method == 'POST':
@@ -46,9 +45,6 @@ def register(request):
 
             if user:
                 auth.login(request, user)
-                # create default user details
-                models.MyProfile.objects.create(position="guest", personality="", my_wallet=0,
-                                                owner=request.user).save()
                 messages.success(request, "You have successfully registered")
                 return redirect(reverse('dashboard:dashboard'))
 
@@ -66,3 +62,33 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
     return redirect(reverse('dashboard:dashboard'))
+
+
+@login_required
+def profile(request):
+    context = compile_profile(request.user)
+
+    return render(request, 'profile.html', context)
+
+
+@login_required
+def edit_profile(request):
+    my_profile = get_object_or_404(models.MyProfile, owner=request.user)
+    positions = models.Position.objects.all()
+
+    if request.method == 'POST':
+        form = MyDetailsForm(request.POST, request.FILES, instance=my_profile)
+
+        # Amount of credits depends on user's position
+        if form.is_valid():
+            if my_profile.position == "PM" and my_profile.my_wallet == 0:
+                my_profile.my_wallet = 500
+            elif my_profile.position == "Coder" and my_profile.my_wallet == 0:
+                my_profile.my_wallet = 100
+            else:
+                my_profile.my_wallet = my_profile.my_wallet
+            my_profile.save()
+
+            return redirect(reverse('user:profile'))
+
+    return render(request, 'edit_profile.html', {'my_profile': my_profile, 'positions': positions})

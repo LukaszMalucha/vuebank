@@ -134,7 +134,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = "accounts/login/"
+LOGIN_URL = "user/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
@@ -142,8 +142,11 @@ LOGOUT_REDIRECT_URL = "/"
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "frontend/dist"),
 )
 
 # django.contrib.sites
