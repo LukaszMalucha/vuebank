@@ -1,24 +1,19 @@
-{% load staticfiles %}
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project Dashboard</title>
-    <meta name="Description" content="Project management Dashboard made with Django.
-                                        This Project is a simulation of work environment, where more traditional
-                                        agile techniques are blended with key gamification concepts of 'reward' and 'role'. ">
-    <meta name="KeyWords" content="data, django, dashboard">
-    <link rel="shortcut icon" type="image/png" href="{% static 'img/septellar.png' %}"/>
-
+    <title>Vuebank</title>
+    <meta name="Description" content="Vuebank">
     <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Materialize-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -26,70 +21,35 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
           integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <!-- Custom Styles-->
-    <link href="{% static 'css/custom-styles.css' %}" rel="stylesheet"/>
-    <link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
+
     <!-- jQuery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Chart Js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
     <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% block extrahead %}{% endblock %} {% block head_js %} {% endblock head_js %}
-     <style>
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-weight: 400 500;
-        src: url('{% static 'fonts/TTF/SourceSansPro-Regular.ttf' %}');
-      }
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-weight: bold 600;
-        src: url('{% static 'fonts/TTF/SourceSansPro-Semibold.ttf' %}');
-      }
-      @font-face {
-        font-family: 'Raleway';
-        src: url('{% static 'fonts/TTF/Raleway-Regular.ttf' %}');
-      }
-    </style>
 
 </head>
-
 <body>
-<div id="wrapper">
-    <!-- PAGE-INDEX -->
-    <div id="page-index">
+{% block content %}
+{% endblock %}
 
-        {% block content %}
-        {% endblock %}
 
-    </div>
-    <!-- PAGE-INDEX -->
-</div>
-<div class="footer">
-    <p><a target="_blank" href="https://www.freeprivacypolicy.com/privacy/view/9b972ff9a2aaeda03f07216c15625791/">Privacy
-        Policy</a> • © 2019 - 2020 www.unflasked.com - All Rights Reserved • Powered by Septellar &trade;</p>
-</div>
-<!-- /. WRAPPER  -->
-<!-- JS Scripts-->
+<!-- popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
 
 <!-- Bootstrap Js -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
 <!-- Materialize Js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-
-<!-- waypoints JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
-<!-- counterup JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-<!-- Custom Js -->
-<script src="{% static 'js/custom-scripts.js' %}"></script>
-
-
-
+{% block js %}
+{% endblock %}
 </body>
-
 </html>
