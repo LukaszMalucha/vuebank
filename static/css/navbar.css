@@ -8,12 +8,15 @@
 
 
 .top-navbar .navbar-brand strong {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: normal;
     display: block;
-    color: #1DA1F2;
+    color: white;
 }
 
+.top-navbar .navbar-brand strong b {
+    color: #ba378b;
+}
 
 .top-navbar {
     position: fixed;
@@ -35,7 +38,7 @@
     width: 100%;
     height: 42px;
     text-align: left;
-    padding-top: 8px;
+    padding-top: 12px;
     font-weight: 700;
     color: #1a2026;
     background: transparent;
