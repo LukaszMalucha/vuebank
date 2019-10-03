@@ -25,9 +25,7 @@
     <link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
 
     <!-- jQuery-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% block extrahead %}{% endblock %} {% block head_js %} {% endblock head_js %}
@@ -79,9 +77,19 @@
     {% endif %}
 </ul>
 
+    <!-- PAGE-INDEX -->
+    <div id="page-index">
+
 
 {% block content %}
 {% endblock %}
+    </div>
+    <!-- PAGE-INDEX -->
+</div>
+<div class="footer">
+    <p><a target="_blank" href="https://www.freeprivacypolicy.com/privacy/view/9b972ff9a2aaeda03f07216c15625791/">Privacy
+        Policy</a> • © 2019 - 2020 www.unflasked.com - All Rights Reserved • Powered by Septellar &trade;</p>
+</div>
 
 <!-- Bootstrap Js -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -90,6 +98,9 @@
 
 <!-- Materialize Js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'js/custom-scripts.js' %}"></script>
 
 {% block js %}
 {% endblock %}
