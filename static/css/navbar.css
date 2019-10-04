@@ -135,10 +135,11 @@ nav ul a {
 
 }
 
-.sidenav-trigger {
-    height: 60px !important;
-
-
+nav a.sidenav-trigger {
+    height: 42px;
+    line-height: 42px;
+    padding: 9px;
+    margin: 0px;
 }
 
 .sidenav-trigger i {
@@ -146,10 +147,10 @@ nav ul a {
 
 }
 
-
 #trigger {
    font-size: 24px;
-   padding: 10px 0px 10px 0px;
+   height: 24px;
+   padding: 0px;
 }
 
 /* Hovers and Focuses --------------------------------------------------------*/
@@ -310,8 +311,6 @@ nav ul a {
     }
 
     nav a.sidenav-trigger {
-        line-height: 1;
-        display: block;
     }
 
     nav a.sidenav-trigger i {
@@ -319,14 +318,18 @@ nav ul a {
         line-height: 1;
     }
 
-    #trigger {
-        position: relative;
-        top: -10px;
-        left: 24px;
-        margin: 10px 0px 10px 0px;
-    }
 
 }
+
+@media(max-width:768px) {
+
+    .top-navbar .navbar-right {
+       position: relative;
+       top: -42px;
+    }
+}
+
+
 
 
 @media(max-width:415px) {

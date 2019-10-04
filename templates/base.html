@@ -34,34 +34,16 @@
 <body>
 
 
-<!-- MOBILE -->
-<!-- MOBILE -->
-<ul class="sidenav" id="mobile-demo">
-
-    {% if user.is_authenticated %}
-    <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:logout' %}"><i
-            class="fas fa-sign-out-alt"></i><b> Log Out {{ user.name }}</b></a></li>
-    {% else %}
-    <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:login' %}"><i
-            class="fa fa-user"></i><b> Log In</b></a></li>
-    <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:register' %}"><i
-            class="fas fa-tasks"></i><b> Register</b></a></li>
-    {% endif %}
-</ul>
-
     <!-- PAGE-INDEX -->
-    <div id="page-index">
+
 
 
 {% block content %}
 {% endblock %}
-    </div>
+</div>
     <!-- PAGE-INDEX -->
-</div>
-<div class="footer">
-    <p><a target="_blank" href="https://www.freeprivacypolicy.com/privacy/view/9b972ff9a2aaeda03f07216c15625791/">Privacy
-        Policy</a> • © 2019 - 2020 www.unflasked.com - All Rights Reserved • Powered by Septellar &trade;</p>
-</div>
+
+
 
 <!-- Bootstrap Js -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

@@ -1,6 +1,8 @@
 <template>
+  <div id="page-index">
   <div class="home">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
   </div>
 </template>
 
