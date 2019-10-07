@@ -1,4 +1,5 @@
 # VUEBANK
+Django + Vue.js
 
 python manage.py runserver --insecure
 
@@ -12,4 +13,6 @@ cd frontend.
 npm run serve
 
 vue ui > project > dependencies > webpack-bundle-tracker
+
+
 
