@@ -36,7 +36,9 @@ html {
 }
 
 .row-message {
-    height: 20px;
+    position: relative;
+    top: 42px;
+    height: 72px;
 }
 
 
@@ -335,13 +337,13 @@ a:hover {
 .footer p {
     margin: 0;
     font-size: 12px;
-    color: #868e96;
+    color: #323232;
     padding: 15px 0px;
     text-align: center;
 }
 
 .footer a {
-    color: #868e96;
+    color: #323232;
 }
 
 .footer a:hover,

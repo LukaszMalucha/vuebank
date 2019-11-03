@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
 
+
 # Manager Class
 class UserManager(BaseUserManager):
 
@@ -44,3 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         super(User, self).save(*args, **kwargs)
 
     # Add  AUTH_USER_MODEL to settings !!!
+
+
+

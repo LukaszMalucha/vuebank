@@ -3,7 +3,52 @@
 <link href="{% static 'css/forms.css' %}" rel="stylesheet"/>
 <link href="{% static 'css/data.css' %}" rel="stylesheet"/>
 {% endblock %}
-{% load bootstrap_tags %} {% block content %}
+{% load bootstrap_tags %}
+{% block content %}
+<div id="wrapper">
+
+<!-- TOP NAVBAR -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand waves-effect waves-dark" href="{% url 'dashboard:dashboard' %}"><strong> Welcome to
+                <b>RESTBank</b></strong></a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li><a class='dropdown-trigger nav-link' href='#' data-target='dropdown-user' id="user_dropdown"><i
+                    class="fas fa-caret-down"></i><b>
+                {% if user.is_authenticated %}
+                {{ user }}
+                {% else %}
+                Login/Register
+                {% endif %}
+            </b></a></li>
+            <li><a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons" id="trigger">menu</i></a>
+            </li>
+        </ul>
+    </nav>
+    <!-- DROPDOWN -->
+    <ul id="dropdown-user" class="dropdown-content">
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+        {% else %}
+        <li><a href="{% url 'user:login' %}"><i class="fa fa-user fa-fw"></i> Log In</a></li>
+        <li><a href="{% url 'user:register' %}"><i class="fas fa-tasks"></i> Register</a></li>
+        {% endif %}
+    </ul>
+    <!-- MOBILE -->
+    <ul class="sidenav" id="mobile-demo">
+        {% if user.is_authenticated %}
+        <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:logout' %}"><i
+                class="fas fa-sign-out-alt"></i><b> Log Out {{ user.name }}</b></a></li>
+        {% else %}
+        <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:login' %}"><i
+                class="fa fa-user"></i><b> Log In</b></a></li>
+        <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:register' %}"><i
+                class="fas fa-tasks"></i><b> Register</b></a></li>
+        {% endif %}
+    </ul>
+
+
 {% block row_header %}
 <div class="row header details-header">
     <div class="col-md-2 text-right plain-element img-column">
@@ -84,6 +129,6 @@
     </a>
 </div>
 
-
+</div>
 
 {% endblock %}
