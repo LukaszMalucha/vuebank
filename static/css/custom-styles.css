@@ -35,13 +35,6 @@ html {
     text-align: center;
 }
 
-.row-message {
-    position: relative;
-    top: 42px;
-    height: 72px;
-}
-
-
 a {
     color: #4267b2
 }
@@ -98,6 +91,27 @@ a:hover {
 .plain-element {
     margin: 0px;
     padding: 0px;
+}
+
+/*----------------------------------------------
+    ROWS, COLUMNS, CONTAINERS
+------------------------------------------------*/
+
+.row-message {
+    position: relative;
+    top: 42px;
+    height: 72px;
+}
+
+.container-welcome {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    padding: 10px 15px 10px 0px;
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px outset grey;
+
 }
 
 
@@ -287,20 +301,22 @@ a:hover {
 }
 
 
-.btn-floating {
-    background: #003f67;
-}
-
-
-.btn-floating:hover,
-.btn-floating:active {
-    background: #2d6d91;
-}
-
-
 /*----------------------------------------------
     BUTTONS
 ------------------------------------------------*/
+
+.btn {
+    background-color:
+    #662b61;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.route {
+    font-weight: normal;
+    width: 100%;
+    font-size: 0.8rem;
+}
 
 
 .btn-inline {
@@ -320,6 +336,18 @@ a:hover {
 .btn-inline:focus {
     background: #4c7894;
     color: white;
+}
+
+
+
+.btn-floating {
+    background: #003f67;
+}
+
+
+.btn-floating:hover,
+.btn-floating:active {
+    background: #2d6d91;
 }
 
 /*------------------------------------------------------------------------------
