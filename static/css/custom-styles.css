@@ -7,7 +7,9 @@ body {
     position: relative;
     margin: 0;
     padding-bottom: 0;
-    background-color: grey;
+    background-color: #e6ecf0;
+    background-image: url('../../static/img/background_img.png');
+    background-size: cover;
 }
 
 html {
@@ -36,7 +38,7 @@ html {
 }
 
 a {
-    color: #4267b2
+    color: #662b61
 }
 
 a:hover {
@@ -96,6 +98,14 @@ a:hover {
 /*----------------------------------------------
     ROWS, COLUMNS, CONTAINERS
 ------------------------------------------------*/
+
+.dashboard-cards {
+    width: 60%;
+    margin: auto;
+    margin-top: 100px;
+
+}
+
 
 .row-message {
     position: relative;
@@ -348,6 +358,11 @@ a:hover {
 .btn-floating:hover,
 .btn-floating:active {
     background: #2d6d91;
+}
+
+.btn-default:hover, btn-default:active, btn-default:focus, .route:hover, .route:active, .route:focus {
+    background-color: #582554;
+    color: white;
 }
 
 /*------------------------------------------------------------------------------

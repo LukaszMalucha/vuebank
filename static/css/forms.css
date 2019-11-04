@@ -27,12 +27,12 @@
     border-color: transparent;
     text-align: right;
     color: white;
-    background-color: #165d81;
+    background-color: #582554;;
     font-size: 18px;
 }
 
 .btn-login:hover, .btn-login:active, .btn-login:focus {
-    background-color: #0f415a;
+    background-color: #582554;
 }
 
 
@@ -45,7 +45,7 @@
     border-radius: 50px;
     background-color: white;
     padding: 3%;
-    color: #165d81;
+    color: #582554;;
 }
 
 .form-box {
@@ -75,8 +75,8 @@ h6 {
 input[type="email"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),
 input[type="text"]:not(.browser-default):focus:not([readonly]) {
-    border-bottom: 1px solid #165d81;
-    box-shadow: 0 1px 0 0 #26a69a;
+    border-bottom: 1px solid #582554;
+    box-shadow: 0 0px 0 0 #582554;
 
 }
 
@@ -99,6 +99,7 @@ input.valid[type="number"]:not(.browser-default) {
 
 .orange-text {
     font-size: 12px;
+    color: #ba378b !important;
 }
 
 blockquote {

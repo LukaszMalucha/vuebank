@@ -3,8 +3,8 @@
     <div class="navbar-header">
         <router-link
             :to="{name: 'home'}"
-            class="navbar-brand waves-effect waves-dark"
-        ><strong> Welcome to <b>RESTBank</b></strong>
+            class="navbar-brand waves-effect waves-dark">
+        <img alt="RestBank" src="../assets/restbank.png" class="responsive logo-img" />
         </router-link>
     </div>
     <ul class="nav navbar-top-links navbar-right">

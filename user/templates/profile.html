@@ -9,8 +9,8 @@
 <!-- TOP NAVBAR -->
     <nav class="navbar navbar-default top-navbar" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand waves-effect waves-dark" href="{% url 'dashboard:dashboard' %}"><strong> Welcome to
-                <b>RESTBank</b></strong></a>
+            <a class="navbar-brand waves-effect waves-dark" href="/"> <img
+                    src="{% static 'img/restbank.png' %}" class="responsive logo-img"></a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li><a class='dropdown-trigger nav-link' href='#' data-target='dropdown-user' id="user_dropdown"><i
@@ -230,7 +230,7 @@
         </div>
     </div>
 <div class="fixed-action-btn">
-    <a class="btn-floating btn-large blue" href="{% url 'dashboard:dashboard' %}">
+    <a class="btn-floating btn-large blue" href="/">
         <i class="large material-icons">exit_to_app</i>
     </a>
 </div>
