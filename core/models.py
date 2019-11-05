@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.validators import MinValueValidator
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import ValidationError
 
 
 # Manager Class
@@ -45,6 +48,26 @@ class User(AbstractBaseUser, PermissionsMixin):
         super(User, self).save(*args, **kwargs)
 
     # Add  AUTH_USER_MODEL to settings !!!
+
+
+class Instrument(models.Model):
+    """Financial instrument for customer portfolio"""
+    name = models.CharField(max_length=255, unique=True, default="USD")
+    symbol = models.CharField(max_length=255, unique=True, default="USD")
+    category = models.CharField(max_length=255, default="Currency")
+    price = models.DecimalField(max_digits=12, decimal_places=2, default=1.0, validators=[MinValueValidator(0.01)])
+
+    def __str__(self):
+        return self.symbol
+
+
+
+
+
+
+
+
+
 
 
 

@@ -19,3 +19,15 @@ class UserAdmin(BaseUserAdmin):
     # Page for adding new users
     add_fieldsets = (
         (None, {'classes': ('wide',), 'fields': ('email', 'password1', 'password2')}),)  # Coma - TUPLE!
+
+
+class InstrumentModelAdmin(admin.ModelAdmin):
+    list_display = ["name", "symbol", "category", "price"]
+    list_filter = ("category",)
+    search_fields = ["symbol", "name"]
+
+    class Meta:
+        model = models.Instrument
+
+admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Instrument, InstrumentModelAdmin)
