@@ -20,9 +20,18 @@
                             </button>
                         </div>
                         <div class="col-md-3 text-center">
-                            <button class="btn route"><b>My
-                                Portfolio</b></button>
+                            <button class="btn route"><b>Instruments</b></button>
                         </div>
+                    </div>
+                    <div class="row">
+                    <div v-for="instrument in instruments" :key="instrument.pk" class="col-md-3 text-center">
+                      <div class="card small">
+                        <h4>{{ instrument.name }}</h4>
+                        <p>{{ instrument.symbol }}</p>
+                        <p>{{ instrument.category }}</p>
+                        <p>{{ instrument.price }}</p>
+                      </div>
+                      </div>
                     </div>
             </div>
         </div>
@@ -31,24 +40,27 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service"
+import { apiService } from "../common/api.service.js"
 
 export default {
   name: 'home',
   data() {
     return {
-        questions: []
+        instruments: []
     }
 
   },
   methods: {
-    getQuestions() {
-        let endpoint = "api/questions/";
+    getInstruments() {
+        let endpoint = "portfolio/instruments/";
         apiService(endpoint)
         .then(data => {
-            this.questions.push(...data.results);
+            this.instruments.push(...data.results)
         })
     }
+  },
+  created() {
+    this.getInstruments()
   }
-}
+};
 </script>

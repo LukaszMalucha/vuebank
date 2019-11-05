@@ -7,7 +7,7 @@ async function getJSON(response) {
 
 function apiService(endpoint, method, data) {
     const config = {
-        method: method || GET,
+        method: method || "GET",
         body: data !== undefined ? JSON.stringify(data) : null,
         headers: {
             'content-type': 'application/json',
@@ -15,7 +15,7 @@ function apiService(endpoint, method, data) {
         }
     }
     return fetch(endpoint, config)
-            .then(getJSon)
+            .then(getJSON)
             .catch(error => console.log(error))
 }
 
