@@ -116,7 +116,7 @@ a:hover {
 .container-welcome {
     margin-top: 20px;
     margin-bottom: 100px;
-    padding: 10px 15px 10px 0px;
+    padding: 10px 15px 10px 10px;
     width: 100%;
     background-color: white;
     border-radius: 20px;
@@ -326,6 +326,7 @@ a:hover {
     font-weight: normal;
     width: 100%;
     font-size: 0.8rem;
+    margin-bottom: 20px;
 }
 
 
