@@ -20,11 +20,16 @@
 
 
 <script>
-import { apiService } from "..common/api.service.js"
+import { apiService } from "../common/api.service.js"
 
 export default {
-  name: 'Instrument'
-
+  name: 'Instrument',
+  props: {
+    slug: {
+      type: String,
+      required: true
+    }
+  }
 }
 
 </script>

@@ -14,6 +14,11 @@
                 <p>{{ instrument.symbol }}</p>
                 <p>{{ instrument.category }}</p>
                 <p>{{ instrument.price }}</p>
+                <h4>
+                  <router-link :to="{ name: 'instrument', params: { slug: instrument.slug} }">
+                    {{ instrument.name }}
+                  </router-link>
+                </h4>
               </div>
             </div>
           </div>
@@ -45,7 +50,6 @@ export default {
   },
   created() {
     this.getInstruments()
-    console.log(this.instruments)
   }
 }
 </script>
