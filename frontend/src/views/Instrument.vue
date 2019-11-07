@@ -29,6 +29,28 @@ export default {
       type: String,
       required: true
     }
+  },
+  data() {
+    return {
+      instrument: {}
+    }
+  },
+  methods: {
+    setPageTitle(title) {
+      document.title = title;
+    },
+    getInstrumentData() {
+      let endpoint = `/portfolio/instruments/${this.slug}/`;
+      apiService(endpoint)
+        .then(data => {
+          this.instrument = data;
+          this.setPageTitle(data.name)
+        })
+    }
+  },
+  created() {
+    this.getInstrumentData();
+    document.title = "Instruments";
   }
 }
 

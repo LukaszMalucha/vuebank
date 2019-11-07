@@ -34,5 +34,9 @@ import { apiService } from "../common/api.service.js"
 
 export default {
   name: 'home',
-  };
+  created() {
+    document.title = "VueBank";
+  }
+};
+
 </script>

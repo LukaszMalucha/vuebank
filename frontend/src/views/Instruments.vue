@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     getInstruments() {
-    let endpoint = "portfolio/instruments/";
+    let endpoint = "/portfolio/instruments/";
     apiService(endpoint)
       .then( data => {
           this.instruments.push(...data.results)
