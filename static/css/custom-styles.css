@@ -226,8 +226,86 @@ a:hover {
 
 
 /*----------------------------------------------
-    MENU CARD
+    CARDS & TABLES
 ------------------------------------------------*/
+
+
+.card-instrument {
+    margin-bottom: 25px;;
+}
+
+.card-instrument .card-header {
+    width: 100%;
+}
+
+.card-instrument .card-image {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+.card-instrument h5 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #003f67;
+    height: 20px;
+    margin: 8px 0px;
+}
+
+.card-instrument .card-title {
+    padding-left: 3%;
+    width: 100%;
+
+
+}
+
+.card-instrument p {
+    font-size: 12px !important;
+}
+
+.card-instrument .card-content {
+    text-align: center;
+    padding: 10px;
+}
+
+.card-instrument .card-content p {
+    height: 70px;
+}
+
+.instrument-website a{
+    color: #6aae22;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+
+
+.table-company {
+    border: none;
+    font-size: 0.7rem;
+
+}
+
+.table > tbody > tr > td,
+.table-company tr,
+.table-company td {
+    border: none;
+}
+
+
+.table > tbody > tr >td  {
+    padding-left: 0px;
+    padding-top: 0px;
+
+}
+
+.table-company b {
+    font-weight: 600;
+    color: #003f67;
+}
+
+
 
 .menu-card {
     box-shadow: 0 3px 3px 0 #A9A9A9, 0 3px 1px -2px #838383, 0 1px 5px 0 #838383;

@@ -20,7 +20,7 @@
                 </button>
             </div>
             <div class="col-md-3 text-center">
-                <button class="btn route"><b>Instruments</b></button>
+                <button onclick="window.location='/instruments'" class="btn route"><b>Instruments</b></button>
             </div>
           </div>
         </div>
