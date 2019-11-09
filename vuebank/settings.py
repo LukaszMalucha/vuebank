@@ -167,7 +167,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 8
+    'PAGE_SIZE': 4
 }
 
 WEBPACK_LOADER = {

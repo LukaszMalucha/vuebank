@@ -4,7 +4,7 @@
       <div class="dashboard-cards">
         <div class="container text-center container-welcome">
           <div class="row">
-            <h3>Welcome to the RESTBank</h3>
+            <h4>RESTBank Asset Manager</h4>
           </div>
           <br>
           <div class="row">
@@ -16,8 +16,11 @@
                 </button>
             </div>
             <div class="col-md-3 text-center">
-                <button class="btn route"><b>User Profile</b>
+            <router-link
+            :to="{name: 'asset-manager'}">
+                <button class="btn route"><b>My Assets</b>
                 </button>
+            </router-link>
             </div>
             <div class="col-md-3 text-center">
                 <button onclick="window.location='/instruments'" class="btn route"><b>Instruments</b></button>

@@ -50,6 +50,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-4 plain-element"></div>
+                  <div class="col-md-4 plain-element">
+                    <p v-show="loadingInstruments">...loading...</p>
+                    <button v-show="next" @click="getInstruments" class="btn route">
+                      Load More
+                    </button>
+                  </div>
+                  <div class="col-md-4 plain-element"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,15 +74,27 @@ export default {
   name: 'Instruments',
   data() {
     return {
-        instruments: []
+        instruments: [],
+        next: null,
+        loadingInstruments: false
     }
   },
   methods: {
     getInstruments() {
     let endpoint = "/portfolio/instruments/";
+    if (this.next) {
+      endpoint = this.next;
+    }
+    this.loadingInstruments = true;
     apiService(endpoint)
       .then( data => {
           this.instruments.push(...data.results)
+          this.loadingInstruments = false;
+          if (data.next) {
+            this.next = data.next;
+          } else {
+            this.next = null;
+          }
      })
     }
   },

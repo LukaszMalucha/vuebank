@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Instruments from "./views/Instruments.vue";
 import Instrument from "./views/Instrument.vue";
 import InstrumentEditor from "./views/InstrumentEditor.vue";
+import AssetManager from "./views/AssetManager.vue";
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/add-instrument",
       name: "instrument-editor",
       component: InstrumentEditor,
+    },
+    {
+      path: "/asset-manager",
+      name: "asset-manager",
+      component: AssetManager,
     },
 
   ]
