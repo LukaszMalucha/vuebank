@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from core.models import Instrument
+from core.models import Instrument, Asset
+
 
 ## RETURN READ ONLY AFTER  TESTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 class InstrumentSerializer(serializers.ModelSerializer):
@@ -8,6 +9,7 @@ class InstrumentSerializer(serializers.ModelSerializer):
     # name = serializers.StringRelatedField()
     # symbol = serializers.StringRelatedField()
     slug = serializers.SlugField(read_only=True)
+
     # category = serializers.StringRelatedField()
     # price = serializers.DecimalField(max_digits=19, decimal_places=2)
 
@@ -17,3 +19,13 @@ class InstrumentSerializer(serializers.ModelSerializer):
         # make id read-only
         # read_only_fields = ('id',)  # Tuple!
         # read_only_fields = '__all__',
+
+
+class AssetSerializer(serializers.ModelSerializer):
+    """Serializer for customer assets"""
+    symbol = serializers.ReadOnlyField(source="instrument.symbol")
+
+    class Meta:
+        model = Asset
+        fields = ('id', 'symbol', 'quantity', 'value')
+        read_only_fields = '__all__'

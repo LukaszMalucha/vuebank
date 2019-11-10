@@ -4,7 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from core.permissions import IsAdminOrReadOnly
-from core.models import Instrument
+from core.models import Instrument, Asset
 
 from portfolio import serializers
 
@@ -27,6 +27,17 @@ class InstrumentViewSet(viewsets.ModelViewSet):
             serializer.save()
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class PortfolioViewSet(viewsets.ViewSet):
+    """Customer's asset view"""
+    # authentication_classes = (TokenAuthentication, )
+    # permisssion_classes = (IsAuthenticated, )
+    serializer_class = serializers.AssetSerializer
+    queryset = Asset.objects.all()
+
+    def list(self, request):
+        queryset = Asset.objectc.filter(owner=self.request.user)
+        serializer = serializers.AssetSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 

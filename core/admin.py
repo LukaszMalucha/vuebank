@@ -29,5 +29,17 @@ class InstrumentModelAdmin(admin.ModelAdmin):
     class Meta:
         model = models.Instrument
 
+
+class AssetModelAdmin(admin.ModelAdmin):
+    ordering = ['owner', 'instrument']
+    list_display = ["owner", "instrument", "quantity", "value"]
+    list_filter = ('instrument',)
+    search_fields = ["owner", "instrument"]
+
+    class Meta:
+        model = models.Asset
+
+
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Instrument, InstrumentModelAdmin)
+admin.site.register(models.Asset, AssetModelAdmin)

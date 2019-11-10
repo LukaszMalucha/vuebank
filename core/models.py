@@ -62,6 +62,20 @@ class Instrument(models.Model):
         return self.name
 
 
+class Asset(models.Model):
+    """Customer owned assets"""
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+
+    def value(self):
+        quantity = self.quantity
+        price = self.instrument.price
+        total = quantity * price
+        return total
+
+    def __str__(self):
+        return f"{self.quantity} of {self.instrument}"
 
 
 
