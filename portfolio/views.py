@@ -8,6 +8,11 @@ from core.models import Instrument, Asset
 
 from portfolio import serializers
 
+class BaseRestrictedViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+    """Basic authentication and permission"""
+    # authentication_classes = (TokenAuthentication,)
+    # permission_classes = (IsAuthenticated,)
+
 
 class InstrumentViewSet(viewsets.ModelViewSet):
     """Create instruments in the database"""
@@ -39,6 +44,27 @@ class PortfolioViewSet(viewsets.ViewSet):
         serializer = serializers.AssetSerializer(queryset, many=True)
         return Response(serializer.data)
 
+class CashBalanceViewSet(BaseRestrictedViewSet):
+    """Cash balance view with top-up functrionality"""
+    serializer_class = serializers.AssetSerializer
+    queryset = Asset.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        return queryset.filter(owner=self.request.user).filter(instument__name="USD")
+
+    def post(self, request):
+        cash_serializer = serializers.AssetSerializer(data=request.data)
+        cash_balance = Asset.objects.get(instrument__name="USD", owner=request.user)
+        if cash_serializer.is_valid():
+            top_up = int(request.data['quantity'])
+            cash_balance.quantity += top_up
+            cash_balance.save()
+            return Response(f"You've successfully transferred {top_up} $ to your Account."
+                            f" Your current cash balance is {cash_balance.quantity}$.")
+
+            return Response(cash_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# class BuyAssetViewSet(BaseRestrictedViewSet)
 

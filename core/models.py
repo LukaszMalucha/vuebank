@@ -46,6 +46,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
+        try:
+            instrument = Instrument.objects.get(name="USD")
+        except:
+            instrument = Instrument()
+            instrument.save()
+        asset = Asset.objects.filter(owner=self).filter(instrument__name="USD").first()
+        if not asset:
+            asset = Asset(owner=self, instrument=instrument, quantity=100000)
+            asset.save()
 
     # Add  AUTH_USER_MODEL to settings !!!
 
