@@ -24,8 +24,10 @@ class InstrumentSerializer(serializers.ModelSerializer):
 class AssetSerializer(serializers.ModelSerializer):
     """Serializer for customer assets"""
     symbol = serializers.ReadOnlyField(source="instrument.symbol")
+    category = serializers.ReadOnlyField(source="instrument.category")
+    price = serializers.ReadOnlyField(source="instrument.price")
 
     class Meta:
         model = Asset
-        fields = ('id', 'symbol', 'quantity', 'value')
-        read_only_fields = '__all__'
+        fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price')
+        read_only_fields = '__all__',

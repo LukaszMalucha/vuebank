@@ -32,7 +32,7 @@ class InstrumentViewSet(viewsets.ModelViewSet):
             serializer.save()
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class PortfolioViewSet(viewsets.ViewSet):
+class AssetManagerViewSet(viewsets.ViewSet):
     """Customer's asset view"""
     # authentication_classes = (TokenAuthentication, )
     # permisssion_classes = (IsAuthenticated, )
@@ -40,7 +40,7 @@ class PortfolioViewSet(viewsets.ViewSet):
     queryset = Asset.objects.all()
 
     def list(self, request):
-        queryset = Asset.objectc.filter(owner=self.request.user)
+        queryset = Asset.objects.filter(owner=self.request.user)
         serializer = serializers.AssetSerializer(queryset, many=True)
         return Response(serializer.data)
 

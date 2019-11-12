@@ -5,6 +5,7 @@ from portfolio import views
 
 router = DefaultRouter()
 router.register('instruments', views.InstrumentViewSet)
+router.register('asset-manager', views.AssetManagerViewSet, basename='asset-manager')
 
 
 app_name = 'portfolio'
