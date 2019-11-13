@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Instrument, Asset
+from core.models import Instrument, Asset, BuyTransaction, SellTransaction
 
 
 ## RETURN READ ONLY AFTER  TESTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -31,3 +31,21 @@ class AssetSerializer(serializers.ModelSerializer):
         model = Asset
         fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price')
         read_only_fields = '__all__',
+
+
+class BuyTransactionSerializer(serializers.ModelSerializer):
+    """Serializer for buy transactions"""
+    symbol = serializers.ReadOnlyField(source="instrument.symbol")
+
+    class Meta:
+        model = BuyTransaction
+        fields = ('id', 'symbol', 'instrument', 'quantity', 'create_at', 'value')
+
+
+class SellTransactionSerializer(serializers.ModelSerializer):
+    """Serializer for sell transactions"""
+    symbol = serializers.ReadOnlyField(source="instrument.symbol")
+
+    class Meta:
+        model = SellTransaction
+        fields = ('id', 'symbol', 'instrument', 'qunatity', 'created_at', 'value')

@@ -87,11 +87,69 @@ class Asset(models.Model):
         return f"{self.quantity} of {self.instrument}"
 
 
+class BuyTransaction(models.Model):
+    """Buy Asset transaction"""
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def value(self):
+        quantity = self.quantity
+        price = self.instrument.price
+        total = quantity * price
+        return total
+
+    def save(self, *args, **kwargs):
+        value = self.value
+        cash_balance = Asset.objects.filter(owner=self.owner).filter(instrument__name="USD").first()
+        cash_balance.quantity -= value
+        if cash_balance.quantity < 0:
+            raise ValidationError('Insufficient funds to proceed with transaction.')
+        else:
+            super(BuyTransaction, self).save(*args, **kwargs)
+            cash_balance.save()
+            existing_asset = Asset.objects.filter(owner=self.owner).filter(instrument=self.instrument).first()
+            if not existing_asset:
+                asset = Asset(owner=self.owner, instrument=self.instrument, quantity=self.quantity)
+                asset.save()
+            else:
+                existing_asset.quantity += self.quantity
+                existing_asset.save()
+
+    def __str__(self):
+        return f"{self.owner}: {self.quantity} of {self.instrument}"
 
 
+class SellTransaction(models.Model):
+    """Sell asset transaction"""
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def value(self):
+        quantity = self.quantity
+        price = self.instrument.price
+        total = quantity * price
+        return total
 
+    def save(self, *args, **kwargs):
+        super(SellTransaction, self).save(*args, **kwargs)
+        value = self.value()
+        cash_balance = Asset.objects.filter(owner=self.owner).filter(instrument__name="USD").first()
+        cash_balance.quantity += value
+        asset = get_object_or_404(Asset, owner=self.owner, instrument=self.instrument)
+        asset_balance = asset.quantity - self.quantity
+        if asset_balance < 0:
+            raise ValidationError('Insufficient asset quantity to proceed with transaction.')
+        elif asset_balance == 0:
+            asset.delete()
+            cash_balance.save()
+        else:
+            asset.quantity -= self.quantity
+            asset.save()
+            cash_balance.save()
 
-
-
-
+    def __str__(self):
+        return f"{self.owner}: {self.quantity} of {self.instrument}"
