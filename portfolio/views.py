@@ -4,7 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from core.permissions import IsAdminOrReadOnly
-from core.models import Instrument, Asset
+from core.models import Instrument, Asset, BuyTransaction, SellTransaction
 
 from portfolio import serializers
 
@@ -80,6 +80,23 @@ class BuyAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
         if serializer.is_valid():
             serializer.save(owner=self.request.user)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
+    """Sell asset transaction view"""
+    serializer_class = serializers.SellTransactionSerializer
+    queryset = SellTransaction.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        return queryset.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        """Sell financial instrument"""
+        if serializer.is_valid():
+            serializer.save(owner=self.request.user)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 

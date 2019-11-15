@@ -1,8 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext as _
+from daterange_filter.filter import DateRangeFilter
 
 from core import models
+
+
+class AssetInline(admin.TabularInline):
+    model = models.Asset
 
 
 class UserAdmin(BaseUserAdmin):
@@ -19,6 +24,8 @@ class UserAdmin(BaseUserAdmin):
     # Page for adding new users
     add_fieldsets = (
         (None, {'classes': ('wide',), 'fields': ('email', 'password1', 'password2')}),)  # Coma - TUPLE!
+
+    inlines = [AssetInline]
 
 
 class InstrumentModelAdmin(admin.ModelAdmin):
@@ -39,6 +46,7 @@ class AssetModelAdmin(admin.ModelAdmin):
     class Meta:
         model = models.Asset
 
+
 class BuyTransactionModelAdmin(admin.ModelAdmin):
     ordering = ['owner', 'created_at']
     list_display = ["owner", "instrument", "quantity", "value", "created_at"]
@@ -57,6 +65,7 @@ class SellTransactionModelAdmin(admin.ModelAdmin):
 
     class Meta:
         model = models.SellTransaction
+
 
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Instrument, InstrumentModelAdmin)
