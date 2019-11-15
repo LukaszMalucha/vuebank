@@ -63,8 +63,26 @@ class CashBalanceViewSet(BaseRestrictedViewSet):
             return Response(f"You've successfully transferred {top_up} $ to your Account."
                             f" Your current cash balance is {cash_balance.quantity}$.")
 
-            return Response(cash_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(cash_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class BuyAssetViewSet(BaseRestrictedViewSet)
+class BuyAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
+    """Buy asset transaction view"""
+    serializer_class = serializers.BuyTransactionSerializer
+    queryset = BuyTransaction.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        return queryset.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        """Create a new financial instrument"""
+        if serializer.is_valid():
+            serializer.save(owner=self.request.user)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
 
