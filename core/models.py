@@ -95,7 +95,7 @@ class BuyTransaction(models.Model):
         return total
 
     def save(self, *args, **kwargs):
-        value = self.value
+        value = self.value()
         cash_balance = Asset.objects.filter(owner=self.owner).filter(instrument__name="USD").first()
         cash_balance.quantity -= value
         if cash_balance.quantity < 0:

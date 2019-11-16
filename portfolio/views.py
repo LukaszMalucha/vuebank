@@ -8,6 +8,7 @@ from core.models import Instrument, Asset, BuyTransaction, SellTransaction
 
 from portfolio import serializers
 
+
 class BaseRestrictedViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     """Basic authentication and permission"""
     # authentication_classes = (TokenAuthentication,)
@@ -32,6 +33,7 @@ class InstrumentViewSet(viewsets.ModelViewSet):
             serializer.save()
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class AssetManagerViewSet(viewsets.ViewSet):
     """Customer's asset view"""
     # authentication_classes = (TokenAuthentication, )
@@ -43,6 +45,7 @@ class AssetManagerViewSet(viewsets.ViewSet):
         queryset = Asset.objects.filter(owner=self.request.user)
         serializer = serializers.AssetSerializer(queryset, many=True)
         return Response(serializer.data)
+
 
 class CashBalanceViewSet(BaseRestrictedViewSet):
     """Cash balance view with top-up functrionality"""
@@ -73,6 +76,7 @@ class BuyAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
 
     def get_queryset(self):
         queryset = self.queryset
+
         return queryset.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
@@ -95,11 +99,3 @@ class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
         if serializer.is_valid():
             serializer.save(owner=self.request.user)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
-
-
-
-

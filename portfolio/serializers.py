@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from core.models import Instrument, Asset, BuyTransaction, SellTransaction
-
+from django.utils.timezone import now
 
 ## RETURN READ ONLY AFTER  TESTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 class InstrumentSerializer(serializers.ModelSerializer):
@@ -39,7 +39,8 @@ class BuyTransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BuyTransaction
-        fields = ('id', 'symbol', 'instrument', 'quantity', 'create_at', 'value')
+        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value')
+
 
 
 class SellTransactionSerializer(serializers.ModelSerializer):
