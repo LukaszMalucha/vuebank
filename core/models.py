@@ -82,7 +82,7 @@ class Asset(models.Model):
 
 
 class BuyTransaction(models.Model):
-    """Buy Asset transaction"""
+    """Buy asset transaction"""
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
@@ -113,6 +113,7 @@ class BuyTransaction(models.Model):
 
     def __str__(self):
         return f"{self.owner}: {self.quantity} of {self.instrument}"
+
 
 
 class SellTransaction(models.Model):

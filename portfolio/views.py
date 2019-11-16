@@ -1,7 +1,8 @@
 from rest_framework.response import Response
-from rest_framework import viewsets, mixins, status
+from rest_framework import generics, viewsets, mixins, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import ValidationError
 
 from core.permissions import IsAdminOrReadOnly
 from core.models import Instrument, Asset, BuyTransaction, SellTransaction
@@ -69,22 +70,6 @@ class CashBalanceViewSet(BaseRestrictedViewSet):
         return Response(cash_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class BuyAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
-    """Buy asset transaction view"""
-    serializer_class = serializers.BuyTransactionSerializer
-    queryset = BuyTransaction.objects.all()
-
-    def get_queryset(self):
-        queryset = self.queryset
-
-        return queryset.filter(owner=self.request.user)
-
-    def perform_create(self, serializer):
-        """Create a new financial instrument"""
-        if serializer.is_valid():
-            serializer.save(owner=self.request.user)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
     """Sell asset transaction view"""
     serializer_class = serializers.SellTransactionSerializer
@@ -99,3 +84,29 @@ class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
         if serializer.is_valid():
             serializer.save(owner=self.request.user)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class BuyAssetCreateAPIView(generics.CreateAPIView):  ### ZAKAZ USD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    """Buy asset transaction view"""
+    queryset = BuyTransaction.objects.all()
+    serializer_class = serializers.BuyTransactionSerializer
+
+    def perform_create(self, serializer):
+        """Create a new financial instrument"""
+        request_user = self.request.user
+        money = Asset.objects.filter(owner=self.request.user).filter(instrument__name="USD").first()
+
+        if 11 < 10000:
+            raise ValidationError(str(money.quantity))
+        if serializer.is_valid():
+            serializer.save(owner=self.request.user)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BuyAssetListAPIView(generics.ListAPIView):
+    """Buy Transactions list view"""
+    serializer_class = serializers.BuyTransactionSerializer
+
+    def get_queryset(self):
+        return BuyTransaction.objects.filter(owner=self.request.user).order_by("-created_at")
