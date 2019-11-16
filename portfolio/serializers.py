@@ -41,6 +41,11 @@ class BuyTransactionSerializer(serializers.ModelSerializer):
         model = BuyTransaction
         fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value')
 
+    def validate(self, attrs):
+        """Forbid USD to USD transaction"""
+        if str(attrs['instrument']) == "USD":
+            raise serializers.ValidationError("USD to USD - invalid transaction")
+        return attrs
 
 
 class SellTransactionSerializer(serializers.ModelSerializer):
