@@ -46,7 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
-        instrument, created = Instrument.objects.get_or_create(name="USD")  # if not USD in instruments yet
+        instrument, created = Instrument.objects.get_or_create(name="USD", symbol="USD")  # if not USD in instruments yet
         asset, created = Asset.objects.get_or_create(owner=self, instrument=instrument,
                                                      quantity=100)  # starter asset
 
@@ -99,6 +99,7 @@ class BuyTransaction(models.Model):
         cash_balance = Asset.objects.filter(owner=self.owner).filter(instrument__name="USD").first()
         cash_balance.quantity -= value
         if cash_balance.quantity < 0:
+            """Secondary check after serializer for extra security."""
             raise ValidationError('Insufficient funds to proceed with transaction.')
         else:
             super(BuyTransaction, self).save(*args, **kwargs)
@@ -137,6 +138,7 @@ class SellTransaction(models.Model):
         asset = get_object_or_404(Asset, owner=self.owner, instrument=self.instrument)
         asset_balance = asset.quantity - self.quantity
         if asset_balance < 0:
+            """Secondary check after serializer for extra security."""
             raise ValidationError('Insufficient asset quantity to proceed with transaction.')
         elif asset_balance == 0:
             asset.delete()

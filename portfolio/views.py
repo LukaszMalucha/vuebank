@@ -70,6 +70,23 @@ class CashBalanceViewSet(BaseRestrictedViewSet):
         return Response(cash_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class BuyAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
+    """Buy asset transaction view"""
+    serializer_class = serializers.BuyTransactionSerializer
+    queryset = BuyTransaction.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+
+        return queryset.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        """Create a new financial instrument"""
+        if serializer.is_valid():
+            serializer.save(owner=self.request.user)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
     """Sell asset transaction view"""
     serializer_class = serializers.SellTransactionSerializer
@@ -85,31 +102,3 @@ class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
             serializer.save(owner=self.request.user)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-
-class BuyAssetCreateAPIView(generics.CreateAPIView):
-    """Buy asset transaction view"""
-    queryset = BuyTransaction.objects.all()
-    serializer_class = serializers.BuyTransactionSerializer
-
-    def perform_create(self, serializer):
-        """Create a new financial instrument"""
-        cash_on_hand = Asset.objects.filter(owner=self.request.user).filter(instrument__name="USD").first()
-        instrument = Instrument.objects.filter(symbol=serializer.data['symbol']).first()
-        quantity = serializer.data['quantity']
-        transaction_value = instrument.price * quantity
-        cash_balance = cash_on_hand.quantity - transaction_value
-        if cash_balance < 0:
-            raise ValidationError(str(cash_balance))
-        if serializer.is_valid():
-            serializer.save(owner=self.request.user)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class BuyAssetListAPIView(generics.ListAPIView):
-    """Buy Transactions list view"""
-    serializer_class = serializers.BuyTransactionSerializer
-
-    def get_queryset(self):
-        return BuyTransaction.objects.filter(owner=self.request.user).order_by("-created_at")
