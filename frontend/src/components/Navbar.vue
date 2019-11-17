@@ -21,6 +21,13 @@
         <li><router-link :to="{ name: 'instrument-editor'}">
               Instrument Editor
         </router-link></li>
+        </router-link></li>
+        <li><router-link :to="{ name: 'asset-manager'}">
+              Asset Manager
+        </router-link></li>
+        <li><router-link :to="{ name: 'home'}">
+              Home
+        </router-link></li>
         <li><a href="/user/logout"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
         <li><a href="/user/login"><i class="fa fa-user fa-fw"></i> Log In</a></li>
         <li><a href="/user/register"><i class="fas fa-tasks"></i> Register</a></li>

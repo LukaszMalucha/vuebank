@@ -17,7 +17,7 @@ export default new Router({
       component: Home
     },
     {
-      path: "/instruments/",
+      path: "/instruments",
       name: "instruments",
       component: Instruments
     },

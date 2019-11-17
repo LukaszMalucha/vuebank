@@ -55,13 +55,15 @@ class CashBalanceViewSet(BaseRestrictedViewSet):
 
     def get_queryset(self):
         queryset = self.queryset
-        return queryset.filter(owner=self.request.user).filter(instument__name="USD")
+        return queryset.filter(owner=self.request.user).filter(instrument__name="USD")
 
     def post(self, request):
         cash_serializer = serializers.AssetSerializer(data=request.data)
         cash_balance = Asset.objects.get(instrument__name="USD", owner=request.user)
         if cash_serializer.is_valid():
             top_up = int(request.data['quantity'])
+            if top_up > 100000:
+                raise ValidationError('Maximum amount per top up is 100k USD')
             cash_balance.quantity += top_up
             cash_balance.save()
             return Response(f"You've successfully transferred {top_up} $ to your Account."

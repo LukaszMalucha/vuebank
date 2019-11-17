@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import ValidationError
@@ -69,7 +69,7 @@ class Asset(models.Model):
     """Customer owned assets"""
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
-    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    quantity = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100000000)])
 
     def value(self):
         quantity = self.quantity

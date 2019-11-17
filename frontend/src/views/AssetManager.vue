@@ -54,16 +54,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-4 plain-element"></div>
-                  <div class="col-md-4 plain-element">
-                    <p v-show="loadingInstruments">...loading...</p>
-                    <button v-show="next" @click="getInstruments" class="btn route">
-                      Load More
-                    </button>
-                  </div>
-                  <div class="col-md-4 plain-element"></div>
-                </div>
             </div>
             </div>
         </div>
@@ -78,7 +68,7 @@ export default {
   name: "AssetManager",
   data() {
     return {
-      assets: {}
+      assets: [],
     }
   },
   methods: {
@@ -86,11 +76,11 @@ export default {
       document.title = title;
     },
     getAssetData() {
-      let endpoint = `/portfolio/asset-manager/`;
+      let endpoint = "/portfolio/asset-manager/";
       apiService(endpoint)
         .then(data => {
-          this.assets = data;
-          this.setPageTitle("My Assets")
+          this.assets.push(...data)
+          this.setPageTitle("My Assets");
         })
     }
   },
