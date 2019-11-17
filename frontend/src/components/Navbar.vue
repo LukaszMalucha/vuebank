@@ -21,7 +21,6 @@
         <li><router-link :to="{ name: 'instrument-editor'}">
               Instrument Editor
         </router-link></li>
-        </router-link></li>
         <li><router-link :to="{ name: 'asset-manager'}">
               Asset Manager
         </router-link></li>

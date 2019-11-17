@@ -26,6 +26,32 @@
                 <button onclick="window.location='/instruments'" class="btn route"><b>Instruments</b></button>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-3 text-center">
+            <router-link
+            :to="{name: 'cash-balance'}">
+                <button class="btn route"><b>Cash Balance</b>
+                </button>
+            </router-link>
+            </div>
+            <div class="col-md-3 text-center">
+            <router-link
+            :to="{name: 'asset-manager'}">
+                <button class="btn route"><b>Buy</b>
+                </button>
+            </router-link>
+            </div>
+            <div class="col-md-3 text-center">
+            <router-link
+            :to="{name: 'asset-manager'}">
+                <button class="btn route"><b>Sell</b>
+                </button>
+            </router-link>
+            </div>
+            <div class="col-md-3 text-center">
+                <button onclick="window.location='/instruments'" class="btn route"><b>User Profile</b></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

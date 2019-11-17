@@ -5,6 +5,7 @@ import Instruments from "./views/Instruments.vue";
 import Instrument from "./views/Instrument.vue";
 import InstrumentEditor from "./views/InstrumentEditor.vue";
 import AssetManager from "./views/AssetManager.vue";
+import CashBalance from "./views/CashBalance.vue";
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: "/asset-manager",
       name: "asset-manager",
       component: AssetManager,
+    },
+    {
+      path: "/cash-balance",
+      name: "cash-balance",
+      component: CashBalance,
     },
 
   ]
