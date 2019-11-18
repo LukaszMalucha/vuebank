@@ -5,7 +5,7 @@ from portfolio import views
 
 router = DefaultRouter()
 router.register('instruments', views.InstrumentViewSet)
-router.register('cash_balance', views.CashBalanceViewSet)
+router.register('cash-balance', views.CashBalanceViewSet)
 router.register('asset-manager', views.AssetManagerViewSet, basename='asset-manager')
 router.register('buy', views.BuyAssetViewSet)
 router.register('sell', views.SellAssetViewSet, basename='sell')

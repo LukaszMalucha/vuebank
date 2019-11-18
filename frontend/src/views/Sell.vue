@@ -4,7 +4,7 @@
       <div class="dashboard-cards">
         <div class="container text-center container-welcome">
           <div class="row">
-            <h3>Buy Instrument</h3>
+            <h3>Sell Instrument</h3>
           </div>
           <div class="row">
           <div class="col-md-4 plain-element"></div>
@@ -23,7 +23,7 @@
               </textarea>
               <br>
               <button type="submit" class="btn btn-success">
-                Buy
+                Sell
               </button>
             </form>
             <p v-if="error" class="muted">{{ error }}</p>
@@ -41,7 +41,7 @@
 import { apiService } from "../common/api.service.js";
 
 export default {
-  name: "Buy",
+  name: "Sell",
   data() {
     return {
       instrument_name: null,
@@ -61,12 +61,12 @@ export default {
           this.instrument_quantity > 1000000) {
          this.error = "Quantity can't be larger than 1 million"
     } else {
-      let endpoint = "/portfolio/buy/";
+      let endpoint = "/portfolio/sell/";
       let method = "POST";
       apiService(endpoint, method, {name: this.instrument_name, symbol: this.instrument_symbol,
                 category: this.instrument_category, price: this.instrument_price, quantity: this.instrument_quantity })
         .then(instrument_data => {
-          this.$router.push({ name: 'buy'});
+          this.$router.push({ name: 'sell'});
           console.log(data)
         })
       }

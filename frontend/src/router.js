@@ -6,7 +6,9 @@ import Instrument from "./views/Instrument.vue";
 import InstrumentEditor from "./views/InstrumentEditor.vue";
 import AssetManager from "./views/AssetManager.vue";
 import CashBalance from "./views/CashBalance.vue";
+import CashTransfer from "./views/CashTransfer.vue";
 import Buy from "./views/Buy.vue";
+import Sell from "./views/Sell.vue";
 
 
 Vue.use(Router)
@@ -46,10 +48,19 @@ export default new Router({
       component: CashBalance,
     },
     {
+      path: "/cash-transfer",
+      name: "cash-transfer",
+      component: CashTransfer,
+    },
+    {
       path: "/buy",
       name: "buy",
       component: Buy,
     },
-
+    {
+      path: "/sell",
+      name: "sell",
+      component: Sell,
+    }
   ]
 })

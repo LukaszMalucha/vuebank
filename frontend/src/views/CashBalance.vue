@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     getCashData() {
-      let endpoint = '/portfolio/cash_balance/';
+      let endpoint = '/portfolio/cash-balance/';
       apiService(endpoint)
         .then(data => {
           this.cash = data['results'][0];

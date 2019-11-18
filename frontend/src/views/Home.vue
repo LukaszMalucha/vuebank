@@ -43,13 +43,13 @@
             </div>
             <div class="col-md-3 text-center">
             <router-link
-            :to="{name: 'asset-manager'}">
+            :to="{name: 'sell'}">
                 <button class="btn route"><b>Sell</b>
                 </button>
             </router-link>
             </div>
             <div class="col-md-3 text-center">
-                <button onclick="window.location='/instruments'" class="btn route"><b>User Profile</b></button>
+                <button onclick="window.location='/instruments'" class="btn route"><b>Cash Transfer</b></button>
             </div>
           </div>
         </div>
