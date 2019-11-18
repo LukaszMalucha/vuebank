@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-3 text-center">
             <router-link
-            :to="{name: 'asset-manager'}">
+            :to="{name: 'buy'}">
                 <button class="btn route"><b>Buy</b>
                 </button>
             </router-link>
@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import { apiService } from "../common/api.service.js"
 
 export default {
   name: 'home',
