@@ -10,10 +10,9 @@
           <div class="col-md-4 plain-element"></div>
           <div class="col-md-4 plain-element">
             <form @submit.prevent="onSubmit">
-              <textarea v-model="instrument_name" rows="1" class="form-control" placeholder="name">
-              </textarea>
+              <input v-model="cash_quantity" type="number" placeholder="quantity" class="form-control">
+              </input>
               <br>
-
               <button type="submit" class="btn btn-success">
                 Cash Transfer
               </button>
@@ -36,24 +35,25 @@ export default {
   name: "CashTransfer",
   data() {
     return {
-      quantity: null,
+      cash_quantity: null,
       error: null
     }
   },
   methods: {
     onSubmit() {
-    if (!this.quantity) {
-        this.error = "Can't be empty"
+    if (!this.cash_quantity) {
+        this.error = "Can't be empty";
     } else if (
-          this.instrument_quantity > 1000000) {
-         this.error = "Quantity can't be larger than 1 million"
+          this.cash_quantity > 1000000) {
+         this.error = "Quantity can't be larger than 1 million";
     } else {
       let endpoint = "/portfolio/cash-balance/";
       let method = "POST";
-      apiService(endpoint, method, { quantity: this.quantity })
-        .then(instrument_data => {
-          this.$router.push({ name: 'buy'});
-          console.log(data)
+      apiService(endpoint, method, { quantity: this.cash_quantity, category: "Currency", price: 1.0 })
+        .then(cash_data => {
+          this.$router.push({
+          name: 'cash-balance',
+          })
         })
       }
     }
