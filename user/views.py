@@ -23,7 +23,7 @@ def login(request):
                     next = request.GET['next']
                     return HttpResponseRedirect(next)
                 else:
-                    return redirect(reverse('dashboard:dashboard'))
+                    return redirect('/')
             else:
                 messages.error(request, "Your email or password are incorrect")
     else:
@@ -46,7 +46,7 @@ def register(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, "You have successfully registered")
-                return redirect(reverse('dashboard:dashboard'))
+                return redirect('/')
 
             else:
                 messages.error(request, "unable to log you in at this time!")
@@ -61,7 +61,7 @@ def register(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
-    return redirect(reverse('dashboard:dashboard'))
+    return redirect('/')
 
 
 @login_required

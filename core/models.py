@@ -46,9 +46,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
-        instrument, created = Instrument.objects.get_or_create(name="USD", symbol="USD")  # if not USD in instruments yet
-        asset, created = Asset.objects.get_or_create(owner=self, instrument=instrument,
-                                                     quantity=100)  # starter asset
+        instrument, created = Instrument.objects.get_or_create(name="USD",
+                                                               symbol="USD")  # if not USD in instruments yet
+        asset = Asset.objects.filter(owner=self).filter(instrument__name="USD").first()
+        if not asset:
+            asset = Asset(owner=self, instrument=instrument, quantity=100000)
+            asset.save()  # starter asset
 
     # Add AUTH_USER_MODEL to settings !!!
 
@@ -114,7 +117,6 @@ class BuyTransaction(models.Model):
 
     def __str__(self):
         return f"{self.owner}: {self.quantity} of {self.instrument}"
-
 
 
 class SellTransaction(models.Model):

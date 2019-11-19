@@ -49,7 +49,11 @@
             </router-link>
             </div>
             <div class="col-md-3 text-center">
-                <button onclick="window.location='/instruments'" class="btn route"><b>Cash Transfer</b></button>
+                <router-link
+                  :to="{name: 'cash-transfer'}">
+                <button class="btn route"><b>Cash Transfer</b>
+                </button>
+            </router-link>
             </div>
           </div>
         </div>

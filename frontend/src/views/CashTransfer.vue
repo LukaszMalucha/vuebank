@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     onSubmit() {
-    if !this.quantity {
+    if (!this.quantity) {
         this.error = "Can't be empty"
     } else if (
           this.instrument_quantity > 1000000) {
