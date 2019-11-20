@@ -37,10 +37,11 @@ class AssetSerializer(serializers.ModelSerializer):
 class BuyTransactionSerializer(serializers.ModelSerializer):
     """Serializer for buy transactions"""
     symbol = serializers.ReadOnlyField(source="instrument.symbol")
+    slug = serializers.SlugField(read_only=True)
 
     class Meta:
         model = BuyTransaction
-        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value')
+        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value', 'slug')
 
     def validate(self, attrs):
         """Forbid USD to USD transactions, also check for sufficient cash balance"""
@@ -62,10 +63,11 @@ class BuyTransactionSerializer(serializers.ModelSerializer):
 class SellTransactionSerializer(serializers.ModelSerializer):
     """Serializer for sell transactions"""
     symbol = serializers.ReadOnlyField(source="instrument.symbol")
+    slug = serializers.SlugField(read_only=True)
 
     class Meta:
         model = SellTransaction
-        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value')
+        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value', 'slug')
 
     def validate(self, attrs):
         """Forbid USD to USD transactions, also check for sufficient asset quantity to sell"""

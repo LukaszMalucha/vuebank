@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import NavbarComponent from "./components/Navbar.vue";
-import NavbarMobileComponent from "./components/NavbarMobile.vue";
-import FooterComponent from "./components/Footer.vue";
+import NavbarComponent from "@/components/Navbar.vue";
+import NavbarMobileComponent from "@/components/NavbarMobile.vue";
+import FooterComponent from "@/components/Footer.vue";
 export default {
     name: "App",
     components: {

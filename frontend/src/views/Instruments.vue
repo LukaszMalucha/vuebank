@@ -43,7 +43,7 @@
                             <div class="card-content">
                                 <b class="instrument-website">
                                     <router-link :to="{ name: 'instrument', params: { slug: instrument.slug} }">
-                                        Buy/Sell
+                                        Buy
                                     </router-link>
                                 </b>
                             </div>
@@ -68,7 +68,7 @@
 
 
 <script>
-import { apiService } from "../common/api.service.js"
+import { apiService } from "@/common/api.service.js"
 
 export default {
   name: 'Instruments',
