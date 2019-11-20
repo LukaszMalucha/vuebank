@@ -72,6 +72,7 @@ class Asset(models.Model):
     """Customer owned assets"""
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True)
     quantity = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100000000)])
 
     def value(self):
@@ -88,6 +89,7 @@ class BuyTransaction(models.Model):
     """Buy asset transaction"""
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -123,6 +125,7 @@ class SellTransaction(models.Model):
     """Sell asset transaction"""
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -26,10 +26,11 @@ class AssetSerializer(serializers.ModelSerializer):
     symbol = serializers.ReadOnlyField(source="instrument.symbol")
     category = serializers.ReadOnlyField(source="instrument.category")
     price = serializers.ReadOnlyField(source="instrument.price")
+    slug = serializers.SlugField(read_only=True)
 
     class Meta:
         model = Asset
-        fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price')
+        fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price','slug')
         read_only_fields = '__all__',
 
 
