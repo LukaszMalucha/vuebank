@@ -33,6 +33,6 @@ def add_slug_to_buy_transaction(sender, instance, *args, **kwargs):
 @receiver(pre_save, sender=SellTransaction)
 def add_slug_to_sell_transaction(sender, instance, *args, **kwargs):
     if instance and not instance.slug:
-        slug_instrument = slugify(instance.instrument.name)
+        slug = slugify(instance.instrument.name)
         random_string = generate_random_string()
         instance.slug = "sell-" + slug + "-" + random_string

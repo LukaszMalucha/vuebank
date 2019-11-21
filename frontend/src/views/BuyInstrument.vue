@@ -76,7 +76,7 @@
 import { apiService } from "@/common/api.service.js"
 
 export default {
-  name: 'Instrument',
+  name: 'BuyInstrument',
   props: {
     slug: {
       type: String,
@@ -104,10 +104,9 @@ export default {
         })
     },
     onSubmit() {
-      console.log('XXX');
-      let endpoint = "/portfolio/cash-balance/";
+      let endpoint = "/portfolio/buy/";
       let method = "POST";
-      apiService(endpoint, method, { quantity: this.assetQuantity, category: "Currency", price: 1.0 })
+      apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
         .then(cash_data => {
           this.$router.push({
           name: 'cash-balance',

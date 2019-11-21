@@ -42,8 +42,13 @@
                             </div>
                             <div class="card-content">
                                 <b class="instrument-website">
-                                    <router-link :to="{ name: 'instrument', params: { slug: instrument.slug} }">
+                                    <router-link :to="{ name: 'buy-instrument', params: { slug: instrument.slug} }">
                                         Buy
+                                    </router-link>
+                                </b>
+                                <b class="instrument-website">
+                                    <router-link :to="{ name: 'sell-instrument', params: { slug: instrument.slug} }">
+                                        Sell
                                     </router-link>
                                 </b>
                             </div>

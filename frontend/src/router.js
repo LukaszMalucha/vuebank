@@ -2,14 +2,12 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Instruments from "./views/Instruments.vue";
-import Instrument from "./views/Instrument.vue";
+import BuyInstrument from "./views/BuyInstrument.vue";
+import SellInstrument from "./views/SellInstrument.vue"
 import InstrumentEditor from "./views/InstrumentEditor.vue";
 import AssetManager from "./views/AssetManager.vue";
 import CashBalance from "./views/CashBalance.vue";
 import CashTransfer from "./views/CashTransfer.vue";
-import Buy from "./views/Buy.vue";
-import Sell from "./views/Sell.vue";
-
 
 Vue.use(Router)
 
@@ -27,9 +25,15 @@ export default new Router({
       component: Instruments
     },
     {
-      path: "/instrument/:slug",
-      name: "instrument",
-      component: Instrument,
+      path: "/instrument/:slug/buy",
+      name: "buy-instrument",
+      component: BuyInstrument,
+      props: true
+    },
+    {
+      path: "/instrument/:slug/sell",
+      name: "sell-instrument",
+      component: SellInstrument,
       props: true
     },
     {
@@ -52,15 +56,5 @@ export default new Router({
       name: "cash-transfer",
       component: CashTransfer,
     },
-    {
-      path: "/buy",
-      name: "buy",
-      component: Buy,
-    },
-    {
-      path: "/sell",
-      name: "sell",
-      component: Sell,
-    }
   ]
 })
