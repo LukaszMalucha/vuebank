@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from core.models import Instrument, Asset, BuyTransaction, SellTransaction
+from core.models import Instrument, Asset, BuyTransaction, SellTransaction, User
 from django.utils.timezone import now
+
 
 ## RETURN READ ONLY AFTER  TESTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 class InstrumentSerializer(serializers.ModelSerializer):
@@ -30,7 +31,7 @@ class AssetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Asset
-        fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price','slug')
+        fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price', 'slug')
         read_only_fields = '__all__',
 
 
@@ -82,3 +83,9 @@ class SellTransactionSerializer(serializers.ModelSerializer):
         if asset_balance < 0:
             raise ValidationError('You have insufficient asset quantity to proceed with transaction.')
         return attrs
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email"]

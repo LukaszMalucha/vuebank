@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from rest_framework import generics, viewsets, mixins, status
+from rest_framework import generics, viewsets, views, mixins, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
@@ -104,3 +104,9 @@ class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
             serializer.save(owner=self.request.user)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class CurrentUserApiView(views.APIView):
+
+    def get(self, request):
+        serializer = serializers.UserSerializer(request.user)
+        return Response(serializer.data)

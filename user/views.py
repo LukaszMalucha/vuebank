@@ -7,6 +7,7 @@ from .forms import UserLoginForm, UserRegistrationForm
 from core import models
 
 
+
 def login(request):
     """A view that manages the login form"""
     if request.method == 'POST':
@@ -92,3 +93,4 @@ def edit_profile(request):
             return redirect(reverse('user:profile'))
 
     return render(request, 'edit_profile.html', {'my_profile': my_profile, 'positions': positions})
+

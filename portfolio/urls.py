@@ -15,6 +15,6 @@ app_name = 'portfolio'
 
 urlpatterns = [
     path('', include(router.urls)),
-
+    path("user/", views.CurrentUserApiView.as_view(), name="current-user")
 ]
 
