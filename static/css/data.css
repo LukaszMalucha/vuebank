@@ -1,0 +1,445 @@
+/*------------------------------------------------------------------------------
+    DATA STYLES
+------------------------------------------------------------------------------*/
+
+body {
+    background-image: none;
+}
+
+
+
+#page-index {
+    padding-top: 0px;
+}
+
+.dashboard-cards {
+    border: none;
+    text-align: center;
+    box-shadow: none;
+    display: block;
+    overflow: auto;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 10%;
+    width: 100%;
+
+}
+
+.row-cards {
+    width: 70%;
+    text-align: center;
+    padding: 4% 0% 4% 0%;
+}
+
+.row-title {
+    width: 70%;
+    margin: auto;
+    text-align: left;
+}
+
+
+.row-title p {
+    color: #868e96;
+    font-size: 12px;
+
+}
+
+
+
+
+/*------------------------------------------------------------------------------
+    CARDS
+------------------------------------------------------------------------------*/
+
+/*----------------------------------------------
+   DASHBOARD STYLES
+------------------------------------------------*/
+
+
+
+.row-cards {
+    width: 70%;
+    text-align: center;
+    padding: 0%;
+}
+
+
+.menu-card {
+    box-shadow: 0 3px 3px 0 #b25792, 0 3px 1px -2px #838383, 0 1px 5px 0 #838383;
+    text-align: left;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    float: none;
+}
+
+.menu-card:hover {
+    box-shadow: 0 3px 3px 0 #5d2966, 0 3px 2px -2px #b25792, 0 2px 5px 0 #b25792;
+}
+
+
+.card .card-content {
+    min-height: 80px;
+
+}
+
+.card .card-content p {
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+    min-height: 50px;
+}
+
+.card .card-content .card-title {
+    color: #ba378b;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+
+
+.card.horizontal .card-image {
+    max-width: 80%;
+}
+
+.card .card-action:last-child {
+    border: none;
+}
+
+
+
+
+
+.card .card-content {
+    padding: 16px;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 12px;
+
+}
+
+.card .card-content h5 {
+    margin-top: 5px;
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 1.4rem;
+
+}
+
+
+.card .card-image img {
+    border: none;
+    height: 100%;
+}
+
+
+.chart {
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 500px;
+
+}
+
+.card-campaign {
+    width: 90%;
+    height: 240px;
+    margin: auto;
+    margin-top: 10px;
+    box-shadow: 0 3px 3px 0 #A9A9A9, 0 3px 1px -2px #6d6d6d, 0 1px 5px 0 #6d6d6d;
+    margin-bottom: 20px;
+}
+
+.card-short {
+    height: 140px;
+}
+
+.campaign-title {
+    color: #ba378b;
+}
+
+.form-card {
+    width: 98%;
+    margin: auto;
+    border-radius: 5px;
+    box-shadow: 0 3px 3px 0 #A9A9A9, 0 3px 1px -2px #6d6d6d, 0 1px 5px 0 #6d6d6d;
+    background: #652966;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.form-card h5 {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+}
+
+.row-choice {
+    padding-left: 6%;
+
+}
+
+.row-choice label {
+    font-size: 1rem;
+    color: white;
+}
+
+.advert {
+    width: 85%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+/*------------------------------------------------------------------------------
+    FORMS
+------------------------------------------------------------------------------*/
+
+input[type="radio"] {
+    opacity: 1 !important;
+    position: relative !important;
+    margin-right: 5px;
+    height: 12px !important;
+}
+
+
+/*------------------------------------------------------------------------------
+    BUTTONS
+------------------------------------------------------------------------------*/
+
+.btn-enter {
+    background-color: #702a65;
+    width: 100%;
+    text-align: right;
+    font-size: 14px;
+}
+
+.btn-enter i {
+    font-size: 16px;
+}
+
+.btn-enter:hover,
+.btn-enter:focus,
+.btn-enter:active {
+    background-color: #652966;
+    color: white;
+}
+
+
+.arrow {
+    color: white;
+}
+
+
+.btn-algorithm {
+    border-radius: 5px;
+    height: 40px;
+    width: 160px;
+    background: #652966;
+    padding: 1px 10px 1px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 28px;
+    margin-top: 6px;
+    color: white;
+}
+
+.btn-algorithm:hover,
+.btn-algorithm:focus,
+.btn-algorithm:active {
+    color: white;
+    background: #441c44;
+}
+
+.button-card {
+    width: 25%;
+    height: 100px;
+    margin: auto;
+    border-radius: 10px;
+    background: #652966;
+    box-shadow: 0 3px 3px 0 #A9A9A9, 0 3px 1px -2px #6d6d6d, 0 1px 5px 0 #6d6d6d;
+}
+
+.button-image {
+    width: 30%;
+
+}
+
+.button-image img {
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+
+.button-content {
+    padding-top: 15% !important;
+    color: white;
+}
+
+.button-card:hover {
+    background: #441c44;
+}
+
+
+.button-card:active,
+.button-card:focus {
+    box-shadow: 0 3px 0 #441c44;
+    top: 1px;
+}
+
+.fixed-action-btn {
+    right: 310px;
+}
+
+/*------------------------------------------------------------------------------
+    MEDIA QUERIES
+------------------------------------------------------------------------------*/
+
+@media(max-width:1700px) {
+
+    .row-cards {
+        width: 85%;
+    }
+
+    .button-card {
+        width: 30%;
+    }
+
+    .button-content {
+        padding-top: 12% !important;
+    }
+
+    .fixed-action-btn {
+        right: 120px;
+    }
+
+
+    .campaign-header {
+        width: 85%;
+        margin: auto;
+        padding: 0;
+    }
+
+}
+
+@media(max-width:1300px) {
+    .campaign-restbank {
+        margin-top: 25%;
+        width: 180px;
+    }
+}
+
+@media(max-width:1024px) {
+
+    .row-cards {
+        width: 88%;
+    }
+
+    .campaign-restbank {
+        margin-top: 15%;
+        width: 200px;
+        float: left;
+    }
+
+    .card .card-content p {
+        color: black;
+        font-size: 12px;
+        min-height: 50px;
+    }
+
+    .card .card-content .card-title {
+        color: #ba378b;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+
+
+    .viz-card {
+        width: 90%;
+    }
+
+    .card .card-image img {
+        height: 100% !important;
+    }
+
+    .col-lg-4 {
+        width: 100%;
+    }
+
+    .header {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+
+    .tableau_card {
+        overflow: auto;
+    }
+
+    .skillset-image {
+        display: none;
+    }
+
+    .form-signin {
+        max-width: 100%;
+    }
+
+
+
+    .button-card {
+        width: 50%;
+        height: 100px;
+        margin-bottom: 50px;
+    }
+
+    .button-content {
+        padding-top: 12% !important;
+    }
+}
+
+
+@media(max-width:520px) {
+
+    .row-title,
+    .row-cards {
+        width: 100%;
+    }
+
+    .property_input {
+        padding-right: 10px !important;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .form-box h4 {
+        font-size: 1.6rem;
+    }
+
+    .button-card {
+        width: 80%;
+        height: 100px;
+        margin-bottom: 50px;
+    }
+
+    .button-content h5 {
+        font-size: 1.3rem !important;
+    }
+
+    .button-content {
+        padding-top: 15% !important;
+    }
+
+    .campaign-restbank {
+        width: 100%;
+    }
+
+    .summary {
+        text-align: center;
+    }
+
+    .fixed-action-btn {
+        right: 10px;
+    }
+
+
+}

@@ -1,9 +1,14 @@
+body {
+    background-image: url('../../static/img/background-form.png');
+    background-size: cover;
+}
 
 
-.form-container {
-    padding-top: 72px;
-    width: 70%;
-    margin: auto;
+
+#page-index {
+
+    padding-top: 60px;
+    background-image: none;
 }
 
 .form-signin {
@@ -16,7 +21,7 @@
     border-radius: 15px;
     color: #222222;
     font-weight: bolder;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .btn-login {
@@ -27,12 +32,14 @@
     border-color: transparent;
     text-align: right;
     color: white;
-    background-color: #582554;;
+    background-color: #652966;
     font-size: 18px;
 }
 
-.btn-login:hover, .btn-login:active, .btn-login:focus {
-    background-color: #582554;
+.btn-login:hover,
+.btn-login:active,
+.btn-login:focus {
+    background-color: #702a65;
 }
 
 
@@ -45,7 +52,7 @@
     border-radius: 50px;
     background-color: white;
     padding: 3%;
-    color: #582554;;
+    color: #702a65;
 }
 
 .form-box {
@@ -75,8 +82,8 @@ h6 {
 input[type="email"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),
 input[type="text"]:not(.browser-default):focus:not([readonly]) {
-    border-bottom: 1px solid #582554;
-    box-shadow: 0 0px 0 0 #582554;
+    border-bottom: 1px solid #702a65;
+    box-shadow: 0 1px 0 0 #26a69a;
 
 }
 
@@ -86,20 +93,15 @@ input[type="text"]:not(.browser-default) {
     font-size: 14px;
     height: 2.5rem;
 }
-input[type="number"]:not(.browser-default),
-input.valid[type="number"]:not(.browser-default) {
-    text-align: center;
-}
 
 
-.input-field > label {
+.input-field>label {
     display: none;
 }
 
 
 .orange-text {
     font-size: 12px;
-    color: #ba378b !important;
 }
 
 blockquote {
@@ -110,17 +112,9 @@ blockquote {
     top: -50px;
 }
 
-
-.form-wide {
-    max-width: 100% !important;
-
+.footer p {
+    margin-right: 16px;
 }
-
-.form-wide .btn-login {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
 
 
 /*----------------------------------------------
@@ -128,15 +122,13 @@ blockquote {
 ------------------------------------------------*/
 
 
-
-
 @media(max-width:1600px) {
     .form-signin {
-    max-width: 60%;
+        max-width: 60%;
     }
 
-     #page-index {
-    padding-top: 0px;
+    #page-index {
+        padding-top: 0px;
     }
 
 
@@ -144,9 +136,8 @@ blockquote {
 
 @media(max-width:859px) {
     .form-signin {
-    max-width: 100%;
+        max-width: 100%;
     }
 
 
 }
-
