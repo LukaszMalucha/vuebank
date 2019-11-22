@@ -124,9 +124,12 @@ export default {
       let method = "POST";
       apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
         .then(data => {
-          this.$router.push({
-          name: 'cash-balance',
-          })
+          if (data) {
+            console.log(data)
+          }
+//          this.$router.push({
+//          name: 'cash-balance',
+//          })
         })
       },
   },
