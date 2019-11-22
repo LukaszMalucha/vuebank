@@ -13,10 +13,14 @@
               <textarea v-model="instrument_name" rows="1" class="form-control" placeholder="name">
               </textarea>
               <br>
-              <textarea v-model="instrument_symbol" rows="1" class="form-control" placeholder="symbol">
-              </textarea>
+              <div class="input-field col s12">
+                <select v-model="instrument_category">
+                  <option v-for="option in options" :value="option">{{option}}</option>
+                </select>
+                <label>Materialize Select</label>
+              </div>
               <br>
-              <textarea v-model="instrument_category" rows="1" class="form-control" placeholder="category">
+              <textarea v-model="instrument_symbol" rows="1" class="form-control" placeholder="symbol">
               </textarea>
               <br>
               <textarea v-model="instrument_price" rows="1" class="form-control" placeholder="price">
@@ -64,14 +68,14 @@ export default {
         let method = "POST";
         apiService(endpoint, method, {name: this.instrument_name, symbol: this.instrument_symbol, category: this.instrument_category, price: this.instrument_price })
           .then(instrument_data => {
-            this.$router.push({ name: 'instrument', params: { slug: instrument_data.slug}
-            })
+            this.$router.push({ name: 'instruments'})
           })
       }
     }
   },
   created() {
     document.title = "Instrument Editor";
+    this.options = ["Cryptocurrency", "Currency", "Stock", "Commodity"]
   }
 }
 </script>
