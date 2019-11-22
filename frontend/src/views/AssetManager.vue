@@ -5,6 +5,7 @@
             <div class="container text-center container-welcome">
                 <div class="row">
                     <h3>My Portfolio</h3>
+                    <p>{{ this.requestUser }} </p>
                 </div>
                 <br>
                 <div class="row">
@@ -69,11 +70,15 @@ export default {
   data() {
     return {
       assets: [],
+      requestUser: null,
     }
   },
   methods: {
     setPageTitle(title) {
       document.title = title;
+    },
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("email");
     },
     getAssetData() {
       let endpoint = "/portfolio/asset-manager/";
@@ -85,7 +90,8 @@ export default {
     }
   },
   created() {
-    this.getAssetData();
+    this.getAssetData()
+    this.setRequestUser()
   }
 }
 

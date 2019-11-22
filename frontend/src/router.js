@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import NotFound from "./views/NotFound.vue";
 import Instruments from "./views/Instruments.vue";
 import BuyInstrument from "./views/BuyInstrument.vue";
 import SellInstrument from "./views/SellInstrument.vue"
@@ -55,6 +56,11 @@ export default new Router({
       path: "/cash-transfer",
       name: "cash-transfer",
       component: CashTransfer,
+    },
+    {
+      path: "*",
+      name: "page-not-found",
+      component: NotFound,
     },
   ]
 })
