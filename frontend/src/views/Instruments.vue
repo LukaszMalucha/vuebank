@@ -11,28 +11,28 @@
   <div class="dashboard-cards">
     <div class="container text-center container-welcome">
         <div class="search-wrapper">
-           <input type="text" v-model="search" placeholder="Search title.."/>
-          <label>Search title:</label>
+           <label>Search:</label>
+           <input type="text" v-model="search"/>
         </div>
-      <table>
+      <table id="instrumentTable">
         <thead>
         <tr>
-          <th>Instrument</th>
-          <th>Symbol</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Buy</th>
-          <th>Sell</th>
+          <th onclick="sortTable(0)">Instrument</th>
+          <th onclick="sortTable(1)" class="text-center">Symbol</th>
+          <th onclick="sortTable(2)" class="text-center">Category</th>
+          <th class="text-center">Price</th>
+          <th class="text-center">Buy</th>
+          <th class="text-center">Sell</th>
         </tr>
         </thead>
         <tbody>
           <tr v-for="instrument in filteredList" :key="instrument.pk">
             <td>{{ instrument.name }}</td>
-            <td>{{ instrument.symbol }}</td>
-            <td>{{ instrument.category }}</td>
-            <td>{{ instrument.price }}</td>
-            <td>Buy</td>
-            <td>Sell</td>
+            <td  class="text-center">{{ instrument.symbol }}</td>
+            <td class="text-center">{{ instrument.category }}</td>
+            <td class="text-center">{{ instrument.price }}</td>
+            <td class="text-center">Buy</td>
+            <td class="text-center">Sell</td>
           </tr>
        </tbody>
       </table>
@@ -65,7 +65,7 @@ export default {
       .then( data => {
           this.instruments.push(...data.results)
      })
-    }
+    },
   },
   computed: {
     filteredList() {

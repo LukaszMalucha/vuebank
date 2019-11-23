@@ -198,6 +198,12 @@ input[type="radio"] {
     height: 12px !important;
 }
 
+input[type="text"]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid #702a65;
+  -webkit-box-shadow: 0 1px 0 0 #702a65;
+  box-shadow: 0 1px 0 0 #702a65;
+}
+
 
 /*------------------------------------------------------------------------------
     BUTTONS
@@ -290,10 +296,16 @@ input[type="radio"] {
     TABLES
 ------------------------------------------------------------------------------*/
 
-.dataTables_empty {
+.search-wrapper {
+  width: 15%;
+  margin-left:85%;
+  margin-bottom: 10px;
+  text-align: right;
 
 }
-
+.search-wrapper label {
+  margin: 0px;
+}
 
 /*------------------------------------------------------------------------------
     MEDIA QUERIES
