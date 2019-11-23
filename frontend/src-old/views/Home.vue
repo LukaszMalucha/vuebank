@@ -42,14 +42,9 @@
 </template>
 
 <script>
-import RowHeaderComponent from "@/components/RowHeader.vue";
-import RowBannerComponent from "@/components/RowBanner.vue";
 
 export default {
   name: 'home',
-  components: {
-
-  },
   created() {
     document.title = "VueBank";
   }

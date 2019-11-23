@@ -5,74 +5,7 @@
 <link href="{% static 'css/data.css' %}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
-{% block row_header %}
-<div class="row header">
-    <div class="row top-menu">
-        <a href="">
-        <img src="{% static 'img/logo/restbank.png' %}" class="img responsive restbank" alt="RESTBank logo">
-        </a>
-        <ul>
-            <li><a href="">Manage Portfolio</a></li>
-            <li><a href="">Ad Campaign</a></li>
-            <li><a target="_blank" href="http://www.minerstartup.com/">Blockchain Platform</a></li>
-            <li><a target="_blank" href="http://www.quantproperties.com/">Property Value Estimator</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
-    </div>
-</div>
-<div class="row row-banner">
-    <div class="col-md-8 text-left col-banner no-padding">
-    <h4>Welcome to RESTBank</h4>
-    </div>
-    <div class="col-md-4 no-padding">
-    <div class="slider">
-        <ul class="slides">
-            <li>
-                <img src="{% static 'img/slider/slider1.png' %}" alt="slider">
-                <div class="caption center-align">
-                    <h4>Planning Retirement</h4>
-                    <h5 class="light grey-text text-lighten-3">Stay wealthy, stay happy. </h5>
-                </div>
-            </li>
-            <li>
-                <img src="{% static 'img/slider/slider2.png' %}" alt="slider">
-                <div class="caption left-align">
-                    <h4>One Man Startup</h4>
-                    <h5 class="light grey-text text-lighten-3">Jump-start for Freelancers </h5>
-                </div>
-            </li>
-            <li>
-                <img src="{% static 'img/slider/slider3.png' %}" alt="slider">
-                <div class="caption right-align">
-                    <h4>Invest in Blockchain</h4>
-                    <h5 class="light grey-text text-lighten-3">Try our trading platform</h5>
-                </div>
-            </li>
-        </ul>
-    </div>
-    </div>
-</div>
 
-
-<div class="row messages">
-    {% if messages %} {% for message in messages %} {% if message.tags == "success" %}
-    <div class="alert alert-success">
-        <div class="messages text-center">
-            {{ message }}
-        </div>
-    </div>
-    {% else %}
-    <div class="alert alert-danger">
-        <div class="messages text-center">
-            {{ message }}
-        </div>
-    </div>
-    {% endif %} {% endfor %}
-    {% else %}
-
-    {% endif %}
-</div>
-{% endblock %}
 
 <noscript>
     <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to
@@ -80,9 +13,11 @@
 </noscript>
 <div id="app">
 
+    {% render_bundle 'app' %}
+
 </div>
 
-{% render_bundle 'app' %}
+
 
 
 <script>
@@ -94,3 +29,5 @@
 </script>
 
 {% endblock %}
+
+

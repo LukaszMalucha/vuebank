@@ -1,20 +1,24 @@
 <template>
-    <div id="app">
-      <router-view/>
-      <RowHeaderComponent/>
-      <RowBannerComponent/>
-    </div>
+
+      <div id="app">
+        <NavbarComponent />
+        <NavbarMobileComponent />
+        <FooterComponent />
+        <router-view/>
+      </div>
 </template>
 
 <script>
 import { apiService } from "@/common/api.service.js"
-import RowHeaderComponent from "@/components/RowHeader.vue";
-import RowBannerComponent from "@/components/RowBanner.vue";
+import NavbarComponent from "@/components/Navbar.vue";
+import NavbarMobileComponent from "@/components/NavbarMobile.vue";
+import FooterComponent from "@/components/Footer.vue";
 export default {
     name: "App",
     components: {
-        RowHeaderComponent,
-        RowBannerComponent
+        NavbarComponent,
+        NavbarMobileComponent,
+        FooterComponent
     },
     methods: {
       async setUserInfo() {

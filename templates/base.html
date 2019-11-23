@@ -1,11 +1,11 @@
-{% load staticfiles %}
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Thompson Sampling Example - RESTBank Ad Campaign | Septellar</title>
+    <title>Quantesta - Manage Your Financial Portfolio | Septellar</title>
     <meta name="Description"
           content="Bank Advertising Campaign with Thompson Sampling algorithm. Ever imagined Marketing Campaign managed by Artificial Intelligence? While it my sound as a sci-fi, we can already have a taste the future ad campaigns today.
           This project is a simulation of LeanBank advertisement campaign where Thomson Sampling algorithm records customers behavior and then, based on the gathered experience it will determine most effective Ad design.
@@ -36,41 +36,11 @@
     <!-- Material Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% block extrahead %}{% endblock %} {% block head_js %} {% endblock head_js %}
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138397523-8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-138397523-8');
-    </script>
      <!-- Fonts -->
-     <style>
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-weight: 400 500;
-        src: url('{% static 'fonts/TTF/SourceSansPro-Regular.ttf' %}');
-      }
-      @font-face {
-        font-family: 'Source Sans Pro';
-        font-weight: bold 600;
-        src: url('{% static 'fonts/TTF/SourceSansPro-Semibold.ttf' %}');
-      }
-      @font-face {
-        font-family: 'Raleway';
-        src: url('{% static 'fonts/TTF/Raleway-Regular.ttf' %}');
-      }
-    </style>
-
-
-
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<div id="preloader">
-    <i class="circle-preloader"></i>
-</div>
 <div id="wrapper">
     <!-- TOP NAVBAR -->
     {% block navbar %}
@@ -80,16 +50,16 @@
                 <b>RESTBank</b></strong></a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            <li><a class="nav-link" href=""><i class="fas fa-terminal"></i><b>REST Api</b></a>
+            <li><a class="nav-link" href=""><i class="fas fa-terminal"></i>REST Api</a>
             </li>
             <li><a class='dropdown-trigger nav-link' href='#' data-target='dropdown-user' id="user_dropdown"><i
-                    class="fas fa-caret-down"></i><b>
+                    class="fas fa-caret-down"></i>
                 {% if user.is_authenticated %}
                 {{ user }}
                 {% else %}
                 Login/Register
                 {% endif %}
-            </b></a></li>
+            </a></li>
             <li><a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons" id="trigger">menu</i></a>
             </li>
         </ul>
