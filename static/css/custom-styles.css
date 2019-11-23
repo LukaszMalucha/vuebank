@@ -92,6 +92,17 @@ a:hover {
     text-shadow: 1px 1px #f0dee9;
 }
 
+.row-message {
+  position: absolute;
+  width: 100%;
+  top: 42px;
+}
+
+.alert {
+  position: absolute;
+  width: 100%;
+}
+
 
 .row-banner {
     min-height: 150px;

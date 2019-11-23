@@ -1,20 +1,16 @@
 <template>
     <div id="app">
       <router-view/>
-      <RowHeaderComponent/>
-      <RowBannerComponent/>
     </div>
 </template>
 
 <script>
 import { apiService } from "@/common/api.service.js"
 import RowHeaderComponent from "@/components/RowHeader.vue";
-import RowBannerComponent from "@/components/RowBanner.vue";
 export default {
     name: "App",
     components: {
         RowHeaderComponent,
-        RowBannerComponent
     },
     methods: {
       async setUserInfo() {

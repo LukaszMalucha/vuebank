@@ -1,7 +1,7 @@
 <template>
 <div class="row row-banner">
     <div class="col-md-8 text-left col-banner no-padding">
-    <h4>Quantesta Asset Manager</h4>
+    <h4>RESTBank Asset Manager</h4>
     </div>
     <div class="col-md-4 no-padding">
     <div class="slider">

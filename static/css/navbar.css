@@ -31,7 +31,7 @@
     height: 42px;
     min-height: 42px;
     padding-left: 16%;
-    padding-right: 16%;
+    padding-right: 16.5%;
     padding-top: 0px;
     padding-bottom: 0px;
 
@@ -107,9 +107,9 @@ nav ul b {
 }
 
 .dropdown-content {
-    width: max-content !important;
+    min-width: 138px;
     right: -50px !important;
-    top: 50px !important;
+    top: 42px !important;
 
 }
 

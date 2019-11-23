@@ -1,4 +1,7 @@
 <template>
+<div id="page-index">
+  <RowHeaderComponent/>
+  <RowBannerComponent/>
   <div class="dashboard-cards">
     <div class="row row-cards">
         <div class="col-md-4 no-padding">
@@ -7,10 +10,12 @@
                     <img src="../assets/portfolio.jpg" class="img responsive" alt="portfolio">
                 </div>
                 <div class="card-content">
-                    <span class="card-title">Manage Portfolio</span>
-                    <p>Manage Investment Protfolio with REST API</p>
+                    <span class="card-title">Asset Manager</span>
+                    <p>Manage your Financial Assets Portfolio</p>
                 </div>
-                <button onclick="#" class="btn btn-enter"><span>Continue <i class="far fa-arrow-alt-circle-right"></i></span></button>
+                <router-link :to="{name: 'asset-manager'}">
+                <button class="btn btn-enter"><span>Continue <i class="far fa-arrow-alt-circle-right"></i></span></button>
+                </router-link>
             </div>
         </div>
         <div class="col-md-4 no-padding">
@@ -22,7 +27,7 @@
                     <span class="card-title">Advertising with AI</span>
                     <p>Build an Advert with Thompson Sampling</p>
                 </div>
-                <button onclick="#" type="submit" class="btn btn-enter"><span>Continue <i class="far fa-arrow-alt-circle-right"></i></span></button>
+                <button onclick="window.open('http://www.thompsonsampling.com/')" type="submit" class="btn btn-enter"><span>Continue <i class="far fa-arrow-alt-circle-right"></i></span></button>
             </div>
         </div>
         <div class="col-md-4 no-padding">
@@ -34,10 +39,11 @@
                     <span class="card-title">Blockchain Platform</span>
                     <p>Basic Blockchain concepts explained</p>
                 </div>
-                <button onclick="#" type="submit" class="btn btn-enter"><span>Continue <i class="far fa-arrow-alt-circle-right"></i></span></button>
+                <button onclick="window.open('http://www.minerstartup.com/')" type="submit" class="btn btn-enter"><span>Continue <i class="far fa-arrow-alt-circle-right"></i></span></button>
             </div>
         </div>
     </div>
+  </div>
 </div>
 </template>
 
@@ -48,7 +54,8 @@ import RowBannerComponent from "@/components/RowBanner.vue";
 export default {
   name: 'home',
   components: {
-
+    RowHeaderComponent,
+    RowBannerComponent
   },
   created() {
     document.title = "VueBank";

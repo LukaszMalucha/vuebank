@@ -41,16 +41,17 @@
 </head>
 
 <body>
+<!-- PAGE-WRAPPER -->
 <div id="wrapper">
     <!-- TOP NAVBAR -->
     {% block navbar %}
     <nav class="navbar navbar-default top-navbar" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand waves-effect waves-dark" href=""><strong> Welcome to
+            <a class="navbar-brand waves-effect waves-dark" href="/"><strong> Welcome to
                 <b>RESTBank</b></strong></a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            <li><a class="nav-link" href=""><i class="fas fa-terminal"></i>REST Api</a>
+            <li><a class="nav-link" href="/portfolio/"><i class="fas fa-terminal"></i>REST Api</a>
             </li>
             <li><a class='dropdown-trigger nav-link' href='#' data-target='dropdown-user' id="user_dropdown"><i
                     class="fas fa-caret-down"></i>
@@ -68,40 +69,35 @@
     <!-- DROPDOWN -->
     <ul id="dropdown-user" class="dropdown-content">
         {% if user.is_authenticated %}
-        <li><a href=""><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+        <li><a href="{% url 'user:logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
         {% else %}
-        <li><a href=""><i class="fa fa-user fa-fw"></i> Log In</a></li>
-        <li><a href=""><i class="fas fa-tasks"></i> Register</a></li>
+        <li><a href="{% url 'user:login' %}"><i class="fa fa-user fa-fw"></i> Log In</a></li>
+        <li><a href="{% url 'user:register' %}"><i class="fas fa-tasks"></i> Register</a></li>
         {% endif %}
     </ul>
 
 
     <!-- MOBILE -->
     <ul class="sidenav" id="mobile-demo">
-        <li><a class="dropdown-button waves-effect waves-dark" href=""><i
+        <li><a class="dropdown-button waves-effect waves-dark" href="/portfolio/"><i
                 class="fas fa-terminal"></i><b>REST Api</b></a></li>
         {% if user.is_authenticated %}
-        <li><a class="dropdown-button waves-effect waves-dark" href=""><i
+        <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:logout' %}"><i
                 class="fas fa-sign-out-alt"></i><b> Log Out {{ user.name }}</b></a></li>
         {% else %}
-        <li><a class="dropdown-button waves-effect waves-dark" href=""><i
+        <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:login' %}"><i
                 class="fa fa-user"></i><b> Log In</b></a></li>
-        <li><a class="dropdown-button waves-effect waves-dark" href=""><i
+        <li><a class="dropdown-button waves-effect waves-dark" href="{% url 'user:register' %}"><i
                 class="fas fa-tasks"></i><b> Register</b></a></li>
         {% endif %}
-
     </ul>
     {% endblock %}
-    <!-- PAGE-WRAPPER -->
 
-    <!-- PAGE-INDEX -->
-    <div id="page-index">
 
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
 
-    </div>
-    <!-- PAGE-INDEX -->
+
 </div>
 <!-- /. WRAPPER  -->
 <div class="footer">
