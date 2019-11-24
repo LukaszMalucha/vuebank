@@ -19,7 +19,7 @@ body {
     display: block;
     overflow: auto;
     margin: auto;
-    margin-top: 2%;
+    margin-top: 0;
     margin-bottom: 10%;
     width: 100%;
 
@@ -68,6 +68,7 @@ body {
     width: 80%;
     margin: 0 auto;
     margin-bottom: 50px;
+    margin-top: 58px;
     float: none;
 }
 

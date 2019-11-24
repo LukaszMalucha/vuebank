@@ -21,8 +21,7 @@
           <th onclick="sortTable(1)" class="text-center">Symbol</th>
           <th onclick="sortTable(2)" class="text-center">Category</th>
           <th class="text-center">Price</th>
-          <th class="text-center">Buy</th>
-          <th class="text-center">Sell</th>
+          <th colspan="2" class="text-center">Transaction</th>
         </tr>
         </thead>
         <tbody>
@@ -70,7 +69,9 @@ export default {
   computed: {
     filteredList() {
       return this.instruments.filter(instrument => {
-        return instrument.name.toLowerCase().includes(this.search.toLowerCase())
+        return instrument.symbol.toLowerCase().includes(this.search.toLowerCase()) ||
+                instrument.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                instrument.category.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   },
