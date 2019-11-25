@@ -21,6 +21,7 @@ class InstrumentViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
     serializer_class = serializers.InstrumentSerializer
     queryset = Instrument.objects.all()
+    queryset = queryset.exclude(name="USD")  # Exclude USD to USD transactions
     lookup_field = "slug"
 
     def get_queryset(self):

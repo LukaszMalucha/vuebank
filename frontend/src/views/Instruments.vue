@@ -20,7 +20,7 @@
           <th onclick="sortTable(0)">Instrument</th>
           <th onclick="sortTable(1)" class="text-center">Symbol</th>
           <th onclick="sortTable(2)" class="text-center">Category</th>
-          <th class="text-center">Price</th>
+          <th class="text-center">Price (USD)</th>
           <th colspan="2" class="text-center">Transaction</th>
         </tr>
         </thead>
@@ -30,8 +30,16 @@
             <td  class="text-center">{{ instrument.symbol }}</td>
             <td class="text-center">{{ instrument.category }}</td>
             <td class="text-center">{{ instrument.price }}</td>
-            <td class="text-center"><button class="btn btn-transaction">Buy</button></td>
-            <td class="text-center"><button class="btn btn-transaction">Sell</button></td>
+            <td class="text-center">
+            <router-link :to="{ name: 'buy-instrument', params: { slug: instrument.slug} }">
+                <button class="btn btn-transaction">Buy</button>
+            </router-link>
+            </td>
+            <td class="text-center">
+            <router-link :to="{ name: 'sell-instrument', params: { slug: instrument.slug} }">
+                <button class="btn btn-transaction">Sell</button>
+            </router-link>
+            </td>
           </tr>
        </tbody>
       </table>
