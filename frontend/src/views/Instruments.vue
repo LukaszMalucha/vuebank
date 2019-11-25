@@ -30,8 +30,8 @@
             <td  class="text-center">{{ instrument.symbol }}</td>
             <td class="text-center">{{ instrument.category }}</td>
             <td class="text-center">{{ instrument.price }}</td>
-            <td class="text-center">Buy</td>
-            <td class="text-center">Sell</td>
+            <td class="text-center"><button class="btn btn-transaction">Buy</button></td>
+            <td class="text-center"><button class="btn btn-transaction">Sell</button></td>
           </tr>
        </tbody>
       </table>
