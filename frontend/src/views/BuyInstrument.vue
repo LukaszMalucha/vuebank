@@ -3,17 +3,21 @@
   <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
     <div class="col-md-8 text-left col-banner-small no-padding">
-      <h4>Buy {{ instrument.name }}</h4>
+      <h4>Buy {{ instrument.name }} ({{instrument.symbol}})</h4>
     </div>
     <div class="col-md-4 no-padding">
     </div>
   </div>
   <div v-if="instrument" class="dashboard-cards">
-    <div class="row">
-      <div class="col-md-4 plain-element"></div>
+    <div class="row row-cards">
       <div class="col-md-4 plain-element">
-        <table class="table table-company">
+      <form @submit.prevent="onSubmit">
+        <table class="table table-transaction">
           <tbody>
+          <tr>
+            <td>Instrument:</td>
+            <td><b>{{ instrument.name }}</b></td>
+          </tr>
           <tr>
             <td>Category:</td>
             <td><b>{{ instrument.category }}</b></td>
@@ -26,23 +30,21 @@
             <td>Current Price:</td>
             <td><b>{{ instrument.price }} USD</b></td>
           </tr>
-
           <tr>
-          <div class="card text-center">
-            <form @submit.prevent="onSubmit">
-              <br>
-              <input v-model="assetQuantity" type="number" placeholder="quantity" class="form-control"/>
-
-              <br>
-              <button type="submit" class="btn btn-success">
-                Buy
-              </button>
-            </form>
-            </div>
-            <p v-if="error" class="muted">{{ error }}</p>
+            <td>Quantity:</td>
+            <td class="cell-input"><input v-model="assetQuantity" type="number" placeholder="quantity" class="form-control form-control-transaction"/></td>
+          </tr>
+          <br>
+          <tr>
+          <td>Total:</td>
+          <td><b>200 USD</b></td>
           </tr>
           </tbody>
         </table>
+
+        <p v-if="error" class="muted">{{ error }}</p>
+         <button type="submit" class="btn btn-success">Buy</button>
+        </form>
       </div>
       <div class="col-md-4 plain-element"></div>
     </div>
@@ -60,7 +62,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 </template>
 
