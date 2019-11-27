@@ -207,11 +207,10 @@ input[type="text"]:not(.browser-default):focus:not([readonly]) {
 
 
 input[type="number"]:not(.browser-default) {
-  border: 1px solid #9e9e9e;
-  height: 2.5rem;
+  height: 1.6rem;
   margin: 8px;
-  padding: 8px;
-  width: 96%;
+  padding: 4px;
+  width: 91%;
 }
 
 /*------------------------------------------------------------------------------
@@ -323,8 +322,27 @@ input[type="number"]:not(.browser-default) {
   border: 1px solid #702a65;
   color: #fefefe;
   transition: background-color .25s ease-out,color .25s ease-out
-
 }
+
+.btn-confirm {
+  background: #702a65;
+  border: 1px solid #702a65;
+  color: #fefefe;
+  font-size: 16px;
+  border-radius: 8px;
+  margin: 0px 0px 0px -40px !important;
+  line-height: 1.3;
+  padding: .25rem!important;
+  min-width: 40%;
+  height: 36px;
+}
+
+.btn-confirm:hover,
+.btn-confirm:active,
+.btn-confirm:focus {
+  background: #662965;
+}
+
 
 /*------------------------------------------------------------------------------
     TABLES
