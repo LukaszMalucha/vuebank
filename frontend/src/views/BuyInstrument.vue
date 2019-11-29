@@ -40,7 +40,7 @@
           <br>
           <tr>
           <td>Total:</td>
-          <td><b>200 USD</b></td>
+          <td><b>{{calcRoomTotal()}} USD</b></td>
           </tr>
           </tbody>
         </table>
@@ -52,34 +52,21 @@
       <table>
         <thead>
         <td>Room Type</td>
-        <td>Adult</td>
-        <td>Children</td>
         <td>Total Price</td>
         </thead>
                 <tbody>
-                  <tr v-for="(row, index) in rows">
-                    <td>
-                      <select v-model="row.roomType">
-                        <option v-for="room in rooms" v-bind:value="room.title">{{room.title}}</option>
-                      </select>
-                    </td>
-                    <td>
-                      <select v-model="row.adultCount">
-                      <option value="1">1 Adult</option>
-                      <option value="2">2 Adults</option>
-                    </select>
-                  </td>
+
                   <td>
-                    <select v-model="row.childCount">
+                    <select v-model="childCount"> ZAMIENIC
                     <option value="0">No Child</option>
                     <option value="1">1 Child</option>
                     <option value="2">2 Children</option>
                   </select>
                 </td>
                 <td>
-                  {{calcRoomTotal(row)}}
+                  {{calcRoomTotal()}}
                 </td>
-              </tr>
+
     </tbody>
   </table>
       </div>
@@ -123,43 +110,13 @@ export default {
       instrument: {},
       assetQuantity: null,
       error: null,
-      rows: [{
-      roomType : "Standard Room",
-      adultCount : 1,
-      childCount : 0
-      }],
-      rooms: [
-      {
-          value:0,
-          title: 'Standard Room'
-      },
-      {
-          value:0,
-          title: 'Deluxe Room'
-      },
-      ],
-      items: [{
-          price: 1000,
-      }]
+      childCount: 2,
     }
   },
   methods: {
-    addRoom: function() {
-      this.rows.push({
-      roomType : "Standard Room",
-      adultCount : 1,
-      childCount : 0
-      });
+    calcRoomTotal: function() {
+        return (parseInt(this.childCount) ) * this.instrument.price;
     },
-
-    removeRoom: function(index) {
-      this.rows.splice(index, 1);
-    },
-
-    calcRoomTotal: function(row) {
-        return (parseInt(row.adultCount) + parseInt(row.childCount)) * 1000;
-    },
-
     setPageTitle(title) {
       document.title = title;
     },
