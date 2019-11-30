@@ -32,7 +32,7 @@
           </tr>
           <tr>
             <td>Cash On Hand:</td>
-            <td><b>{{ instrument.symbol }}</b></td>
+            <td><b>{{ instrument }}</b></td>
           </tr>
           <tr>
             <td>Current Price:</td>
@@ -114,13 +114,17 @@ export default {
     setPageTitle(title) {
       document.title = title;
     },
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("email");
+    },
     getInstrumentData() {
       let endpoint = `/portfolio/instruments/${this.slug}/`;
       apiService(endpoint)
         .then(data => {
           if (data) {
             this.instrument = data;
-            this.setPageTitle(data.name)
+            this.setPageTitle(data.name);
+
           } else {
             this.instrument = null;
             this.setPageTitle("404 - Page Not Found")

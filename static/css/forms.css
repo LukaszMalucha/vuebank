@@ -83,11 +83,13 @@ h6 {
     color: grey;
 }
 
+input.valid[type="password"]:not(.browser-default),
+input.valid[type="text"]:not(.browser-default),
 input[type="email"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),
 input[type="text"]:not(.browser-default):focus:not([readonly]) {
     border-bottom: 1px solid #702a65;
-    box-shadow: 0 1px 0 0 #26a69a;
+    box-shadow: 0 1px 0 0 #702a65;
 
 }
 

@@ -104,7 +104,7 @@ export default {
         if (this.assetQuantity < 1) {
           return 0 + " USD"
         }
-        else if (this.assetQuantity > 9999999999999999999) {
+        else if (this.assetQuantity > 100000000) {
           return "Max. limit exceeded"
         }
 
