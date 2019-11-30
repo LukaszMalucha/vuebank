@@ -14,7 +14,7 @@
       <form @submit.prevent="onSubmit">
         <table class="table table-transaction">
           <tbody>
-          <tr>
+<tr>
             <td>Instrument:</td>
             <td><b>{{ instrument.name }}</b></td>
           </tr>
@@ -27,6 +27,14 @@
             <td><b>{{ instrument.symbol }}</b></td>
           </tr>
           <tr>
+            <td>You Hold:</td>
+            <td><b>{{ instrument.symbol }}</b></td>
+          </tr>
+          <tr>
+            <td>Cash On Hand:</td>
+            <td><b>{{ instrument.symbol }}</b></td>
+          </tr>
+          <tr>
             <td>Current Price:</td>
             <td><b>{{ instrument.price }} USD</b></td>
           </tr>
@@ -34,13 +42,13 @@
             <td>Quantity:</td>
             <td class="cell-input">
               <input v-model="assetQuantity" type="number" placeholder="Specify quantity..."
-                      class="form-control form-control-transaction" id="quantityCounter"/>
+                      class="form-control form-control-transaction" id="quantityCounter" max="1000000000"/>
             </td>
           </tr>
           <br>
           <tr>
           <td>Total:</td>
-          <td><b>{{calcRoomTotal()}} USD</b></td>
+          <td><b>{{calcTotal()}}</b></td>
           </tr>
           </tbody>
         </table>
@@ -49,26 +57,6 @@
         </form>
       </div>
       <div class="col-md-4 plain-element">
-      <table>
-        <thead>
-        <td>Room Type</td>
-        <td>Total Price</td>
-        </thead>
-                <tbody>
-
-                  <td>
-                    <select v-model="childCount"> ZAMIENIC
-                    <option value="0">No Child</option>
-                    <option value="1">1 Child</option>
-                    <option value="2">2 Children</option>
-                  </select>
-                </td>
-                <td>
-                  {{calcRoomTotal()}}
-                </td>
-
-    </tbody>
-  </table>
       </div>
     </div>
   </div>
@@ -85,8 +73,6 @@
       </div>
     </div>
   </div>
-
-
 </template>
 
 
@@ -108,14 +94,22 @@ export default {
   data() {
     return {
       instrument: {},
-      assetQuantity: null,
+      assetQuantity: 0,
       error: null,
-      childCount: 2,
     }
   },
   methods: {
-    calcRoomTotal: function() {
-        return (parseInt(this.childCount) ) * this.instrument.price;
+    calcTotal: function() {
+        if (this.assetQuantity < 1) {
+          return 0 + " USD"
+        }
+        else if (this.assetQuantity > 9999999999999999999) {
+          return "Max. limit exceeded"
+        }
+
+        else {
+          return ((parseFloat(this.assetQuantity) ) * this.instrument.price).toFixed(2) + " USD";
+        }
     },
     setPageTitle(title) {
       document.title = title;

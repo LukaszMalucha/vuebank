@@ -1,72 +1,66 @@
 <template>
-<div class="wrapper">
-  <div id="page-index">
-    <div v-if="instrument" class="dashboard-cards">
-      <div class="row">
-        <div class="col-md-4 plain-element"></div>
-        <div class="col-md-4 plain-element">
-          <div class="card card-instrument">
-            <div class="card-header">
-              <div class="row plain-element">
-                <div class="col-md-4 plain-element">
-                  <div class="card-image">
-                    <img alt="Currency" src="../assets/currency.png" class="img responsive"/>
-                  </div>
-                </div>
-                <div class="col-md-8 plain-element">
-                  <div class="card-title text-left">
-                    <h5>{{ instrument.name }}</h5>
-                    <table class="table table-company">
-                      <tbody>
-                      <tr>
-                        <td>Category:</td>
-                        <td><b>{{ instrument.category }}</b></td>
-                      </tr>
-                      <tr>
-                        <td>Ticker:</td>
-                        <td><b>{{ instrument.symbol }}</b></td>
-                      </tr>
-                      <tr>
-                        <td>Current Price:</td>
-                        <td><b>{{ instrument.price }} USD</b></td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-content">
-              <b class="instrument-website">
-                <router-link :to="{ name: 'instrument', params: { slug: instrument.slug} }">
-                  Buy
-                </router-link>
-              </b>
-            </div>
-          </div>
-        </div>
+<div id="page-index">
+  <RowHeaderComponent/>
+  <div class="row row-banner row-banner-small">
+    <div class="col-md-8 text-left col-banner-small no-padding">
+      <h4>Sell {{ instrument.name }} ({{instrument.symbol}})</h4>
+    </div>
+    <div class="col-md-4 no-padding">
+    </div>
+  </div>
+  <div v-if="instrument" class="dashboard-cards">
+    <div class="row row-cards">
+      <div class="col-md-4 plain-element">
+      <form @submit.prevent="onSubmit">
+        <table class="table table-transaction">
+          <tbody>
+          <tr>
+            <td>Instrument:</td>
+            <td><b>{{ instrument.name }}</b></td>
+          </tr>
+          <tr>
+            <td>Category:</td>
+            <td><b>{{ instrument.category }}</b></td>
+          </tr>
+          <tr>
+            <td>Ticker:</td>
+            <td><b>{{ instrument.symbol }}</b></td>
+          </tr>
+          <tr>
+            <td>You Hold:</td>
+            <td><b>{{ instrument.symbol }}</b></td>
+          </tr>
+          <tr>
+            <td>Your Cash:</td>
+            <td><b>{{ instrument.symbol }}</b></td>
+          </tr>
+          <tr>
+            <td>Current Price:</td>
+            <td><b>{{ instrument.price }} USD</b></td>
+          </tr>
+          <tr>
+            <td>Quantity:</td>
+            <td class="cell-input">
+              <input v-model="assetQuantity" type="number" placeholder="Specify quantity..."
+                      class="form-control form-control-transaction" id="quantityCounter" max="1000000000"/>
+            </td>
+          </tr>
+          <br>
+          <tr>
+            <td>Total:</td>
+            <td><b>{{calcTotal()}}</b></td>
+          </tr>
+          </tbody>
+        </table>
+        <p v-if="error" class="muted">{{ error }}</p>
+        <button type="submit" class="btn btn-confirm btn-success">Sell</button>
+        </form>
       </div>
-      <div class="row">
-        <div class="col-md-4 plain-element"></div>
-        <div class="col-md-4 plain-element">
-          <div class="card text-center">
-            <br>
-            <form @submit.prevent="onSubmit">
-              <br>
-              <input v-model="assetQuantity" type="number" placeholder="quantity" class="form-control">
-              </input>
-              <br>
-              <button type="submit" class="btn btn-success">
-                Sell
-              </button>
-            </form>
-            <p v-if="error" class="muted">{{ error }}</p>
-          </div>
-        </div>
-        <div class="col-md-4 plain-element"></div>
+      <div class="col-md-4 plain-element">
       </div>
     </div>
-    <div v-else class="dashboard-cards">
+  </div>
+  <div v-else class="dashboard-cards">
       <div class="row">
         <div class="col-md-4 plain-element"></div>
         <div class="col-md-4 plain-element">
@@ -79,14 +73,18 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
+
 <script>
-import { apiService } from "@/common/api.service.js"
+import { apiService } from "@/common/api.service.js";
+import RowHeaderComponent from "@/components/RowHeader.vue";
 
 export default {
-  name: 'BuyInstrument',
+  name: 'SellInstrument',
+  components: {
+    RowHeaderComponent,
+  },
   props: {
     slug: {
       type: String,
@@ -102,6 +100,18 @@ export default {
     }
   },
   methods: {
+    calcTotal: function() {
+        if (this.assetQuantity < 1) {
+          return 0 + " USD"
+        }
+        else if (this.assetQuantity > 9999999999999999999) {
+          return "Max. limit exceeded"
+        }
+
+        else {
+          return ((parseFloat(this.assetQuantity) ) * this.instrument.price).toFixed(2) + " USD";
+        }
+    },
     setPageTitle(title) {
       document.title = title;
     },
