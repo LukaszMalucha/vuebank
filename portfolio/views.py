@@ -80,7 +80,6 @@ class BuyAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
 
     def get_queryset(self):
         queryset = self.queryset
-
         return queryset.filter(owner=self.request.user)
 
     def perform_create(self, serializer):

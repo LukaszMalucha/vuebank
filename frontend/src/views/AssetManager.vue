@@ -1,74 +1,67 @@
 <template>
- <div class="wrapper">
-    <div id="page-index">
-        <div class="dashboard-cards">
-            <div class="container text-center container-welcome">
-                <div class="row">
-                    <h3>My Portfolio</h3>
-                    <p>{{ this.requestUser }} </p>
-                </div>
-                <br>
-                <div class="row">
-                    <div v-for="asset in assets" :key="asset.pk" class="col-md-4 text-center">
-                        <div class="card card-asset">
-                            <div class="card-header">
-                                <div class="row plain-element">
-                                    <div class="col-md-4 plain-element">
-                                        <div class="card-image">
-                                            <img alt="Currency" src="../assets/currency.png" class="img responsive"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 plain-element">
-                                        <div class="card-title text-left">
-                                            <h5>{{ asset.name }}</h5>
-                                            <table class="table table-company">
-                                                <tbody>
-                                                <tr>
-                                                    <td>Category:</td>
-                                                    <td><b>{{ asset.category }}</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ticker:</td>
-                                                    <td><b>{{ asset.symbol }}</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Current Price:</td>
-                                                    <td><b>{{ asset.price }} USD</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Quantity:</td>
-                                                    <td><b>{{ asset.quantity }}</b></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <b class="asset-website">
-                                    <router-link :to="{ name: 'asset', params: { slug: asset.slug} }">
-                                        Buy/Sell
-                                    </router-link>
-                                </b>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
+<div id="page-index">
+  <RowHeaderComponent/>
+  <div class="row row-banner row-banner-small">
+    <div class="col-md-8 text-left col-banner-small no-padding">
+    <h4>Portfolio - {{ this.requestUser }}</h4>
+    </div>
+    <div class="col-md-4 no-padding">
     </div>
   </div>
+  <div class="dashboard-cards">
+      <div class="container text-center container-welcome">
+        <div class="search-wrapper">
+           <label>Search:</label>
+           <input type="text" v-model="search"/>
+        </div>
+    <div class="container text-center container-welcome">
+      <table id="instrumentTable">
+          <thead>
+          <tr>
+            <th onclick="sortTable(0)">Instrument</th>
+            <th onclick="sortTable(1)" class="text-center">Symbol</th>
+            <th onclick="sortTable(2)" class="text-center">Category</th>
+            <th class="text-center">Price (USD)</th>
+            <th colspan="2" class="text-center">Transaction</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="asset in filteredList" :key="asset.pk">
+            <td>{{ asset.name }}</td>
+            <td  class="text-center">{{ asset.symbol }}</td>
+            <td class="text-center">{{ asset.category }}</td>
+            <td class="text-center">{{ asset.price }}</td>
+            <td class="text-center">
+            <router-link :to="{ name: 'buy-instrument', params: { slug: asset.slug} }">
+                <button class="btn btn-transaction">Buy</button>
+            </router-link>
+            </td>
+            <td class="text-center">
+            <router-link :to="{ name: 'sell-instrument', params: { slug: asset.slug} }">
+                <button class="btn btn-transaction">Sell</button>
+            </router-link>
+            </td>
+          </tr>
+       </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js"
+import { apiService } from "@/common/api.service.js";
+import RowHeaderComponent from "@/components/RowHeader.vue";
 
 export default {
   name: "AssetManager",
+  components: {
+    RowHeaderComponent,
+  },
   data() {
     return {
+      search: '',
       assets: [],
       requestUser: null,
     }
@@ -87,6 +80,15 @@ export default {
           this.assets.push(...data)
           this.setPageTitle("My Assets");
         })
+    }
+  },
+  computed: {
+    filteredList() {
+      return this.assets.filter(asset => {
+        return asset.symbol.toLowerCase().includes(this.search.toLowerCase()) ||
+                asset.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                asset.category.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
   },
   created() {

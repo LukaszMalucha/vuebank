@@ -10,7 +10,8 @@
           <div class="col-md-4 plain-element"></div>
           <div class="col-md-4 plain-element">
             <form @submit.prevent="onSubmit">
-              <input v-model="cash_quantity" type="number" placeholder="quantity" class="form-control">
+              <input v-model="cash_quantity" type="number" placeholder="quantity"
+                      class="form-control form-control-transaction">
               </input>
               <br>
               <button type="submit" class="btn btn-success">

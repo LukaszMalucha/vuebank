@@ -37,15 +37,20 @@ body {
     text-align: left;
 }
 
-
 .row-title p {
     color: #868e96;
     font-size: 12px;
-
 }
 
+.row-error {
+  min-height: 40px;
+  margin: 0px;
+}
 
-
+.error-message {
+  color: red;
+  font-size: 16px;
+}
 
 /*------------------------------------------------------------------------------
     CARDS
@@ -104,10 +109,6 @@ body {
 .card .card-action:last-child {
     border: none;
 }
-
-
-
-
 
 .card .card-content {
     padding: 16px;
@@ -383,6 +384,10 @@ td {
 
 .table-transaction {
   font-size: 16px;
+}
+
+.table-transaction > tbody > tr > td {
+  padding: 10px;
 }
 
 .cell-input {

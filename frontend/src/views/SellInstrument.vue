@@ -9,11 +9,14 @@
     </div>
   </div>
   <div v-if="instrument" class="dashboard-cards">
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
       <div class="col-md-4 plain-element">
       <form @submit.prevent="onSubmit">
         <table class="table table-transaction">
-          <tbody>
+         <tbody>
           <tr>
             <td>Instrument:</td>
             <td><b>{{ instrument.name }}</b></td>
@@ -27,12 +30,12 @@
             <td><b>{{ instrument.symbol }}</b></td>
           </tr>
           <tr>
-            <td>You Hold:</td>
-            <td><b>{{ instrument.symbol }}</b></td>
+            <td>Your Holdings:</td>
+            <td><b>{{ instrument.user_holdings }}</b></td>
           </tr>
           <tr>
-            <td>Your Cash:</td>
-            <td><b>{{ instrument.symbol }}</b></td>
+            <td>Cash On Hand:</td>
+            <td><b>{{ instrument.cash_balance }} USD</b></td>
           </tr>
           <tr>
             <td>Current Price:</td>
@@ -47,12 +50,11 @@
           </tr>
           <br>
           <tr>
-            <td>Total:</td>
-            <td><b>{{calcTotal()}}</b></td>
+          <td>Total:</td>
+          <td><b>{{calcTotal()}}</b></td>
           </tr>
           </tbody>
         </table>
-        <p v-if="error" class="muted">{{ error }}</p>
         <button type="submit" class="btn btn-confirm btn-success">Sell</button>
         </form>
       </div>
@@ -129,15 +131,21 @@ export default {
         })
     },
     onSubmit() {
-      let endpoint = "/portfolio/sell/";
-      let method = "POST";
-      apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
-        .then(cash_data => {
-          this.$router.push({
-          name: 'cash-balance',
-          })
+      if (this.assetQuantity > 0) {
+        let endpoint = "/portfolio/sell/";
+        let method = "POST";
+        apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
+        .then(data => {
+          if (data) {
+            this.$router.push({
+            name: 'asset-manager',
+            })
+          }
         })
-      },
+      } else {
+        this.error = "You have to specify quantity";
+      }
+    }
   },
   created() {
     this.getInstrumentData();

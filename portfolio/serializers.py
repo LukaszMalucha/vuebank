@@ -10,13 +10,30 @@ class InstrumentSerializer(serializers.ModelSerializer):
     # name = serializers.StringRelatedField()
     # symbol = serializers.StringRelatedField()
     slug = serializers.SlugField(read_only=True)
+    cash_balance = serializers.SerializerMethodField('cash_balance_field')
+    user_holdings = serializers.SerializerMethodField('user_holdings_field')
+
+    def user_holdings_field(self, obj):
+        user = self.context['request'].user
+        user_holdings = Asset.objects.filter(owner=user).filter(instrument__name=obj.name).first()
+        if user_holdings:
+            return user_holdings.quantity
+        else:
+            return 0
+
+
+    def cash_balance_field(self, obj):
+        user = self.context['request'].user
+        user_cash = Asset.objects.filter(owner=user).filter(instrument__name="USD").first()
+        return user_cash.quantity
+
 
     # category = serializers.StringRelatedField()
     # price = serializers.DecimalField(max_digits=19, decimal_places=2)
 
     class Meta:
         model = Instrument
-        fields = ('id', 'name', 'symbol', 'slug', 'category', 'price')
+        fields = ('id', 'name', 'symbol', 'slug', 'category', 'price', 'cash_balance', 'user_holdings')
         # make id read-only
         # read_only_fields = ('id',)  # Tuple!
         # read_only_fields = '__all__',
@@ -53,7 +70,8 @@ class BuyTransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BuyTransaction
-        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value', 'slug', 'cash_balance', 'instrument_price')
+        fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at',
+                  'value', 'slug', 'cash_balance', 'instrument_price')
         ## READ ONLY!!!!!!!!!!!
 
     def validate(self, attrs):

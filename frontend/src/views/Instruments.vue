@@ -63,6 +63,7 @@ export default {
     return {
         search: '',
         instruments: [],
+        requestUser: null,
     }
   },
   methods: {

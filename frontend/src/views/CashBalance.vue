@@ -1,50 +1,42 @@
 <template>
-  <div class="wrapper">
-    <div id="page-index">
-      <div class="dashboard-cards">
-        <div class="row">
-          <div class="col-md-4 plain-element"></div>
-          <div class="col-md-4 plain-element">
-            <div class="card card-instrument">
-              <div class="card-header">
-                <div class="row plain-element">
-                  <div class="col-md-4 plain-element">
-                    <div class="card-image">
-                      <img alt="Currency" src="../assets/currency.png" class="img responsive"/>
-                    </div>
-                  </div>
-                <div class="col-md-8 plain-element">
-                  <div class="card-title text-left">
-                    <h5>Cash Balance</h5>
-                      <table class="table table-company">
-                        <tbody>
-                          <tr>
-                            <td>Category:</td>
-                            <td><b>{{ cash.category }}</b></td>
-                          </tr>
-                          <tr>
-                            <td>Ticker:</td>
-                            <td><b>{{ cash.symbol }}</b></td>
-                          </tr>
-                          <tr>
-                            <td>Current Amount:</td>
-                            <td><b>{{ cash.quantity }}</b></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="card-content">
-              <b class="instrument-website">
-
-                    Top Up
-
-              </b>
-            </div>
-          </div>
-        </div>
+<div id="page-index">
+  <RowHeaderComponent/>
+  <div class="row row-banner row-banner-small">
+    <div class="col-md-8 text-left col-banner-small no-padding">
+      <h4>Cash Transfer</h4>
+    </div>
+    <div class="col-md-4 no-padding">
+    </div>
+  </div>
+  <div v-if="cash" class="dashboard-cards">
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
+    <div class="row row-cards">
+      <div class="col-md-4 plain-element">
+        <form @submit.prevent="onSubmit">
+          <table class="table table-transaction">
+            <tbody>
+            <tr>
+              <td>Cash Balance:</td>
+              <td><b>{{ cash.quantity }}</b></td>
+            </tr>
+            <tr>
+              <td>Currency:</td>
+              <td><b>{{ cash.symbol }}</b></td>
+            </tr>
+            <tr>
+              <td>Transfer Amount:</td>
+              <td class="cell-input">
+                <input v-model="cash_quantity" type="number" placeholder="Specify quantity..."
+                       class="form-control form-control-transaction" id="quantityCounter" max="100000"/>
+              </td>
+            </tr>
+            <br>
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-confirm btn-success">Transfer</button>
+        </form>
       </div>
     </div>
   </div>
@@ -53,13 +45,19 @@
 
 
 <script>
-import { apiService } from "@/common/api.service.js"
+import { apiService } from "@/common/api.service.js";
+import RowHeaderComponent from "@/components/RowHeader.vue";
 
 export default {
   name: 'CashBalance',
+  components: {
+    RowHeaderComponent,
+  },
   data() {
     return {
-      cash: {}
+      cash: {},
+      cash_quantity: null,
+      error: null,
     }
   },
   methods: {
@@ -67,14 +65,36 @@ export default {
       let endpoint = '/portfolio/cash-balance/';
       apiService(endpoint)
         .then(data => {
-          this.cash = data['results'][0];
-
+          if (data) {
+            this.cash = data['results'][0];
+            this.setPageTitle(data.name)
+          } else {
+            this.instrument = null;
+            this.setPageTitle("404 - Page Not Found")
+          }
         })
+    },
+    onSubmit() {
+    if (!this.cash_quantity) {
+        this.error = "Can't be empty";
+    } else if (
+          this.cash_quantity > 1000000) {
+         this.error = "Quantity can't be larger than 1 million";
+    } else {
+      let endpoint = "/portfolio/cash-balance/";
+      let method = "POST";
+      apiService(endpoint, method, { quantity: this.cash_quantity, category: "Currency", price: 1.0 })
+        .then(cash_data => {
+          this.$router.push({
+          name: 'asset-manager',
+          })
+        })
+      }
     }
   },
   created() {
     this.getCashData();
-    document.title = "Cash Balance";
+    document.title = "Cash Transfer";
   }
 }
 

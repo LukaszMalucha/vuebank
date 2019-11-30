@@ -9,12 +9,15 @@
     </div>
   </div>
   <div v-if="instrument" class="dashboard-cards">
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
       <div class="col-md-4 plain-element">
       <form @submit.prevent="onSubmit">
         <table class="table table-transaction">
           <tbody>
-<tr>
+          <tr>
             <td>Instrument:</td>
             <td><b>{{ instrument.name }}</b></td>
           </tr>
@@ -27,12 +30,12 @@
             <td><b>{{ instrument.symbol }}</b></td>
           </tr>
           <tr>
-            <td>You Hold:</td>
-            <td><b>{{ instrument.symbol }}</b></td>
+            <td>Your Holdings:</td>
+            <td><b>{{ instrument.user_holdings }}</b></td>
           </tr>
           <tr>
             <td>Cash On Hand:</td>
-            <td><b>{{ instrument }}</b></td>
+            <td><b>{{ instrument.cash_balance }} USD</b></td>
           </tr>
           <tr>
             <td>Current Price:</td>
@@ -52,7 +55,7 @@
           </tr>
           </tbody>
         </table>
-        <p v-if="error" class="muted">{{ error }}</p>
+
         <button type="submit" class="btn btn-confirm btn-success">Buy</button>
         </form>
       </div>
@@ -95,6 +98,7 @@ export default {
     return {
       instrument: {},
       assetQuantity: 0,
+      cashBalance: 0,
       error: null,
     }
   },
@@ -103,7 +107,7 @@ export default {
         if (this.assetQuantity < 1) {
           return 0 + " USD"
         }
-        else if (this.assetQuantity > 9999999999999999999) {
+        else if (this.assetQuantity > 1000000000) {
           return "Max. limit exceeded"
         }
 
@@ -132,18 +136,21 @@ export default {
         })
     },
     onSubmit() {
+      if (this.assetQuantity > 0) {
       let endpoint = "/portfolio/buy/";
       let method = "POST";
       apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
-        .then(data => {
+      .then(data => {
           if (data) {
-            console.log(data)
+            this.$router.push({
+            name: 'asset-manager',
+            })
           }
-//          this.$router.push({
-//          name: 'cash-balance',
-//          })
         })
-      },
+        } else {
+          this.error = "You have to specify quantity";
+        }
+      }
   },
   created() {
     this.getInstrumentData();

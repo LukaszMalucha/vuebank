@@ -1,5 +1,4 @@
 <template>
- <div class="wrapper">
     <div id="page-index">
         <div class="dashboard-cards">
             <div class="container text-center container-welcome">
@@ -68,7 +67,6 @@
             </div>
         </div>
     </div>
-  </div>
 </template>
 
 

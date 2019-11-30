@@ -73,7 +73,8 @@ class Asset(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     instrument = models.ForeignKey('Instrument', on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-    quantity = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100000000)])
+    quantity = models.DecimalField(validators=[MinValueValidator(1), MaxValueValidator(100000000)],
+                                   decimal_places=2, max_digits=12)
 
     def value(self):
         quantity = self.quantity
