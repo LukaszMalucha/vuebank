@@ -1,5 +1,27 @@
 <template>
-<div id="page-index">
+<div v-if="this.requestUser == 'undefined'" id="page-index">
+<RowHeaderComponent/>
+  <div class="row row-banner row-banner-small">
+    <div class="col-md-8 text-left col-banner-small no-padding">
+      <h4>Asset Portfolio </h4>
+    </div>
+    <div class="col-md-4 no-padding"></div>
+  </div>
+  <div class="dashboard-cards">
+    <div class="row row-cards"></div>
+    <div class="row row-cards">
+    <div class="row text-center">
+          <h5>You have to Login first:</h5>
+    </div>
+    <div class="row text-center">
+          <button onclick="window.location.href='/user/login'"  type="submit" class="btn btn-confirm btn-login">
+          Login
+          </button>
+    </div>
+    </div>
+  </div>
+</div>
+<div v-else id="page-index">
   <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
     <div class="col-md-8 text-left col-banner-small no-padding">
@@ -154,6 +176,7 @@ export default {
   },
   created() {
     this.getInstrumentData();
+    this.setRequestUser();
   }
 }
 

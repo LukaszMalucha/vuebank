@@ -10,6 +10,8 @@ NPM & VUE setup
 
 npm i -g @vue/cli
 
+npm install vue-chartjs chart.js --save
+
 vue create frontend > Manually > Add Router > Y > Lint on save > In package.json > N
 
 cd frontend.

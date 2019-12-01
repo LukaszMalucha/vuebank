@@ -114,7 +114,7 @@ export default {
   created() {
     this.getInstruments();
     this.setRequestUser();
-    document.title = "Instruments";
+    document.title = "Trade Assets";
   }
 }
 </script>

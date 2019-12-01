@@ -1,5 +1,4 @@
 <template>
-
 <div v-if="this.requestUser == 'undefined'" id="page-index">
 <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
@@ -28,12 +27,28 @@
     <div class="col-md-8 text-left col-banner-small no-padding">
       <h4> Asset Portfolio - {{ this.requestUser }} </h4>
     </div>
-    <div class="col-md-4 no-padding"></div>
+    <div class="col-md-4 no-padding">
+    </div>
   </div>
-  <div class="dashboard-cards">
+  <div v-if="assets.length < 2" class="dashboard-cards">
+    <div class="row row-cards"></div>
+    <div class="row row-cards">
+    <div class="row text-center">
+          <h5>No Assets in your Portfolio yet:</h5>
+    </div>
+    <div class="row text-center">
+          <router-link :to="{ name: 'instruments'}">
+            <button type="submit" class="btn btn-confirm btn-login">
+            Trade Assets
+            </button>
+          </router-link>
+    </div>
+    </div>
+  </div>
+  <div v-else class="dashboard-cards">
     <div class="row row-cards">
       <div class="search-wrapper">
-        <label>Search:</label>
+        <label> Search:</label>
         <input type="text" v-model="search"/>
       </div>
     </div>

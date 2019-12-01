@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import generics, viewsets, views, mixins, status
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
 
@@ -12,13 +12,13 @@ from portfolio import serializers
 
 class BaseRestrictedViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     """Basic authentication and permission"""
-    # authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication, BasicAuthentication)
     # permission_classes = (IsAuthenticated,)
 
 
 class InstrumentViewSet(viewsets.ModelViewSet):
     """Create instruments in the database"""
-    # permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
+    permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
     serializer_class = serializers.InstrumentSerializer
     queryset = Instrument.objects.all()
     queryset = queryset.exclude(name="USD")  # Exclude USD to USD transactions
@@ -50,7 +50,7 @@ class AssetManagerViewSet(viewsets.ViewSet):
 
 
 class CashBalanceViewSet(BaseRestrictedViewSet):
-    """Cash balance view with top-up functrionality"""
+    """Cash balance view with top-up functionality"""
     serializer_class = serializers.AssetSerializer
     queryset = Asset.objects.all()
 
