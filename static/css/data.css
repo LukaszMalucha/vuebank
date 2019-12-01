@@ -26,9 +26,9 @@ body {
 }
 
 .row-cards {
-    width: 70%;
+    width: 68%;
     text-align: center;
-    padding: 4% 0% 4% 0%;
+    padding: 0;
 }
 
 .row-title {
@@ -59,12 +59,6 @@ body {
 /*----------------------------------------------
    DASHBOARD STYLES
 ------------------------------------------------*/
-
-.row-cards {
-    width: 70%;
-    text-align: center;
-    padding: 0%;
-}
 
 
 .menu-card {
@@ -392,6 +386,11 @@ td {
 
 .cell-input {
   padding: 0px !important;
+}
+
+
+.cash-cell {
+  padding-left: 6px !important;
 }
 
 /*------------------------------------------------------------------------------

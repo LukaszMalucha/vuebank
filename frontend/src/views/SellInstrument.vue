@@ -58,7 +58,7 @@
         <button type="submit" class="btn btn-confirm btn-success">Sell</button>
         </form>
       </div>
-      <div class="col-md-4 plain-element">
+      <div class="col-md-8 plain-element">
       </div>
     </div>
   </div>

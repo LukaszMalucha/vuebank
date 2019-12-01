@@ -3,50 +3,68 @@
   <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
     <div class="col-md-8 text-left col-banner-small no-padding">
-    <h4>Portfolio - {{ this.requestUser }}</h4>
+      <h4>Asset Portfolio - {{ this.requestUser }}</h4>
     </div>
-    <div class="col-md-4 no-padding">
-    </div>
+    <div class="col-md-4 no-padding"></div>
   </div>
   <div class="dashboard-cards">
-      <div class="container text-center container-welcome">
-        <div class="search-wrapper">
-           <label>Search:</label>
-           <input type="text" v-model="search"/>
-        </div>
     <div class="container text-center container-welcome">
+      <div class="search-wrapper">
+        <label>Search:</label>
+        <input type="text" v-model="search"/>
+      </div>
+    </div>
+    <div class="row row-cards">
       <table id="instrumentTable">
-          <thead>
-          <tr>
-            <th onclick="sortTable(0)">Instrument</th>
-            <th onclick="sortTable(1)" class="text-center">Symbol</th>
-            <th onclick="sortTable(2)" class="text-center">Category</th>
-            <th class="text-center">Price (USD)</th>
-            <th colspan="2" class="text-center">Transaction</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="asset in filteredList" :key="asset.pk">
+        <thead>
+        <tr>
+          <th onclick="sortTable(0)">Instrument</th>
+          <th onclick="sortTable(1)" class="text-center">Symbol</th>
+          <th onclick="sortTable(2)" class="text-center">Category</th>
+          <th class="text-center">Your Holdings</th>
+          <th class="text-center">Price (USD)</th>
+          <th colspan="2" class="text-center">Transaction</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr v-for="asset in filteredList"  v-if="asset.name != 'USD'" :key="asset.pk">
             <td>{{ asset.name }}</td>
-            <td  class="text-center">{{ asset.symbol }}</td>
+            <td class="text-center">{{ asset.symbol }}</td>
             <td class="text-center">{{ asset.category }}</td>
+            <td class="text-center">{{ asset.quantity }}</td>
             <td class="text-center">{{ asset.price }}</td>
             <td class="text-center">
-            <router-link :to="{ name: 'buy-instrument', params: { slug: asset.slug} }">
+              <router-link :to="{ name: 'buy-instrument', params: {slug: asset.instrument_slug} }">
                 <button class="btn btn-transaction">Buy</button>
-            </router-link>
+              </router-link>
             </td>
             <td class="text-center">
-            <router-link :to="{ name: 'sell-instrument', params: { slug: asset.slug} }">
+              <router-link :to="{ name: 'sell-instrument', params: { slug: asset.instrument_slug} }">
                 <button class="btn btn-transaction">Sell</button>
-            </router-link>
+              </router-link>
             </td>
           </tr>
-       </tbody>
+        </tbody>
       </table>
+      </div>
+      <br>
+      <div class="row row-cards">
+        <div class="col-md-3 plain-element">
+          <table class="table table-transaction">
+            <tbody>
+                <tr>
+                  <td class="cash-cell">Cash on Hand:</td>
+                  <td v-for="asset in assets"  v-if="asset.name == 'USD'" class="">
+                    <b>{{ asset.quantity }} USD</b>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-9 plain-element"></div>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </template>
 
@@ -77,7 +95,7 @@ export default {
       let endpoint = "/portfolio/asset-manager/";
       apiService(endpoint)
         .then(data => {
-          this.assets.push(...data)
+          this.assets.push(...data);
           this.setPageTitle("My Assets");
         })
     }

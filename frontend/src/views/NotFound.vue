@@ -1,26 +1,24 @@
 <template>
-  <div class="wrapper">
-    <div id="page-index">
-      <div class="dashboard-cards">
-        <div class="row">
-          <div class="col-md-4 plain-element"></div>
-          <div class="col-md-4 plain-element">
-            <div class="card card-instrument">
-              <div class="card-content">
-                  <h4>  {{ message }} </h4>
-            </div>
-          </div>
-        </div>
-      </div>
+<div id="page-index">
+  <RowHeaderComponent/>
+  <div class="row row-banner row-banner-small">
+    <div class="col-md-8 text-left col-banner-small no-padding">
+      <h4>{{ message }}</h4>
     </div>
+    <div class="col-md-4 no-padding"></div>
   </div>
 </div>
 </template>
 
 
 <script>
+import RowHeaderComponent from "@/components/RowHeader.vue";
+
 export default {
   name: "NotFound",
+  components: {
+    RowHeaderComponent,
+  },
   data() {
     return {
       message: "404 - Page Not Found"

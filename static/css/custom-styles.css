@@ -103,6 +103,10 @@ a:hover {
     background: #652966;
 }
 
+.plain-element {
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 
 /*----------------------------------------------

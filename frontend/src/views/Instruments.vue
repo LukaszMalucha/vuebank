@@ -3,17 +3,19 @@
   <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
     <div class="col-md-8 text-left col-banner-small no-padding">
-    <h4>Available Instruments</h4>
+      <h4>Available Instruments</h4>
     </div>
     <div class="col-md-4 no-padding">
     </div>
   </div>
   <div class="dashboard-cards">
     <div class="container text-center container-welcome">
-        <div class="search-wrapper">
-           <label>Search:</label>
-           <input type="text" v-model="search"/>
-        </div>
+      <div class="search-wrapper">
+        <label>Search:</label>
+        <input type="text" v-model="search"/>
+      </div>
+    </div>
+    <div class="row row-cards">
       <table id="instrumentTable">
         <thead>
         <tr>
@@ -25,23 +27,23 @@
         </tr>
         </thead>
         <tbody>
-          <tr v-for="instrument in filteredList" :key="instrument.pk">
-            <td>{{ instrument.name }}</td>
-            <td  class="text-center">{{ instrument.symbol }}</td>
-            <td class="text-center">{{ instrument.category }}</td>
-            <td class="text-center">{{ instrument.price }}</td>
-            <td class="text-center">
+        <tr v-for="instrument in filteredList" :key="instrument.pk">
+          <td>{{ instrument.name }}</td>
+          <td class="text-center">{{ instrument.symbol }}</td>
+          <td class="text-center">{{ instrument.category }}</td>
+          <td class="text-center">{{ instrument.price }}</td>
+          <td class="text-center">
             <router-link :to="{ name: 'buy-instrument', params: { slug: instrument.slug} }">
-                <button class="btn btn-transaction">Buy</button>
+              <button class="btn btn-transaction">Buy</button>
             </router-link>
-            </td>
-            <td class="text-center">
+          </td>
+          <td class="text-center">
             <router-link :to="{ name: 'sell-instrument', params: { slug: instrument.slug} }">
-                <button class="btn btn-transaction">Sell</button>
+              <button class="btn btn-transaction">Sell</button>
             </router-link>
-            </td>
-          </tr>
-       </tbody>
+          </td>
+        </tr>
+        </tbody>
       </table>
     </div>
   </div>

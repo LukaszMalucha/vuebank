@@ -4,11 +4,8 @@ from core.models import Instrument, Asset, BuyTransaction, SellTransaction, User
 from django.utils.timezone import now
 
 
-## RETURN READ ONLY AFTER  TESTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 class InstrumentSerializer(serializers.ModelSerializer):
     """Serializer for financial instrument"""
-    # name = serializers.StringRelatedField()
-    # symbol = serializers.StringRelatedField()
     slug = serializers.SlugField(read_only=True)
     cash_balance = serializers.SerializerMethodField('cash_balance_field')
     user_holdings = serializers.SerializerMethodField('user_holdings_field')
@@ -21,34 +18,29 @@ class InstrumentSerializer(serializers.ModelSerializer):
         else:
             return 0
 
-
     def cash_balance_field(self, obj):
         user = self.context['request'].user
         user_cash = Asset.objects.filter(owner=user).filter(instrument__name="USD").first()
         return user_cash.quantity
 
-
-    # category = serializers.StringRelatedField()
-    # price = serializers.DecimalField(max_digits=19, decimal_places=2)
-
     class Meta:
         model = Instrument
         fields = ('id', 'name', 'symbol', 'slug', 'category', 'price', 'cash_balance', 'user_holdings')
-        # make id read-only
-        # read_only_fields = ('id',)  # Tuple!
-        # read_only_fields = '__all__',
+        read_only_fields = '__all__',
 
 
 class AssetSerializer(serializers.ModelSerializer):
     """Serializer for customer assets"""
+    name = serializers.ReadOnlyField(source="instrument.name")
     symbol = serializers.ReadOnlyField(source="instrument.symbol")
     category = serializers.ReadOnlyField(source="instrument.category")
     price = serializers.ReadOnlyField(source="instrument.price")
+    instrument_slug = serializers.ReadOnlyField(source="instrument.slug")
     slug = serializers.SlugField(read_only=True)
 
     class Meta:
         model = Asset
-        fields = ('id', 'symbol', 'quantity', 'category', 'value', 'price', 'slug')
+        fields = ('id', 'name', 'symbol', 'instrument_slug', 'quantity', 'category', 'value', 'price', 'slug')
         read_only_fields = '__all__',
 
 
@@ -72,7 +64,7 @@ class BuyTransactionSerializer(serializers.ModelSerializer):
         model = BuyTransaction
         fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at',
                   'value', 'slug', 'cash_balance', 'instrument_price')
-        ## READ ONLY!!!!!!!!!!!
+        read_only_fields = ('id', 'symbol', 'cash_balance', 'instrument_price')
 
     def validate(self, attrs):
         """Forbid USD to USD transactions, also check for sufficient cash balance"""
@@ -97,6 +89,7 @@ class SellTransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = SellTransaction
         fields = ('id', 'symbol', 'instrument', 'quantity', 'created_at', 'value', 'slug')
+        read_only_fields = ('id', 'symbol', 'cash_balance', 'instrument_price')
 
     def validate(self, attrs):
         """Forbid USD to USD transactions, also check for sufficient asset quantity to sell"""
@@ -114,7 +107,7 @@ class SellTransactionSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """For request.user logic in Vue.js frontend"""
     class Meta:
         model = User
-        ## CASH BALANCE!!!!!!!!!!
         fields = ["email"]
