@@ -339,6 +339,20 @@ input[type="number"]:not(.browser-default) {
   background: #662965;
 }
 
+.btn-login {
+  min-width: 10%;
+  width: 15%;
+  margin: auto;
+  padding: 0;
+  margin: 0px !important;
+}
+
+.btn-login:hover,
+.btn-login:active,
+.btn-login:focus {
+  background: #662965;
+  color: white;
+}
 
 /*------------------------------------------------------------------------------
     TABLES
