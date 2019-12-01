@@ -100,10 +100,9 @@
           </table>
         </div>
         <div class="col-md-9 plain-element">
-        <div class="small">
+          <div class="small">
             <line-chart :chart-data="datacollection"></line-chart>
-            <button @click="fillData()">Randomize</button>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -149,25 +148,21 @@ export default {
           this.setPageTitle("My Assets");
         })
     },
+    getArrayData() {
+        this.amountArray = this.assets.map(item => item.quantity)
+    },
     fillData () {
       this.datacollection = {
-        labels: [this.getRandomInt(), this.getRandomInt()],
+        labels: ['crypto', 'stock'],
         datasets: [
           {
-            label: 'Data One',
+            label: 'Portfolio',
             backgroundColor: '#f87979',
-            data: [this.getRandomInt(), this.getRandomInt()]
-          }, {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [this.getRandomInt(), this.getRandomInt()]
+            data: this.amountArray
           }
         ]
       }
     },
-    getRandomInt () {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-    }
   },
   computed: {
     filteredList() {
@@ -181,6 +176,8 @@ export default {
   created() {
     this.getAssetData()
     this.setRequestUser()
+    this.getArrayData()
+    console.log(this.amountArray)
   }
 }
 
