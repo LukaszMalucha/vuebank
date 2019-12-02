@@ -380,7 +380,22 @@ a:hover {
     }
 
     .row-banner {
-    padding-left: 0%;
+        padding-left: 0%;
+        min-height: 100px !important;
+    }
+
+    .col-banner,
+    .col-banner-small {
+      text-align: center;
+    }
+
+    .col-banner-small h4{
+      font-size: 1.5rem;
+    }
+
+    .col-banner-small h4,
+    .col-banner h4 {
+        line-height: 100px;
     }
 
 
@@ -392,6 +407,10 @@ a:hover {
         font-size: 1rem;
     }
 
+    .link-advert {
+      display: none;
+    }
+
 
 
     .restbank {
@@ -399,15 +418,6 @@ a:hover {
     }
 
 
-
-    .row-banner {
-        min-height: 100px !important;
-        padding-left: 15%;
-    }
-
-    .col-banner h4 {
-        line-height: 100px;
-    }
 
     .campaign-restbank {
         width: 240px;

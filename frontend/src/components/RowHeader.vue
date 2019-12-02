@@ -8,9 +8,9 @@
               <li><router-link :to="{ name: 'asset-manager'}">My Asset Manager</router-link></li>
               <li><router-link :to="{ name: 'instruments'}">Trade Assets</router-link></li>
               <li><router-link :to="{ name: 'cash-balance'}">Cash Transfer</router-link></li>
-              <li><a target="_blank" href="http://www.minerstartup.com/">Blockchain Platform</a></li>
-              <li><a target="_blank" href="http://www.quantproperties.com/">Property Value Estimator</a></li>
-              <li><a target="_blank" href="http://www.thompsonsampling.com/">Ad Campaign</a></li>
+              <li class="link-advert"><a target="_blank" href="http://www.minerstartup.com/">Blockchain Platform</a></li>
+              <li class="link-advert"><a target="_blank" href="http://www.quantproperties.com/">Property Value Estimator</a></li>
+              <li class="link-advert"><a target="_blank" href="http://www.thompsonsampling.com/">Ad Campaign</a></li>
               <li><a target="_blank" href="https://github.com/LukaszMalucha">Contact</a></li>
           </ul>
       </div>

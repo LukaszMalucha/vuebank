@@ -527,9 +527,49 @@ td {
 
 @media(max-width:520px) {
 
+    .dashboard-cards {
+      width: 92%;
+    }
+
+
     .row-title,
     .row-cards {
         width: 100%;
+    }
+
+    .search-wrapper {
+      width: 30%;
+      margin-left: 70%;
+
+    }
+
+    #instrumentTable {
+      font-size: 8px;
+    }
+
+    .table-transaction {
+      font-size: 14px;
+    }
+
+    input[type="number"]:not(.browser-default) {
+      font-size: 14px;
+    }
+
+
+    #doughnut-chart {
+      height: 360px !important;
+      width: 360px !important;
+    }
+
+    .btn-transaction {
+      font-size: 8px;
+      min-width: 2rem;
+      height: 20px;
+    }
+
+    .btn-confirm {
+      margin: 0px !important;
+
     }
 
     .property_input {

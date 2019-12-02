@@ -153,22 +153,29 @@ export default {
         .then(data => {
           this.assets.push(...data);
           this.setPageTitle("My Assets");
-        }).then(setTimeout(() => {  this.amountArray = this.assets.length;}, 1000))
+        })
     },
+//    Prepare data for chart
     async setPortfolioData() {
+//    wait for data
         const dataPortfolio = await apiService("/portfolio/asset-manager/");
+//    mapper function for array -> summing values for asset categories
         const requestTotals = dataPortfolio.reduce(function (r, o) {
                         (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
                         return r;
                       }, {});
+//    push to local storage
         window.localStorage.setItem("portfolio", JSON.stringify(requestTotals));
         console.log(requestTotals);
     },
     fillData () {
       var dataset = JSON.parse(window.localStorage.getItem("portfolio"))
+//      Get Keys
       var dataLabels = Object.keys(dataset)
+//      Get Values
       var dataValues = Object.values(dataset)
       this.options = {
+//      Tootips options
         tooltips: {
           enabled: true,
           callbacks: {
@@ -179,14 +186,13 @@ export default {
         }
       }
       this.datacollection = {
-
         hoverBackgroundColor: "red",
         hoverBorderWidth: 10,
         labels: dataLabels,
         datasets: [
           {
             label: 'Portfolio',
-            backgroundColor: ["#72ad56", "#914881", "#ba5d6f", "#a8be5f"],
+            backgroundColor: ["#72ad56", "#914881" , "#a8be5f", "#ba5d6f"],
             data: dataValues
           }
         ]
