@@ -33,81 +33,85 @@
   <div v-if="assets.length < 2" class="dashboard-cards">
     <div class="row row-cards"></div>
     <div class="row row-cards">
-    <div class="row text-center">
-          <h5>No Assets in your Portfolio yet:</h5>
-    </div>
-    <div class="row text-center">
-          <router-link :to="{ name: 'instruments'}">
-            <button type="submit" class="btn btn-confirm btn-login">
+      <div class="row text-center">
+        <h5>No Assets in your Portfolio yet:</h5>
+      </div>
+      <div class="row text-center">
+        <router-link :to="{ name: 'instruments'}">
+          <button type="submit" class="btn btn-confirm btn-login">
             Trade Assets
-            </button>
-          </router-link>
-    </div>
+          </button>
+        </router-link>
+      </div>
     </div>
   </div>
   <div v-else class="dashboard-cards">
     <div class="row row-cards">
-      <div class="search-wrapper">
-        <label> Search:</label>
-        <input type="text" v-model="search"/>
-      </div>
-    </div>
-    <div class="row row-cards">
-      <table id="instrumentTable">
-        <thead>
-        <tr>
-          <th onclick="sortTable(0)">Instrument</th>
-          <th onclick="sortTable(1)" class="text-center">Symbol</th>
-          <th onclick="sortTable(2)" class="text-center">Category</th>
-          <th class="text-center">Your Holdings</th>
-          <th class="text-center">Price (USD)</th>
-          <th colspan="2" class="text-center">Transaction</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr v-for="asset in filteredList"  v-if="asset.name != 'USD'" :key="asset.pk">
-            <td>{{ asset.name }}</td>
-            <td class="text-center">{{ asset.symbol }}</td>
-            <td class="text-center">{{ asset.category }}</td>
-            <td class="text-center">{{ asset.quantity }}</td>
-            <td class="text-center">{{ asset.price }}</td>
-            <td class="text-center">
-              <router-link :to="{ name: 'buy-instrument', params: {slug: asset.instrument_slug} }">
-                <button class="btn btn-transaction">Buy</button>
-              </router-link>
-            </td>
-            <td class="text-center">
-              <router-link :to="{ name: 'sell-instrument', params: { slug: asset.instrument_slug} }">
-                <button class="btn btn-transaction">Sell</button>
-              </router-link>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      <br>
-      <div class="row row-cards">
-        <div class="col-md-3 plain-element">
-          <table class="table table-transaction">
+      <div class="col-md-7 no-padding">
+        <div class="row plain element">
+          <div class="search-wrapper">
+            <label> Search:</label>
+            <input type="text" v-model="search"/>
+          </div>
+        </div>
+        <div class="row plain element">
+          <table id="instrumentTable">
+            <thead>
+            <tr>
+              <th onclick="sortTable(0)">Instrument</th>
+              <th onclick="sortTable(1)" class="text-center">Symbol</th>
+              <th onclick="sortTable(2)" class="text-center">Category</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Price (USD)</th>
+              <th colspan="2" class="text-center">Transaction</th>
+            </tr>
+            </thead>
             <tbody>
-                <tr>
-                  <td class="cash-cell">Cash on Hand:</td>
-                  <td v-for="asset in assets"  v-if="asset.name == 'USD'" class="">
-                    <b>{{ asset.quantity }} USD</b>
-                  </td>
-                </tr>
+            <tr v-for="asset in filteredList" v-if="asset.name != 'USD'" :key="asset.pk">
+              <td>{{ asset.name }}</td>
+              <td class="text-center">{{ asset.symbol }}</td>
+              <td class="text-center">{{ asset.category }}</td>
+              <td class="text-center">{{ asset.quantity }}</td>
+              <td class="text-center">{{ asset.price }}</td>
+              <td class="text-center">
+                <router-link :to="{ name: 'buy-instrument', params: {slug: asset.instrument_slug} }">
+                  <button class="btn btn-transaction btn-transaction-small">Buy</button>
+                </router-link>
+              </td>
+              <td class="text-center">
+                <router-link :to="{ name: 'sell-instrument', params: { slug: asset.instrument_slug} }">
+                  <button class="btn btn-transaction btn-transaction-small">Sell</button>
+                </router-link>
+              </td>
+            </tr>
             </tbody>
           </table>
         </div>
-        <div class="col-md-9 plain-element">
-          <div class="small">
-            <pie-chart :options="options" :chart-data="datacollection"></pie-chart>
+        <div class="row plain element">
+          <div class="col-md-4 plain-element">
+            <table class="table table-transaction">
+              <tbody>
+              <tr>
+                <td class="cash-cell">Cash on Hand:</td>
+                <td v-for="asset in assets" v-if="asset.name == 'USD'" class="">
+                  <b>{{ asset.quantity }} USD</b>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
+        </div>
+      </div>
+      <div class="col-md-1 plain-element"></div>
+      <div class="col-md-4 plain-element">
+        <div class="small">
+          <pie-chart :options="options" :chart-data="datacollection"></pie-chart>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 </template>
 
 <script>
@@ -169,7 +173,7 @@ export default {
           enabled: true,
           callbacks: {
             label: function(tooltipItem,data) {
-              return "Total: " + data['datasets'][0]['data'][tooltipItem['index']] + " USD";
+              return data['datasets'][0]['data'][tooltipItem['index']] + " USD";
             },
           }
         }
@@ -182,7 +186,7 @@ export default {
         datasets: [
           {
             label: 'Portfolio',
-            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            backgroundColor: ["#72ad56", "#914881", "#ba5d6f", "#a8be5f"],
             data: dataValues
           }
         ]
@@ -201,20 +205,6 @@ export default {
   created() {
     this.getAssetData()
     this.setRequestUser()
-//    this.getArrayData()
-//    setTimeout(() => {  console.log(this.assets.length); console.log(this.assets);}, 1000);
-
-//    console.log(this.amountArray.length)
-
-
   }
 }
-
 </script>
-
-<style>
-  .small {
-    max-width: 600px;
-    margin:  150px auto;
-  }
-</style>

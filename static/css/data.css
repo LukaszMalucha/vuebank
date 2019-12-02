@@ -52,7 +52,7 @@ body {
   font-size: 16px;
 }
 
-#line-chart {
+#doughnut-chart {
   height: 400px !important;
   width: 400px !important;
 }
@@ -315,6 +315,12 @@ input[type="number"]:not(.browser-default) {
   min-width: 5rem;
   height: 28px;
 }
+
+.btn-transaction-small {
+  min-width: 4rem;
+
+}
+
 
 .btn-transaction:hover,
 .btn-transaction:active,
