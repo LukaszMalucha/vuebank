@@ -101,8 +101,7 @@
         </div>
         <div class="col-md-9 plain-element">
           <div class="small">
-            <line-chart :chart-data="datacollection"></line-chart>
-            {{assets[1]["symbol"]}}
+            <pie-chart :options="options" :chart-data="datacollection"></pie-chart>
           </div>
         </div>
       </div>
@@ -114,22 +113,16 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 import RowHeaderComponent from "@/components/RowHeader.vue";
-import LineChart from '@/LineChart.js'
+import PieChart from '@/PieChart.js'
 
-var source = [
-  { name: 'band1', type: 'concert', subtype: 'rock' },
-  { name: 'band2', type: 'concert', subtype: 'jazz' },
-  { name: 'band3', type: 'concert', subtype: 'jazz' },
-  { name: 'fun1', type: 'festival', subtype: 'beer' },
-  { name: 'fun2', type: 'festival', subtype: 'food' },
-];
+
 
 
 export default {
   name: "AssetManager",
   components: {
     RowHeaderComponent,
-    LineChart,
+    PieChart,
 
   },
   data() {
@@ -140,6 +133,7 @@ export default {
     }
   },
   mounted () {
+    this.setPortfolioData()
     this.fillData()
   },
   methods: {
@@ -155,19 +149,41 @@ export default {
         .then(data => {
           this.assets.push(...data);
           this.setPageTitle("My Assets");
-        })
+        }).then(setTimeout(() => {  this.amountArray = this.assets.length;}, 1000))
     },
-    getArrayData() {
-
+    async setPortfolioData() {
+        const dataPortfolio = await apiService("/portfolio/asset-manager/");
+        const requestTotals = dataPortfolio.reduce(function (r, o) {
+                        (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
+                        return r;
+                      }, {});
+        window.localStorage.setItem("portfolio", JSON.stringify(requestTotals));
+        console.log(requestTotals);
     },
     fillData () {
+      var dataset = JSON.parse(window.localStorage.getItem("portfolio"))
+      var dataLabels = Object.keys(dataset)
+      var dataValues = Object.values(dataset)
+      this.options = {
+        tooltips: {
+          enabled: true,
+          callbacks: {
+            label: function(tooltipItem,data) {
+              return "Total: " + data['datasets'][0]['data'][tooltipItem['index']] + " USD";
+            },
+          }
+        }
+      }
       this.datacollection = {
-        labels: ['crypto', 'stock'],
+
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: dataLabels,
         datasets: [
           {
             label: 'Portfolio',
-            backgroundColor: '#f87979',
-            data: this.amountArray
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            data: dataValues
           }
         ]
       }
@@ -185,8 +201,12 @@ export default {
   created() {
     this.getAssetData()
     this.setRequestUser()
-    this.getArrayData()
-    console.log(source[1])
+//    this.getArrayData()
+//    setTimeout(() => {  console.log(this.assets.length); console.log(this.assets);}, 1000);
+
+//    console.log(this.amountArray.length)
+
+
   }
 }
 
