@@ -102,6 +102,7 @@
         <div class="col-md-9 plain-element">
           <div class="small">
             <line-chart :chart-data="datacollection"></line-chart>
+            {{assets[1]["symbol"]}}
           </div>
         </div>
       </div>
@@ -115,6 +116,15 @@ import { apiService } from "@/common/api.service.js";
 import RowHeaderComponent from "@/components/RowHeader.vue";
 import LineChart from '@/LineChart.js'
 
+var source = [
+  { name: 'band1', type: 'concert', subtype: 'rock' },
+  { name: 'band2', type: 'concert', subtype: 'jazz' },
+  { name: 'band3', type: 'concert', subtype: 'jazz' },
+  { name: 'fun1', type: 'festival', subtype: 'beer' },
+  { name: 'fun2', type: 'festival', subtype: 'food' },
+];
+
+
 export default {
   name: "AssetManager",
   components: {
@@ -127,7 +137,6 @@ export default {
       search: '',
       assets: [],
       requestUser: null,
-      datacollection: {},
     }
   },
   mounted () {
@@ -149,7 +158,7 @@ export default {
         })
     },
     getArrayData() {
-        this.amountArray = this.assets.map(item => item.quantity)
+
     },
     fillData () {
       this.datacollection = {
@@ -177,7 +186,7 @@ export default {
     this.getAssetData()
     this.setRequestUser()
     this.getArrayData()
-    console.log(this.amountArray)
+    console.log(source[1])
   }
 }
 
