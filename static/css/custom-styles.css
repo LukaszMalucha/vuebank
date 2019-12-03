@@ -295,10 +295,16 @@ a:hover {
     }
 
     .top-menu ul {
-        width: 80%;
         margin-top: -10px;
 
     }
+
+    .top-menu li {
+        height: 100%;
+        margin-left: 4%;
+        margin-right: 0%;
+    }
+
 
 
     .top-menu a {
@@ -335,7 +341,7 @@ a:hover {
   }
 
   .top-menu a {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .row-banner {
@@ -353,26 +359,26 @@ a:hover {
     }
 
     .top-menu a {
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 
     .top-menu ul {
         width: 95%;
-        margin-top: 0px;
+        margin-top: -5px;
     }
 
-    .restbank {
-        display: none;
-    }
 
     .row-banner {
         min-height: 100px !important;
-        padding-left: 8%;
+        padding-left: 3%;
     }
+
 
     .col-banner h4 {
         line-height: 100px;
     }
+
+
 
     .caption h4 {
         font-size: 18px;
@@ -384,7 +390,13 @@ a:hover {
 
 }
 
+@media(max-width:770px) {
 
+  .col-logo {
+    display: none;
+  }
+
+}
 
 
 @media(max-width:520px) {
@@ -427,6 +439,7 @@ a:hover {
 
     .top-menu ul {
         width: 100%;
+        margin-top: 10px;
     }
 
     .top-menu a {
@@ -455,3 +468,13 @@ a:hover {
 
 
 }
+
+@media(max-width:380px) {
+
+    .top-menu a {
+        font-size: 0.9rem;
+    }
+
+}
+
+

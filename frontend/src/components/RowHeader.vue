@@ -1,12 +1,12 @@
 <template>
   <div class="row header">
       <div class="row top-menu">
-        <div class="col-md-2 plain-element col-logo">
+        <div class="col-sm-2 col-md-2 plain-element col-logo">
             <router-link :to="{name: 'home'}">
               <img src="../assets/restbank.png" class="img responsive restbank" alt="RESTBank logo" />
             </router-link>
         </div>
-        <div class="col-md-10 plain-element">
+        <div class="col-sm-12 col-md-10 plain-element">
             <ul>
                 <li><router-link :to="{ name: 'asset-manager'}">My Asset Manager</router-link></li>
                 <li><router-link :to="{ name: 'instruments'}">Trade Assets</router-link></li>

@@ -1,8 +1,10 @@
 from rest_framework.response import Response
-from rest_framework import generics, viewsets, views, mixins, status
+from rest_framework import generics, viewsets, views, mixins, status, authentication, permissions
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
+from rest_framework.settings import api_settings
 
 from core.permissions import IsAdminOrReadOnly
 from core.models import Instrument, Asset, BuyTransaction, SellTransaction
@@ -106,7 +108,7 @@ class SellAssetViewSet(BaseRestrictedViewSet, mixins.CreateModelMixin):
 
 
 class CurrentUserApiView(views.APIView):
-
+    """Get currently logged user"""
     def get(self, request):
         serializer = serializers.UserSerializer(request.user)
         return Response(serializer.data)

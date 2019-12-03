@@ -31,7 +31,7 @@
     height: 42px;
     min-height: 42px;
     padding-left: 16%;
-    padding-right: 18%;
+    padding-right: 16%;
     padding-top: 0px;
     padding-bottom: 0px;
 
@@ -282,7 +282,7 @@ nav ul a:hover {
 @media(max-width:1700px) {
     .top-navbar {
         padding-left: 5%;
-        padding-right: 6%;
+        padding-right: 5%;
     }
 
     .navbar-header {
@@ -290,6 +290,16 @@ nav ul a:hover {
     }
 
 }
+
+@media(max-width:1400px) {
+
+    .top-navbar {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}
+
+
 
 @media(min-width:1279px) {
 
@@ -301,8 +311,8 @@ nav ul a:hover {
 
 @media(max-width:1279px) {
     .top-navbar {
-        padding-left: 9%;
-        padding-right: 8%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .top-navbar {
@@ -344,7 +354,6 @@ nav ul a:hover {
 
 }
 
-@media(max-width:760px) {}
 
 @media(max-width:520px) {
 

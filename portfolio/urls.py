@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register('instruments', views.InstrumentViewSet)
 router.register('cash-balance', views.CashBalanceViewSet)
 router.register('asset-manager', views.AssetManagerViewSet, basename='asset-manager')
-router.register('buy', views.BuyAssetViewSet)
+router.register('buy', views.BuyAssetViewSet, basename='buy')
 router.register('sell', views.SellAssetViewSet, basename='sell')
 
 
@@ -15,6 +15,6 @@ app_name = 'portfolio'
 
 urlpatterns = [
     path('', include(router.urls)),
-    path("user/", views.CurrentUserApiView.as_view(), name="current-user")
+    path("user/", views.CurrentUserApiView.as_view(), name="current-user"),
 ]
 

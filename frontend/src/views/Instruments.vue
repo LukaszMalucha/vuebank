@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="dashboard-cards">
-    <div class="container text-center container-welcome">
+    <div class="row row-cards">
       <div class="search-wrapper">
         <label>Search:</label>
         <input type="text" v-model="search"/>

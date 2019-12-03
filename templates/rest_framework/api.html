@@ -1,0 +1,85 @@
+{% extends "rest_framework/base.html" %}
+{% load static %}
+{% load i18n %}
+{% load rest_framework %}
+
+{% block style %}
+{{ block.super }}
+     <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Materialize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- FontAwesome Styles-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <!-- Custom Styles-->
+    <link href="{% static 'css/landing-page.css' %}" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <!-- jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Chart Js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!-- Material Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-weight: 400 500;
+        src: url('{% static 'fonts/TTF/SourceSansPro-Regular.ttf' %}');
+      }
+      @font-face {
+        font-family: 'Source Sans Pro';
+        font-weight: bold 600;
+        src: url('{% static 'fonts/TTF/SourceSansPro-Semibold.ttf' %}');
+      }
+      @font-face {
+        font-family: 'Raleway';
+        src: url('{% static 'fonts/TTF/Raleway-Regular.ttf' %}');
+      }
+    </style>
+
+{% endblock %}
+
+
+{% block title %}RESTBank API{% endblock %}
+
+{% block navbar %}
+         <!-- TOP NAVBAR -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand waves-effect waves-dark" href="/"> <img src="{% static 'img/restbank.png' %}" class="responsive logo-img"></a>
+        </div>
+         <ul class="nav navbar-top-links navbar-right">
+            <li><a class="dropdown-button waves-effect waves-dark"  href="/api/user/create/"><i class="fas fa-user-plus"></i> <b>Register</b></a></li>
+            <li><a class="dropdown-button waves-effect waves-dark"  href="/api/user/authenticate/"><i class="fas fa-user-check"></i> <b>Authenticate</b></a></li>
+            <li><a class="dropdown-button waves-effect waves-dark"  href="/api/user/my-account/"><i class="fas fa-user-circle"></i><b>Portfolio</b></a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+ {% block breadcrumbs %}
+      <ul class="breadcrumb">
+        {% for breadcrumb_name, breadcrumb_url in breadcrumblist %}
+          {% if forloop.last %}
+            <li class="active"><a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a></li>
+          {% else %}
+            <li><a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a></li>
+          {% endif %}
+        {% empty %}
+          {% block breadcrumbs_empty %}&nbsp;{% endblock breadcrumbs_empty %}
+        {% endfor %}
+      </ul>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

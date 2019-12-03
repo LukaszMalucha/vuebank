@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')),
     path('user/', include('user.urls')),
+    path('api/user/', include('user.api.urls')),
     path('portfolio/', include('portfolio.urls')),
     re_path(r"^.*$", IndexTemplateView.as_view(), name="entry-point")
 ]

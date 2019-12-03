@@ -89,7 +89,7 @@
           </table>
         </div>
         <div class="row plain element">
-          <div class="col-md-4 plain-element">
+          <div class="col-md-5 col-lg-4 plain-element">
             <table class="table table-transaction">
               <tbody>
               <tr>
@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-1 plain-element"></div>
+      <div class="col-md-1"></div>
       <div class="col-md-4 plain-element">
         <div class="small">
           <pie-chart :options="options" :chart-data="datacollection"></pie-chart>
