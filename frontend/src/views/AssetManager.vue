@@ -49,7 +49,7 @@
         </div>
     <div class="row row-cards">
       <div class="row text-center">
-        <h5>No Assets in your Portfolio yet:</h5>
+        <h5>No Assets in your Portfolio:</h5>
       </div>
       <div class="row text-center">
         <router-link :to="{ name: 'instruments'}">
@@ -148,20 +148,11 @@ export default {
     return {
       search: '',
       assets: [],
+      portfolioComposition: [],
       requestUser: null,
     }
   },
   mounted () {
-    if (localStorage.getItem('reloaded')) {
-        // The page was just reloaded. Clear the value from local storage
-        // so that it will reload the next time this page is visited.
-        localStorage.removeItem('reloaded');
-    } else {
-        // Set a flag so that we know not to reload the page twice.
-        localStorage.setItem('reloaded', '1');
-        location.reload();
-    }
-    this.fillData();
   },
   methods: {
     setPageTitle(title) {
@@ -170,23 +161,18 @@ export default {
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("email");
     },
-    async setPortfolioData() {
-  //    wait for data
-          const dataPortfolio = await apiService("/portfolio/asset-manager/");
-  //    mapper function for array -> summing values for asset categories
-          const requestTotals = dataPortfolio.reduce(function (r, o) {
-                          (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
-                          return r;
-                        }, {});
-  //    push to local storage
-          window.localStorage.setItem("portfolio", JSON.stringify(requestTotals));
-     },
     getAssetData() {
       let endpoint = "/portfolio/asset-manager/";
       apiService(endpoint)
         .then(data => {
           this.assets.push(...data);
           this.setPageTitle("My Assets");
+          this.portfolioComposition = data.reduce(function (r, o) {
+                          (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
+                          return r;
+                        }, {});
+          window.localStorage.setItem("portfolio", JSON.stringify(this.portfolioComposition));
+          this.fillData();
         })
     },
     fillData () {
@@ -231,7 +217,6 @@ export default {
   },
   created() {
     this.getAssetData();
-    this.setPortfolioData();
     this.setRequestUser();
   }
 }
