@@ -14,7 +14,9 @@ export default {
     },
     methods: {
       async setUserInfo() {
+
         const dataUser = await apiService("/portfolio/user/");
+
 //  IF ELSE TUTAJ !!!!!!!!!!!!!!!!!!!!!!!!!!  I ERRORY I JEDNOSTKĘ USD
         const requestUser = dataUser["email"];
         window.localStorage.setItem("email", requestUser);

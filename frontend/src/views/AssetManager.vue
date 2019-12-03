@@ -149,6 +149,8 @@ export default {
       search: '',
       assets: [],
       portfolioComposition: [],
+      datacollection: {},
+      options: {},
       requestUser: null,
     }
   },
@@ -165,6 +167,7 @@ export default {
       let endpoint = "/portfolio/asset-manager/";
       apiService(endpoint)
         .then(data => {
+//       IF requestUSER
           this.assets.push(...data);
           this.setPageTitle("My Assets");
           this.portfolioComposition = data.reduce(function (r, o) {
