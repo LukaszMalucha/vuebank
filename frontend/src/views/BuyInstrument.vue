@@ -166,7 +166,8 @@ export default {
           if (data) {
             this.$router.push({
             name: 'asset-manager',
-            })
+            });
+
           }
         })
         } else {
@@ -177,6 +178,7 @@ export default {
   created() {
     this.getInstrumentData();
     this.setRequestUser();
+
   }
 }
 
