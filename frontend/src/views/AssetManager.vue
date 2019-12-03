@@ -25,7 +25,8 @@
   <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
     <div class="col-md-8 text-left col-banner-small no-padding">
-      <h4> Asset Portfolio - {{ this.requestUser }} </h4>
+      <h4 class="full-title"> Asset Portfolio - {{ this.requestUser }} </h4>
+      <h4 class="short-title"> Asset Portfolio</h4>
     </div>
     <div class="col-md-4 no-padding">
     </div>
@@ -137,7 +138,6 @@ export default {
     }
   },
   mounted () {
-    this.setPortfolioData()
     this.fillData()
   },
   methods: {
@@ -154,19 +154,6 @@ export default {
           this.assets.push(...data);
           this.setPageTitle("My Assets");
         })
-    },
-//    Prepare data for chart
-    async setPortfolioData() {
-//    wait for data
-        const dataPortfolio = await apiService("/portfolio/asset-manager/");
-//    mapper function for array -> summing values for asset categories
-        const requestTotals = dataPortfolio.reduce(function (r, o) {
-                        (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
-                        return r;
-                      }, {});
-//    push to local storage
-        window.localStorage.setItem("portfolio", JSON.stringify(requestTotals));
-        console.log(requestTotals);
     },
     fillData () {
       var dataset = JSON.parse(window.localStorage.getItem("portfolio"))
@@ -211,6 +198,7 @@ export default {
   created() {
     this.getAssetData()
     this.setRequestUser()
+
   }
 }
 </script>

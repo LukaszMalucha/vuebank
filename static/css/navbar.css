@@ -31,7 +31,7 @@
     height: 42px;
     min-height: 42px;
     padding-left: 16%;
-    padding-right: 16.5%;
+    padding-right: 18%;
     padding-top: 0px;
     padding-bottom: 0px;
 
@@ -129,10 +129,27 @@ nav ul b {
 
 }
 
+
 .sidenav-trigger {
-    height: 42px !important;
+    height: 40px !important;
 
 
+}
+
+nav a.sidenav-trigger {
+    line-height: 1;
+    display: block;
+    padding: 0px !important;
+    margin: 0px !important;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+
+nav a.sidenav-trigger i {
+    height: 40px;
+    line-height: 1;
 }
 
 .sidenav-trigger i {
@@ -142,8 +159,14 @@ nav ul b {
 
 
 #trigger {
-    font-size: 24px;
-    padding: 10px 0px 10px 0px;
+   position: fixed
+   height:24px;
+   font-size: 24px;
+   padding: 0px;
+}
+
+.sidenav li > a > i {
+    margin: 0px !important;
 }
 
 /* Hovers and Focuses --------------------------------------------------------*/
@@ -239,7 +262,7 @@ nav ul a:hover {
 }
 
 .sidenav {
-    background: #292929;
+    background: #532866;
 }
 
 .sidenav li>a {
@@ -258,8 +281,8 @@ nav ul a:hover {
 
 @media(max-width:1700px) {
     .top-navbar {
-        padding-left: 9%;
-        padding-right: 8%;
+        padding-left: 5%;
+        padding-right: 6%;
     }
 
     .navbar-header {
@@ -268,22 +291,23 @@ nav ul a:hover {
 
 }
 
+@media(min-width:1279px) {
 
-@media(max-width:1300px) {
+    .sidenav-trigger {
+        display: none !important;
+    }
+}
+
+
+@media(max-width:1279px) {
     .top-navbar {
         padding-left: 9%;
         padding-right: 8%;
     }
 
-
-}
-
-
-@media(max-width:1025px) {
-
     .top-navbar {
-        padding-left: 7.5%;
-        padding-right: 7%;
+        padding-left: 2%;
+        padding-right: 2%;
     }
 
     .top-navbar .navbar-brand {
@@ -313,7 +337,9 @@ nav ul a:hover {
     }
 
     #trigger {
-        margin: 3px 0px 0px 0px;
+        position: relative;
+        top: -10px;
+        margin: 10px 0px 10px 0px;
     }
 
 }

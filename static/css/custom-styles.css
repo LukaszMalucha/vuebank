@@ -132,8 +132,8 @@ a:hover {
 
 .top-menu ul {
     display: flex;
-    align-items: center;
-    width: 80%;
+    align-items: right;
+    width: 100%;
     margin: auto;
     margin-top: 5px;
 
@@ -141,8 +141,8 @@ a:hover {
 
 .top-menu li {
     height: 100%;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-left: 4%;
+    margin-right: 0%;
 }
 
 .top-menu a {
@@ -203,6 +203,10 @@ a:hover {
 .col-banner-small h4 {
     font-size: 1.8rem;
 
+}
+
+.short-title {
+    display: none;
 }
 
 
@@ -275,7 +279,7 @@ a:hover {
 @media(max-width:1700px) {
 
     .header {
-        padding-left: 9%;
+        padding-left: 5%;
         padding-right: 0;
     }
 
@@ -291,14 +295,14 @@ a:hover {
     }
 
     .top-menu ul {
-        width: 70%;
+        width: 80%;
         margin-top: -10px;
 
     }
 
 
     .top-menu a {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
 
@@ -307,7 +311,7 @@ a:hover {
     }
 
     .row-banner {
-        padding-left: 9%;
+        padding-left: 5%;
     }
 
     .caption h4 {
@@ -323,7 +327,23 @@ a:hover {
 
 }
 
-@media(max-width:1300px) {}
+@media(max-width:1281px) {
+
+  .header {
+    padding-left: 2%;
+
+  }
+
+  .top-menu a {
+    font-size: 1rem;
+  }
+
+  .row-banner {
+    padding-left: 2%;
+  }
+
+
+}
 
 @media(max-width:1025px) {
 
@@ -333,11 +353,11 @@ a:hover {
     }
 
     .top-menu a {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .top-menu ul {
-        width: 90%;
+        width: 95%;
         margin-top: 0px;
     }
 
@@ -389,15 +409,21 @@ a:hover {
       text-align: center;
     }
 
-    .col-banner-small h4{
-      font-size: 1.5rem;
-    }
 
     .col-banner-small h4,
     .col-banner h4 {
         line-height: 100px;
     }
 
+    .full-title {
+      display: none;
+
+    }
+
+
+    .short-title {
+      display: block;
+    }
 
     .top-menu ul {
         width: 100%;
