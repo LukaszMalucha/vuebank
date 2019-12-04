@@ -67,7 +67,7 @@
             <td>Quantity:</td>
             <td class="cell-input">
               <input v-model="assetQuantity" type="number" placeholder="Specify quantity..."
-                      class="form-control form-control-transaction" id="quantityCounter" max="1000000000"/>
+                      class="form-control form-control-transaction" id="quantityCounter" max="1000000000" min="1"/>
             </td>
           </tr>
           <br>
@@ -120,6 +120,7 @@ export default {
       instrument: {},
       assetQuantity: null,
       error: null,
+      requestUser: null,
 
     }
   },
@@ -139,6 +140,9 @@ export default {
     setPageTitle(title) {
       document.title = title;
     },
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("email");
+    },
     getInstrumentData() {
       let endpoint = `/portfolio/instruments/${this.slug}/`;
       apiService(endpoint)
@@ -153,19 +157,24 @@ export default {
         })
     },
     onSubmit() {
-      if (this.assetQuantity > 0) {
+    if (!this.assetQuantity) {
+        this.error = "You have to specify amount you want to sell";
+    } else if ( this.assetQuantity < 1 ) {
+         this.error = "Transaction amount can't be smaller than 1";
+    } else {
         let endpoint = "/portfolio/sell/";
         let method = "POST";
         apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
         .then(data => {
           if (data) {
-            this.$router.push({
-            name: 'asset-manager',
-            })
+//            this.$router.push({
+//            name: 'asset-manager',
+//            })
+              console.log(data)
+          } else {
+            console.log("xxx")
           }
         })
-      } else {
-        this.error = "You have to specify quantity";
       }
     }
   },

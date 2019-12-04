@@ -41,7 +41,7 @@
             <tbody>
             <tr>
               <td>Cash Balance:</td>
-              <td><b>{{ cash.quantity }}</b></td>
+              <td><b>{{ cash.quantity }} USD</b></td>
             </tr>
             <tr>
               <td>Currency:</td>
@@ -51,7 +51,7 @@
               <td>Transfer Amount:</td>
               <td class="cell-input">
                 <input v-model="cash_quantity" type="number" placeholder="Specify quantity..."
-                       class="form-control form-control-transaction" id="quantityCounter" max="100000"/>
+                       class="form-control form-control-transaction" id="quantityCounter" max="100000" min="1"/>
               </td>
             </tr>
             <br>
@@ -83,6 +83,9 @@ export default {
     }
   },
   methods: {
+    setPageTitle(title) {
+      document.title = title;
+    },
     getCashData() {
       let endpoint = '/portfolio/cash-balance/';
       apiService(endpoint)
@@ -101,18 +104,26 @@ export default {
     },
     onSubmit() {
     if (!this.cash_quantity) {
-        this.error = "Can't be empty";
+        this.error = "Transfer amount field can't be empty";
     } else if (
-          this.cash_quantity > 1000000) {
-         this.error = "Quantity can't be larger than 1 million";
+         this.cash_quantity > 100000 ) {
+         this.error = "Transfer amount can't be larger than 100k USD";
+    } else if (
+         this.cash_quantity < 1 ) {
+         this.error = "Transfer amount can't be smaller than 1 USD";
     } else {
       let endpoint = "/portfolio/cash-balance/";
       let method = "POST";
       apiService(endpoint, method, { quantity: this.cash_quantity, category: "Currency", price: 1.0 })
-        .then(cash_data => {
-          this.$router.push({
-          name: 'asset-manager',
-          })
+        .then(data => {
+          if (data) {
+            this.$router.push({
+            name: 'asset-manager',
+            })
+          }
+          else {
+            this.error = "Something went wrong. We couldn't proceed with your cash transfer"
+          }
         })
       }
     }
