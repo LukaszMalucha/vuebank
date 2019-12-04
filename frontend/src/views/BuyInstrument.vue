@@ -127,6 +127,7 @@ export default {
     }
   },
   methods: {
+//  Quick calculation for the website
     calcTotal: function() {
         if (this.assetQuantity < 1) {
           return 0 + " USD"
@@ -139,6 +140,7 @@ export default {
           return this.formatPrice(((parseFloat(this.assetQuantity) ) * this.instrument.price).toFixed(2)) + " USD";
         }
     },
+//  US price format
     formatPrice(value) {
       let val = (value/1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")

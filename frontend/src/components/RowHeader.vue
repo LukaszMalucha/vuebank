@@ -6,7 +6,7 @@
               <img src="../assets/restbank.png" class="img responsive restbank" alt="RESTBank logo" />
             </router-link>
         </div>
-        <div class="col-sm-12 col-md-10 plain-element">
+        <div class="col-sm-10 col-md-10 plain-element">
             <ul>
                 <li><router-link :to="{ name: 'asset-manager'}">My Asset Manager</router-link></li>
                 <li><router-link :to="{ name: 'instruments'}">Trade Assets</router-link></li>

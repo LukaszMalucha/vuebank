@@ -71,7 +71,7 @@
     <div class="row row-cards">
       <div class="col-md-8">
         <div class="row plain element">
-          <div class="col-md-5 col-lg-4 plain-element">
+          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-4 plain-element">
             <table class="table table-transaction">
               <tbody>
                 <tr>
@@ -150,9 +150,6 @@ import PieChart from '@/common/PieChart.js';
 import RowHeaderComponent from "@/components/RowHeader.vue";
 
 
-
-
-
 export default {
   name: "AssetManager",
   components: {
@@ -178,27 +175,26 @@ export default {
     setPageTitle(title) {
       document.title = title;
     },
-    formatPrice(value) {
-      let val = (value/1).toFixed(2).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    },
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("email");
     },
     getAssetData() {
+//      Check if user is logged in
       if (this.requestUser !== "undefined") {
         let endpoint = "/portfolio/asset-manager/";
         apiService(endpoint)
           .then(data => {
           if (data) {
             this.assets.push(...data);
-
+//          Map-reduce to category-quantity
             this.portfolioComposition = data.reduce(function (r, o) {
                             (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
                             return r;
                           }, {});
             window.localStorage.setItem("portfolio", JSON.stringify(this.portfolioComposition));
+//          Send data to the chart
             this.fillData();
+//          Get the total value of a portfolio
             this.totalValue = (Object.values(this.portfolioComposition)).reduce((a, b) => a + b, 0)
           } else {
               this.error = "Something went wrong. We couldn't proceed with your request"
@@ -238,8 +234,14 @@ export default {
         ]
       }
     },
+//  US price format
+    formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
   },
   computed: {
+//  Search functionality
     filteredList() {
       return this.assets.filter(asset => {
         return asset.symbol.toLowerCase().includes(this.search.toLowerCase()) ||

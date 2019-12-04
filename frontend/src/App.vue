@@ -19,7 +19,6 @@ export default {
         window.localStorage.setItem("email", requestUser);
       }
     },
-
     created() {
         this.setUserInfo();
     }

@@ -376,6 +376,11 @@ a:hover {
         margin-top: -5px;
     }
 
+    .top-menu li {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
 
     .row-banner {
         min-height: 100px !important;
@@ -414,6 +419,11 @@ a:hover {
     .header {
         padding: 0%;
         max-height: 240px;
+    }
+
+    .top-menu li {
+      margin-left: 2%;
+      margin-right: 2%;
     }
 
     .restbank {

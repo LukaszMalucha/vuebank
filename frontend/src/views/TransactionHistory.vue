@@ -72,7 +72,6 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 import RowHeaderComponent from "@/components/RowHeader.vue";
-import shared from '@/common/shared.js';
 
 
 
@@ -108,6 +107,7 @@ export default {
         apiService(endpoint)
         .then ( data =>{
           this.transactions.push(...data.results);
+//        Sort transactions by date
           this.transactions.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1);
         })
       } else {
@@ -117,20 +117,24 @@ export default {
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("email");
     },
+//  US price format
     formatPrice(value) {
       let val = (value/1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
+//  Date converter
     formatDate(value) {
       let val = (value).replace('T', ' at ')
       return val.toString().slice(0, -8)
     },
+//  Get buy/sell from transaction slug
     formatSlug(value) {
       let val = (value).replace('T', ' at ')
       return val.toString().split("-")[0]
     },
   },
   computed: {
+//  Search transactions functionality
     filteredList() {
       return this.transactions.filter(transaction => {
         return transaction.symbol.toLowerCase().includes(this.search.toLowerCase()) ||
@@ -140,7 +144,7 @@ export default {
     }
   },
   created() {
-    shared.setRequestUser();
+    this.setRequestUser();
     this.getBuyTransactions();
     this.getSellTransactions();
   }

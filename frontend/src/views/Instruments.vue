@@ -112,6 +112,7 @@ export default {
         console.log("User has to login first.")
       }
     },
+//  US price format
     formatPrice(value) {
       let val = (value/1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -121,6 +122,7 @@ export default {
     },
   },
   computed: {
+//  Search instruments function
     filteredList() {
       return this.instruments.filter(instrument => {
         return instrument.symbol.toLowerCase().includes(this.search.toLowerCase()) ||
