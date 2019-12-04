@@ -108,6 +108,15 @@ a:hover {
   margin: 0 !important;
 }
 
+.transparent {
+  background: none;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+
 
 /*----------------------------------------------
    Row Header

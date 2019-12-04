@@ -8,10 +8,12 @@
     <div class="col-md-4 no-padding"></div>
   </div>
   <div class="dashboard-cards">
-    <div class="row row-cards"></div>
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
     <div class="row text-center">
-          <h5>You have to Login first:</h5>
+          <h5>You have to login first:</h5>
     </div>
     <div class="row text-center">
           <button onclick="window.location.href='/user/login'"  type="submit" class="btn btn-confirm btn-login">
@@ -41,16 +43,12 @@
             <tbody>
             <tr>
               <td>Cash Balance:</td>
-              <td><b>{{ cash.quantity }} USD</b></td>
+              <td><b>{{ formatPrice(cash.quantity) }} USD</b></td>
             </tr>
-            <tr>
-              <td>Currency:</td>
-              <td><b>{{ cash.symbol }}</b></td>
-            </tr>
-            <tr>
+            <tr class="transparent">
               <td>Transfer Amount:</td>
               <td class="cell-input">
-                <input v-model="cash_quantity" type="number" placeholder="Specify quantity..."
+                <input v-model="cash_quantity" type="number" placeholder="Specify amount..."
                        class="form-control form-control-transaction" id="quantityCounter" max="100000" min="1"/>
               </td>
             </tr>
@@ -86,21 +84,28 @@ export default {
     setPageTitle(title) {
       document.title = title;
     },
-    getCashData() {
-      let endpoint = '/portfolio/cash-balance/';
-      apiService(endpoint)
-        .then(data => {
-          if (data) {
-            this.cash = data['results'][0];
-            this.setPageTitle(data.name)
-          } else {
-            this.instrument = null;
-            this.setPageTitle("404 - Page Not Found")
-          }
-        })
+    formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("email");
+    },
+    getCashData() {
+      if (this.requestUser !== "undefined") {
+        let endpoint = '/portfolio/cash-balance/';
+        apiService(endpoint)
+          .then(data => {
+            if (data) {
+              this.cash = data['results'][0];
+            } else {
+              this.instrument = null;
+              this.setPageTitle("404 - Page Not Found")
+            }
+          })
+      } else {
+        console.log("User has to login first.")
+      }
     },
     onSubmit() {
     if (!this.cash_quantity) {
@@ -129,8 +134,8 @@ export default {
     }
   },
   created() {
-    this.getCashData();
     this.setRequestUser();
+    this.getCashData();
     document.title = "Cash Transfer";
   }
 }

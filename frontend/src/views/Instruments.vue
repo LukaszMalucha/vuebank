@@ -3,15 +3,17 @@
 <RowHeaderComponent/>
   <div class="row row-banner row-banner-small">
     <div class="col-md-8 text-left col-banner-small no-padding">
-      <h4>Trade Assets </h4>
+      <h4>Available Instruments</h4>
     </div>
     <div class="col-md-4 no-padding"></div>
   </div>
   <div class="dashboard-cards">
-    <div class="row row-cards"></div>
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
     <div class="row text-center">
-          <h5>You have to Login first:</h5>
+          <h5>You have to login first:</h5>
     </div>
     <div class="row text-center">
           <button onclick="window.location.href='/user/login'"  type="submit" class="btn btn-confirm btn-login">
@@ -32,9 +34,12 @@
   </div>
   <div class="dashboard-cards">
     <div class="row row-cards">
-      <div class="search-wrapper">
-        <label>Search:</label>
-        <input type="text" v-model="search"/>
+      <div class="col-md-10 col-lg-10 plain-element"></div>
+      <div class="col-md-2 col-lg-2 plain-element">
+        <div class="search-wrapper">
+          <label> Search Asset:</label>
+          <input type="text" v-model="search"/>
+        </div>
       </div>
     </div>
     <div class="row row-cards">
@@ -53,7 +58,7 @@
           <td>{{ instrument.name }}</td>
           <td class="text-center">{{ instrument.symbol }}</td>
           <td class="text-center">{{ instrument.category }}</td>
-          <td class="text-center">{{ instrument.price }}</td>
+          <td class="text-center">{{ formatPrice(instrument.price) }}</td>
           <td class="text-center">
             <router-link :to="{ name: 'buy-instrument', params: { slug: instrument.slug} }">
               <button class="btn btn-transaction">Buy</button>
@@ -88,15 +93,28 @@ export default {
         search: '',
         instruments: [],
         requestUser: null,
+        error: null,
     }
   },
   methods: {
     getInstruments() {
-    let endpoint = "/portfolio/instruments/";
-    apiService(endpoint)
-      .then( data => {
-          this.instruments.push(...data.results)
-     })
+      if (this.requestUser !== "undefined") {
+        let endpoint = "/portfolio/instruments/";
+        apiService(endpoint)
+          .then( data => {
+          if (data) {
+            this.instruments.push(...data.results)
+          } else {
+            this.error = "Something went wrong. We couldn't proceed with your request"
+          }
+         })
+      } else {
+        console.log("User has to login first.")
+      }
+    },
+    formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("email");
@@ -112,9 +130,10 @@ export default {
     }
   },
   created() {
-    this.getInstruments();
     this.setRequestUser();
+    this.getInstruments();
     document.title = "Trade Assets";
+
   }
 }
 </script>

@@ -8,10 +8,12 @@
     <div class="col-md-4 no-padding"></div>
   </div>
   <div class="dashboard-cards">
-    <div class="row row-cards"></div>
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
     <div class="row text-center">
-          <h5>You have to Login first:</h5>
+          <h5>You have to login first:</h5>
     </div>
     <div class="row text-center">
           <button onclick="window.location.href='/user/login'"  type="submit" class="btn btn-confirm btn-login">
@@ -57,11 +59,11 @@
           </tr>
           <tr>
             <td>Cash On Hand:</td>
-            <td><b>{{ instrument.cash_balance }} USD</b></td>
+            <td><b>{{ formatPrice(instrument.cash_balance) }} USD</b></td>
           </tr>
           <tr>
             <td>Current Price:</td>
-            <td><b>{{ instrument.price }} USD</b></td>
+            <td><b>{{ formatPrice(instrument.price) }} USD</b></td>
           </tr>
           <tr>
             <td>Quantity:</td>
@@ -134,8 +136,12 @@ export default {
         }
 
         else {
-          return ((parseFloat(this.assetQuantity) ) * this.instrument.price).toFixed(2) + " USD";
+          return this.formatPrice(((parseFloat(this.assetQuantity) ) * this.instrument.price).toFixed(2)) + " USD";
         }
+    },
+    formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
     setPageTitle(title) {
       document.title = title;
@@ -149,7 +155,7 @@ export default {
         .then(data => {
           if (data) {
             this.instrument = data;
-            this.setPageTitle(data.name);
+            this.setPageTitle("Buy - "  + data.name);
 
           } else {
             this.instrument = null;
@@ -158,22 +164,27 @@ export default {
         })
     },
     onSubmit() {
-      if (this.assetQuantity > 0) {
-      let endpoint = "/portfolio/buy/";
-      let method = "POST";
-      apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
-      .then(data => {
-          if (data) {
-            this.$router.push({
-            name: 'asset-manager',
-            });
-
+    if (!this.assetQuantity) {
+        this.error = "You have to specify amount you want to sell";
+    } else if ( this.assetQuantity < 1 ) {
+         this.error = "Transaction amount can't be smaller than 1";
+    } else {
+        let endpoint = "/portfolio/buy/";
+        let method = "POST";
+        apiService(endpoint, method, { quantity: this.assetQuantity, symbol: this.instrument.symbol, instrument: this.instrument.id })
+        .then(data => {
+          if (data.non_field_errors) {
+              this.error = data.non_field_errors[0]
+          } else if (!data) {
+              console.log("Something went wrong. We couldn't proceed with your cash transfer")
+          } else {
+              this.$router.push({
+              name: 'asset-manager',
+              })
           }
         })
-        } else {
-          this.error = "You have to specify quantity";
-        }
       }
+    }
   },
   created() {
     this.getInstrumentData();

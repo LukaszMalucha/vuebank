@@ -8,10 +8,12 @@
     <div class="col-md-4 no-padding"></div>
   </div>
   <div class="dashboard-cards">
-    <div class="row row-cards"></div>
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
     <div class="row text-center">
-          <h5>You have to Login first:</h5>
+          <h5>You have to login first:</h5>
     </div>
     <div class="row text-center">
           <button onclick="window.location.href='/user/login'"  type="submit" class="btn btn-confirm btn-login">
@@ -32,7 +34,9 @@
     </div>
   </div>
   <div v-if="assets.length == 1" class="dashboard-cards">
-    <div class="row row-cards"></div>
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
           <div class="col-md-5 col-lg-4 plain-element">
             <table class="table table-transaction">
@@ -61,12 +65,36 @@
     </div>
   </div>
   <div v-else class="dashboard-cards">
+    <div class="row row-error">
+      <p v-if="error" class="muted error-message">{{ error }}</p>
+    </div>
     <div class="row row-cards">
-      <div class="col-md-7 no-padding">
+      <div class="col-md-8">
         <div class="row plain element">
-          <div class="search-wrapper">
-            <label> Search:</label>
-            <input type="text" v-model="search"/>
+          <div class="col-md-5 col-lg-4 plain-element">
+            <table class="table table-transaction">
+              <tbody>
+                <tr>
+                  <td class="cash-cell">Portfolio Value:</td>
+                  <td >
+                    <b>{{ formatPrice(this.totalValue) }} USD</b>
+                  </td>
+                </tr>
+                <tr class="transparent">
+                  <td class="cash-cell">Cash on Hand:</td>
+                  <td v-for="asset in assets" v-if="asset.name == 'USD'" class="">
+                    <b>{{ formatPrice(asset.quantity) }} USD</b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-4 col-lg-5 plain-element"></div>
+          <div class="col-md-3 col-lg-3 plain-element">
+            <div class="search-wrapper">
+              <label> Search Asset:</label>
+              <input type="text" v-model="search"/>
+            </div>
           </div>
         </div>
         <div class="row plain element">
@@ -78,6 +106,7 @@
               <th onclick="sortTable(2)" class="text-center">Category</th>
               <th class="text-center">Quantity</th>
               <th class="text-center">Price (USD)</th>
+              <th class="text-center">Total (USD)</th>
               <th colspan="2" class="text-center">Transaction</th>
             </tr>
             </thead>
@@ -87,7 +116,8 @@
               <td class="text-center">{{ asset.symbol }}</td>
               <td class="text-center">{{ asset.category }}</td>
               <td class="text-center">{{ asset.quantity }}</td>
-              <td class="text-center">{{ asset.price }}</td>
+              <td class="text-center">{{ formatPrice(asset.price) }}</td>
+              <td class="text-center">{{ formatPrice(asset.value) }}</td>
               <td class="text-center">
                 <router-link :to="{ name: 'buy-instrument', params: {slug: asset.instrument_slug} }">
                   <button class="btn btn-transaction btn-transaction-small">Buy</button>
@@ -102,23 +132,8 @@
             </tbody>
           </table>
         </div>
-        <div class="row plain element">
-          <div class="col-md-5 col-lg-4 plain-element">
-            <table class="table table-transaction">
-              <tbody>
-              <tr>
-                <td class="cash-cell">Cash on Hand:</td>
-                <td v-for="asset in assets" v-if="asset.name == 'USD'" class="">
-                  <b>{{ asset.quantity }} USD</b>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-      <div class="col-md-1"></div>
-      <div class="col-md-4 plain-element">
+      <div class="col-md-4">
         <div class="small">
           <pie-chart :options="options" :chart-data="datacollection"></pie-chart>
         </div>
@@ -131,8 +146,9 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
+import PieChart from '@/common/PieChart.js';
 import RowHeaderComponent from "@/components/RowHeader.vue";
-import PieChart from '@/PieChart.js'
+
 
 
 
@@ -150,8 +166,10 @@ export default {
       assets: [],
       portfolioComposition: [],
       datacollection: {},
+      totalValue: 0,
       options: {},
       requestUser: null,
+      error: null,
     }
   },
   mounted () {
@@ -160,23 +178,35 @@ export default {
     setPageTitle(title) {
       document.title = title;
     },
+    formatPrice(value) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
     setRequestUser() {
       this.requestUser = window.localStorage.getItem("email");
     },
     getAssetData() {
-      let endpoint = "/portfolio/asset-manager/";
-      apiService(endpoint)
-        .then(data => {
-//       IF requestUSER
-          this.assets.push(...data);
-          this.setPageTitle("My Assets");
-          this.portfolioComposition = data.reduce(function (r, o) {
-                          (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
-                          return r;
-                        }, {});
-          window.localStorage.setItem("portfolio", JSON.stringify(this.portfolioComposition));
-          this.fillData();
-        })
+      if (this.requestUser !== "undefined") {
+        let endpoint = "/portfolio/asset-manager/";
+        apiService(endpoint)
+          .then(data => {
+          if (data) {
+            this.assets.push(...data);
+
+            this.portfolioComposition = data.reduce(function (r, o) {
+                            (r[o.category])? r[o.category] += Math.floor(o.value) : r[o.category] = Math.floor(o.value);
+                            return r;
+                          }, {});
+            window.localStorage.setItem("portfolio", JSON.stringify(this.portfolioComposition));
+            this.fillData();
+            this.totalValue = (Object.values(this.portfolioComposition)).reduce((a, b) => a + b, 0)
+          } else {
+              this.error = "Something went wrong. We couldn't proceed with your request"
+            }
+          })
+      } else {
+        console.log("User has to login first.")
+      }
     },
     fillData () {
       var dataset = JSON.parse(window.localStorage.getItem("portfolio"))
@@ -219,8 +249,9 @@ export default {
     }
   },
   created() {
-    this.getAssetData();
     this.setRequestUser();
+    this.getAssetData();
+    this.setPageTitle("My Assets");
   }
 }
 </script>

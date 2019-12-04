@@ -10,6 +10,7 @@ body {
 
 #page-index {
     padding-top: 0px;
+
 }
 
 .dashboard-cards {
@@ -23,6 +24,7 @@ body {
     margin-bottom: 10%;
     width: 100%;
     min-height: 540px;
+
 
 }
 
@@ -310,7 +312,7 @@ input[type="number"]:not(.browser-default) {
   border: 1px solid #914881;
   border-radius: 8px;
   box-shadow: none;
-  margin: 0px -20px !important;
+  margin: 0px -10px !important;
   line-height: 1.3;
   padding: .25rem!important;
   min-width: 5rem;
@@ -371,9 +373,9 @@ input[type="number"]:not(.browser-default) {
 ------------------------------------------------------------------------------*/
 
 .search-wrapper {
-  width: 15%;
-  margin-left:85%;
-  margin-bottom: 10px;
+  width: 80%;
+  margin-left:20%;
+  margin-bottom: 0px;
   text-align: right;
 
 }
@@ -418,6 +420,8 @@ td {
 .cash-cell {
   padding-left: 6px !important;
 }
+
+
 
 /*------------------------------------------------------------------------------
     MEDIA QUERIES
