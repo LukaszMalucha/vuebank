@@ -56,8 +56,8 @@ body {
 }
 
 #doughnut-chart {
-  height: 400px !important;
-  width: 400px !important;
+  height: 96% !important;
+  width: 96% !important;
 }
 
 /*------------------------------------------------------------------------------
@@ -430,7 +430,7 @@ td {
 @media(max-width:1700px) {
 
     .row-cards {
-        width: 90%;
+        width: 92%;
     }
 
     .button-card {
@@ -455,6 +455,11 @@ td {
 }
 
 @media(max-width:1300px) {
+
+    .row-cards {
+        width: 96%;
+    }
+
     .campaign-restbank {
         margin-top: 25%;
         width: 180px;
@@ -471,12 +476,23 @@ td {
     .table-transaction {
         font-size: 14px;
     }
+
+
+
+}
+
+@media(max-width:1279px) {
+
+    #doughnut-chart {
+        height: 360px !important;
+        width: 360px !important;
+    }
 }
 
 @media(max-width:1024px) {
 
     .row-cards {
-        width: 88%;
+        width: 98%;
     }
 
     .campaign-restbank {
@@ -507,9 +523,7 @@ td {
         height: 100% !important;
     }
 
-    .col-lg-4 {
-        width: 100%;
-    }
+
 
     .header {
         padding-left: 1%;
@@ -552,7 +566,7 @@ td {
 @media(max-width:580px) {
 
     .dashboard-cards {
-      width: 96%;
+      width: 99%;
     }
 
 
