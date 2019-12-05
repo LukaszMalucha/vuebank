@@ -6,6 +6,8 @@ from core.utils import generate_random_string
 from core.models import Instrument, Asset, BuyTransaction, SellTransaction
 
 
+# Slug creators for models for better navigation
+
 @receiver(pre_save, sender=Instrument)
 def add_slug_to_instrument(sender, instance, *args, **kwargs):
     if instance and not instance.slug:

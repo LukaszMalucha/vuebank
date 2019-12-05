@@ -10,7 +10,6 @@ class AssetInline(admin.TabularInline):
     model = models.Asset
 
 
-
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
     list_display = ['email', 'name']
@@ -40,7 +39,7 @@ class InstrumentModelAdmin(admin.ModelAdmin):
 
 class AssetModelAdmin(admin.ModelAdmin):
     ordering = ['owner', 'instrument']
-    list_display = ["owner", "instrument","symbol", "quantity", "value"]
+    list_display = ["owner", "instrument", "symbol", "quantity", "value"]
     list_filter = ('instrument',)
     search_fields = ["owner", "instrument"]
 
@@ -54,8 +53,6 @@ class AssetModelAdmin(admin.ModelAdmin):
         price = obj.instrument.price
         quantity = obj.quantity
         return price * quantity
-
-    # inlines = [InstrumentInline]
 
 
 class BuyTransactionModelAdmin(admin.ModelAdmin):

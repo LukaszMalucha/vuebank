@@ -108,6 +108,7 @@ class SellTransactionSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     """For request.user logic in Vue.js frontend"""
+
     class Meta:
         model = User
         fields = ["email"]

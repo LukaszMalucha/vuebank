@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import generics, viewsets, views, mixins, status, authentication, permissions
-from rest_framework.authentication import TokenAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
@@ -14,8 +14,8 @@ from portfolio import serializers
 
 class BaseRestrictedViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     """Basic authentication and permission"""
-    # authentication_classes = (TokenAuthentication, BasicAuthentication)
-    # permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permission_classes = (IsAuthenticated,)
 
 
 class InstrumentViewSet(viewsets.ModelViewSet):
@@ -40,8 +40,8 @@ class InstrumentViewSet(viewsets.ModelViewSet):
 
 class AssetManagerViewSet(viewsets.ViewSet):
     """Customer's asset view"""
-    # authentication_classes = (TokenAuthentication, )
-    # permisssion_classes = (IsAuthenticated, )
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permisssion_classes = (IsAuthenticated, )
     serializer_class = serializers.AssetSerializer
     queryset = Asset.objects.all()
 
@@ -53,6 +53,8 @@ class AssetManagerViewSet(viewsets.ViewSet):
 
 class CashBalanceViewSet(BaseRestrictedViewSet):
     """Cash balance view with top-up functionality"""
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    permisssion_classes = (IsAuthenticated, )
     serializer_class = serializers.AssetSerializer
     queryset = Asset.objects.all()
 
