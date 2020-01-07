@@ -56,16 +56,30 @@ It also allows bank staff members to create or delete available instruments and 
 
 <br>
 
+### App Testing:
+
+##### Travis CI: [![Build Status](https://travis-ci.com/LukaszMalucha/restbankvue.svg?token=sDAtDgByxb1Keyr8uFV2&branch=master)](https://travis-ci.com/LukaszMalucha/restbankvue)
+##### `/core/tests/` [ coverage - 96% ]
+##### `/home/tests/` [coverage - 100% ]
+##### `/portfolio/tests/` [coverage - 98% ]
+##### `/user/tests/` [coverage - 100% ]
+
 ## TOOLS, MODULES & TECHNIQUES
 
-##### Web Development:
-Django RESTful | Vue.js | Docker | Heroku | Bootstrap | Materialize
+##### Backend Development:
+Django RESTful
+
+##### Frontend Development
+Vue.js | Chart.js | Bootstrap | Materialize
+
+##### Deployment
+Docker | Heroku | Travis CI
 
 ##### Database Development:
 Postgres | SQLite
 
 ##### Testing
-Django.test
+django.test | coverage
 
 
 
